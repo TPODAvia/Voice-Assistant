@@ -1,0 +1,7 @@
+{
+    "python.analysis.extraPaths": [
+        "/home/vboxuser/personaGPT",
+        "/home/vboxuser/Multilingual_Text_to_Speech",
+        "/home/vboxuser/Audio_decision",
+    ]
+}
