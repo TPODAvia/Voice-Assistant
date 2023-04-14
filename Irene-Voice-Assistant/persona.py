@@ -6,7 +6,7 @@ Created on Mon Oct 12 20:26:03 2020
 @author: TPODAvia
 """
 import sys
-sys.path.append("/home/vboxuser/personaGPT")
+sys.path.append("/home/vboxuser/Voice-Assistant/personaGPT")
 import torch, argparse
 from load_configs import model, tokenizer, opts, device, p1_tok, p2_tok, act_tok, start_tok
 from utilsss import *

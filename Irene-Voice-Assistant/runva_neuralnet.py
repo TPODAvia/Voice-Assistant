@@ -6,7 +6,8 @@ import vosk
 import sys
 import traceback
 import json
-sys.path.append("/home/vboxuser/Audio_decision")
+from ..Face_ui import face
+sys.path.append("/home/vboxuser/Voice-Assistant/Audio_decision")
 import engine
 
 from vacore import VACore
@@ -89,7 +90,7 @@ if __name__ == "__main__":
             while True:
                 data = q.get()
 
-                engine.run(data)
+                # engine.run(data)
 
                 if rec.AcceptWaveform(data):
 

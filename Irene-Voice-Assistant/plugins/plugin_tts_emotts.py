@@ -36,13 +36,13 @@ def say(core:VACore, text_to_speech:str):
 
     import librosa
     import scipy
-    sys.path.append("/home/vboxuser/Multilingual_Text_to_Speech")
+    sys.path.append("/home/vboxuser/Voice-Assistant/Multilingual_Text_to_Speech")
     from utilss import audio
     from params.params import Params as hp
     import numpy as np
     import torch
 
-    checkpoint = "/home/vboxuser/generated_switching.pyt"
+    checkpoint = "/home/vboxuser/Voice-Assistant/generated_switching.pyt"
     torch.load(checkpoint, map_location="cpu")['parameters']
     hp.decoder_language_init = False
 
