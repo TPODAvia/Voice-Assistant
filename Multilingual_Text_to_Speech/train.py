@@ -185,15 +185,15 @@ if __name__ == '__main__':
     import re
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--base_directory", type=str, default=".", help="Base directory of the project.")
-    parser.add_argument("--checkpoint", type=str, default=None, help="Name of the initial checkpoint.")
-    parser.add_argument("--checkpoint_root", type=str, default="checkpoints", help="Base directory of checkpoints.")
-    parser.add_argument("--data_root", type=str, default="data", help="Base directory of datasets.")
-    parser.add_argument("--flush_seconds", type=int, default=60, help="How often to flush pending summaries to tensorboard.")
-    parser.add_argument('--hyper_parameters', type=str, default=None, help="Name of the hyperparameters file.")
-    parser.add_argument('--logging_start', type=int, default=1, help="First epoch to be logged")
-    parser.add_argument('--max_gpus', type=int, default=2, help="Maximal number of GPUs of the local machine to use.")
-    parser.add_argument('--loader_workers', type=int, default=2, help="Number of subprocesses to use for data loading.")
+    parser.add_argument("--base_directory",   type=str, default=".",           help="Base directory of the project.")
+    parser.add_argument("--checkpoint",       type=str, default=None,          help="Name of the initial checkpoint.")
+    parser.add_argument("--checkpoint_root",  type=str, default="checkpoints", help="Base directory of checkpoints.")
+    parser.add_argument("--data_root",        type=str, default="/home/vboxuser/Voice-Assistant/Multilingual_Text_to_Speech/data",        help="Base directory of datasets.")
+    parser.add_argument("--flush_seconds",    type=int, default=60,            help="How often to flush pending summaries to tensorboard.")
+    parser.add_argument('--hyper_parameters', type=str, default=None,          help="Name of the hyperparameters file.")
+    parser.add_argument('--logging_start',    type=int, default=1,             help="First epoch to be logged")
+    parser.add_argument('--max_gpus',         type=int, default=2,             help="Maximal number of GPUs of the local machine to use.")
+    parser.add_argument('--loader_workers',   type=int, default=2,             help="Number of subprocesses to use for data loading.")
     args = parser.parse_args()
 
     # set up seeds and the target torch device
@@ -220,6 +220,7 @@ if __name__ == '__main__':
         hp.load(hp_path)
 
     # load dataset
+    print("Hello ", os.path.join(args.data_root, hp.dataset))
     dataset = TextToSpeechDatasetCollection(os.path.join(args.data_root, hp.dataset))
 
     if hp.multi_language and hp.balanced_sampling and hp.perfect_sampling:
@@ -232,6 +233,7 @@ if __name__ == '__main__':
         sampler = RandomImbalancedSampler(dataset.train) if hp.multi_language and hp.balanced_sampling else None
         train_data = DataLoader(dataset.train, batch_size=hp.batch_size, drop_last=True, shuffle=(not hp.multi_language or not hp.balanced_sampling),
                                 sampler=sampler, collate_fn=TextToSpeechCollate(True), num_workers=args.loader_workers)
+        print(len(train_data))
         eval_data = DataLoader(dataset.dev, batch_size=hp.batch_size, drop_last=False, shuffle=False,
                                collate_fn=TextToSpeechCollate(True), num_workers=args.loader_workers)
 

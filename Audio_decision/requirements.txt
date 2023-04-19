@@ -1,9 +1,0 @@
-# !pip install git+https://github.com/huggingface/datasets.git
-# !pip install git+https://github.com/huggingface/transformers.git
-datasets
-transformers
-jiwer
-torchaudio
-librosa
-sounddevice
-apex
