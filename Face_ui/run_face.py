@@ -29,8 +29,7 @@ def callback(data):
 
 # while not rospy.is_shutdown():
 
-def main():
-	text_input = [  1, 1, 1, 1,   1, 1, 1, 1,   1, 1, 1, 1  ]
+def main(text_input):
 	
 	_images = '/home/vboxuser/Voice-Assistant/Face_ui/Faces/'
 
@@ -49,8 +48,11 @@ def main():
 	img = cv2.imread(_images + img_library[pred] + ".png")
 
 	cv2.imshow('Hello', img)
-	cv2.waitKey(0)
+	# cv2.waitKey(0)
+	time.sleep(3)
 	cv2.destroyAllWindows()
 
 if __name__ == '__main__':
-	main()
+	
+	text_input = [  1, 1, 1, 1,   1, 1, 1, 1,   1, 1, 1, 1  ]
+	main(text_input)

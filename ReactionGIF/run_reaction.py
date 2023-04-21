@@ -149,7 +149,7 @@ class Embed:
     return embedding_matrix
 
 def get_data():
-    task = "reaction"
+    task = "emotion"
     embed = Embed('/home/vboxuser/Voice-Assistant/ReactionGIF/glove.twitter.27B/glove.twitter.27B.100d.txt', 40)
     preprocess = BasicPreprocess(0, 80, emoji=True)
     file = '/home/vboxuser/Voice-Assistant/ReactionGIF/ReactionGIF.json'
@@ -238,8 +238,8 @@ def reaction(data):
     X_test, y_test = get_data()
     print("Hello1")
     y_pred = prediction(X_test)
-    print("Hello2")
-    y_pred = np.argmax(y_pred,axis=1)
+    # print(y_pred)
+    # y_pred = np.argmax(y_pred,axis=1)
     report(y_test, y_pred)
 
     return y_pred
@@ -248,7 +248,7 @@ if __name__ == '__main__':
     print("Run reaction")
     data = 0
     the_reaction = reaction(data)
-    print("The reaction is: ", the_reaction)
+    print(the_reaction)
 
 
 
