@@ -149,25 +149,14 @@ class Embed:
     return embedding_matrix
 
 def get_data():
-    task = "emotion"
+    task = "sentiment"
     embed = Embed('/home/vboxuser/Voice-Assistant/ReactionGIF/glove.twitter.27B/glove.twitter.27B.100d.txt', 40)
     preprocess = BasicPreprocess(0, 80, emoji=True)
     file = '/home/vboxuser/Voice-Assistant/ReactionGIF/ReactionGIF.json'
     df = pd.read_json(file, lines=True)
     train_data, test_data = train_test_split(df, random_state=42, test_size=0.1)
-    train_data = train_data.copy()
+    
     test_data = test_data.copy()
-
-    if task == 'reaction':
-        train_data['label'] = pd.Categorical(train_data['label'])
-        train_data['labels'] = train_data['label'].cat.codes
-        categories = train_data['label'].cat.categories
-
-        test_data['label'] = pd.Categorical(test_data['label'], categories=categories)
-        test_data['labels'] = test_data['label'].cat.codes
-
-        train_y = to_categorical(train_data['labels'])
-        test_y = to_categorical(test_data['labels'])
 
     if task == 'emotion':
         train_data['label'] = pd.Categorical(train_data['label'])
@@ -185,7 +174,7 @@ def get_data():
 
         train_data = train_data.join(reactions2emotions, on='label')
         train_data['labels'] = train_data[emotions].values.tolist()
-        print(train_data)
+
         test_data = test_data.join(reactions2emotions, on='label')
         test_data['labels'] = test_data[emotions].values.tolist()
 
@@ -193,7 +182,6 @@ def get_data():
         positive = ['hug', 'kiss', 'wink', 'awww', 'hearts', 'win', 'fist_bump', 'high_five',
                     'good_luck', 'you_got_this', 'ok', 'thumbs_up', 'agree', 'yes', 'dance',
                     'happy_dance', 'applause', 'slow_clap', 'popcorn', 'thank_you']
-
         train_data['labels'] = train_data['label'].copy().apply(lambda x: 1 if x in positive else 0)
         test_data['labels'] = test_data['label'].copy().apply(lambda x: 1 if x in positive else 0)
 
@@ -201,17 +189,19 @@ def get_data():
     test_data['text'] = test_data['text'].apply(lambda x: preprocess._massage(x))
     text = train_data['text']
     # text.append(test_data['text'])
+
+
+    print("Hello", test_data['text'].values[0])
+    
     embed.fit(text)
 
-    X_train = embed.documents_to_sequences(train_data['text'])
-    X_test = embed.documents_to_sequences(test_data['text'])
+    # X_train = embed.documents_to_sequences(train_data['text'])
+    X_test = embed.documents_to_sequences("Fuck you!")
 
-    embedding_matrix = embed.matrix()
+
     if task == 'emotion':
-        y_train = np.array(train_data[emotions].values.tolist())
         y_test = np.array(test_data[emotions].values.tolist())
     else:
-        y_train = to_categorical(train_data['labels'])
         y_test = test_data['labels']
     return X_test, y_test
 
@@ -225,7 +215,7 @@ def report(gold, pred):
 
 def prediction(X_test):
     batch_size = 128
-    filename = 'model.hd5'
+    filename = '/home/vboxuser/Voice-Assistant/ReactionGIF/model.hd5'
     print('Predicting')
     model = load_model(filename)
     y_pred = model.predict(X_test, batch_size=batch_size)
@@ -234,13 +224,17 @@ def prediction(X_test):
 
 def reaction(data):
 
-    print("The task is:  Reaction")
+
+    task = "emotion"
     X_test, y_test = get_data()
-    print("Hello1")
+
     y_pred = prediction(X_test)
-    # print(y_pred)
-    # y_pred = np.argmax(y_pred,axis=1)
-    report(y_test, y_pred)
+
+    # if task in ['reaction', 'sentiment']:
+    y_pred = np.argmax(y_pred,axis=1)
+    # report(y_test, y_pred)
+    # print(f'LRAP {label_ranking_average_precision_score(y_test, y_pred):.3f}')
+    # print(f'{label_ranking_average_precision_score(y_test, y_pred):.3f}')
 
     return y_pred
 

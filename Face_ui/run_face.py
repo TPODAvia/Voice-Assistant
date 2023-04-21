@@ -12,7 +12,7 @@ from numpy.linalg import norm
 # from sensor_msgs.msg import Image
 import random
 
-from img_library import library, img_library
+from .img_library import library, img_library
 
 def callback(data):
 	global msg
@@ -37,6 +37,7 @@ def main(text_input):
 	list = []
 	for i in range(len(library)):
 		# counting cosine similarity
+		# print(i, "num: ", norm(text_input)*norm(library[i][:]))
 		cos_sim = dot(text_input, library[i][:])/(norm(text_input)*norm(library[i][:]))
 		list.append(cos_sim)
 	
@@ -48,11 +49,11 @@ def main(text_input):
 	img = cv2.imread(_images + img_library[pred] + ".png")
 
 	cv2.imshow('Hello', img)
-	# cv2.waitKey(0)
-	time.sleep(3)
+	cv2.waitKey(0)
+	# time.sleep(3)
 	cv2.destroyAllWindows()
 
 if __name__ == '__main__':
 	
-	text_input = [  1, 1, 1, 1,   1, 1, 1, 1,   1, 1, 1, 1  ]
+	text_input = [  1,0,0,0, 1,1,0,0, 0,0,1,0, 0,1,0,1, 0,0,0,0, 0,1,0,0, 0,1  ]
 	main(text_input)

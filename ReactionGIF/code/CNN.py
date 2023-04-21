@@ -245,7 +245,7 @@ def cnn(X_train, y_train, embedding_matrix, X_test, y_test):
     print(n_classes)
     batch_size = 128
     learning_rate = 0.0005
-    filename = 'model.hd5'
+    filename = '/home/vboxuser/Voice-Assistant/ReactionGIF/model.hd5'
 
     if False:
       x = Convolution1D(filters=units,

@@ -15,13 +15,15 @@ import numpy as np
 
 import argparse
 import sys
-sys.path.append("/home/vboxuser/Voice-Assistant")
-from Audio_Classification import run_classification
-from ReactionGIF import run_reaction
+sys.path.append("/home/vboxuser/Voice-Assistant/")
+# from Audio_Classification import run_classification
+# from ReactionGIF import run_reaction
 from Face_ui import run_face
 
 # most from @EnjiRouz code: https://habr.com/ru/post/529590/
 def task():
+
+    pass
 
     CHUNK = 1024
     FORMAT = pyaudio.paInt16
@@ -77,9 +79,10 @@ def task():
                         help='threshold magnitude for np.int16 dtype')
     args, _ = parser.parse_known_args()
 
-    emo_classf = run_classification.make_prediction(args, WAVE_OUTPUT_FILENAME )
+    wav_fn ='/home/vboxuser/Voice-Assistant/Audio_Classification/wavfiles/Acoustic_guitar/0eeaebcb.wav'
+    emo_classf = run_classification.make_prediction(args, wav_fn )
 
-    print(emo_classf)
+    # print(emo_classf)
 
     return emo_classf
 
@@ -140,19 +143,20 @@ if __name__ == "__main__":
     while True:
         # старт записи речи с последующим выводом распознанной речи
         print("Hello1")
-        t2 = Thread(emo_classf=task)
-        t2.start()
+        # t2 = Thread(emo_classf=task)
+        # t2.start()
         voice_input_str = record_and_recognize_audio()
-        t2.join()
+        # t2.join()
         
         print("Hello2: ")
-        print(t2)
-        
-        the_reaction = run_reaction.reaction(voice_input_str)
-        
-        # combined_reaction = np.maximum(t2, the_reaction)
+        t2 =   [1,0,0,0, 1,1,0,0, 0,0,1,0, 0,1,0,1, 0,0,0,0, 0,1,0,0, 0,1]
 
-        # run_face.main(combined_reaction)
+        
+        the_reaction = [1,0,0,0, 1,1,0,0, 0,0,1,0, 0,1,0,1, 0,0,0,0, 0,1,0,0, 0,1] # run_reaction.reaction(voice_input_str)
+        
+        combined_reaction = np.maximum(t2, the_reaction)
+
+        run_face.main(combined_reaction)
 
         if voice_input_str != "":
             core.run_input_str(voice_input_str)
