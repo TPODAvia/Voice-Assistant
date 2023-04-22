@@ -11,7 +11,7 @@ if __name__ == "__main__":
 
     # почему бы сразу не отладить какую-то команду?
     time.sleep(0.5) # небольшой таймаут
-    cmd = "приdfvвет"
+    cmd = "привет"
     try:
         cmd_core.execute_next(cmd,cmd_core.context)
     except:

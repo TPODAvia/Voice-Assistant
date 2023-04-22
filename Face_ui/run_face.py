@@ -2,7 +2,7 @@
 # import rospy
 # from baxter_interface import Limb
 # import baxter_interface
-import time
+# import time
 import cv2
 from numpy import argmax
 from numpy import dot
@@ -10,9 +10,14 @@ from numpy.linalg import norm
 # import cv_bridge
 # import rospkg
 # from sensor_msgs.msg import Image
-import random
+# import random
 
-from .img_library import library, img_library
+import sys
+import os
+
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.dirname(SCRIPT_DIR))
+from Face_ui.img_library import library, img_library
 
 def callback(data):
 	global msg
@@ -41,17 +46,13 @@ def main(text_input):
 		cos_sim = dot(text_input, library[i][:])/(norm(text_input)*norm(library[i][:]))
 		list.append(cos_sim)
 	
-	
 	pred = argmax(list, axis = None, out = None)
-	print("Hello: ", pred)
+	# print("Hello: ", pred)
 	
 	print(img_library[pred])
 	img = cv2.imread(_images + img_library[pred] + ".png")
 
-	cv2.imshow('Hello', img)
-	cv2.waitKey(0)
-	# time.sleep(3)
-	cv2.destroyAllWindows()
+	return img
 
 if __name__ == '__main__':
 	

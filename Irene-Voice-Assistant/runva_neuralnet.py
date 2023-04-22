@@ -12,6 +12,7 @@ from threading import Thread
 import pyaudio
 import wave
 import numpy as np
+import cv2
 
 import argparse
 import sys
@@ -148,20 +149,21 @@ if __name__ == "__main__":
         voice_input_str = record_and_recognize_audio()
         # t2.join()
         
-        print("Hello2: ")
-        t2 =   [1,0,0,0, 1,1,0,0, 0,0,1,0, 0,1,0,1, 0,0,0,0, 0,1,0,0, 0,1]
-
-        
-        the_reaction = [1,0,0,0, 1,1,0,0, 0,0,1,0, 0,1,0,1, 0,0,0,0, 0,1,0,0, 0,1] # run_reaction.reaction(voice_input_str)
-        
+        print("This should be parallel computated")
+        t2 =   [1,0,0,0, 1,1,0,0, 0,0,1,0, 0,1,0,1, 0,0,0,0, 0,1,0,0, 0,1]    
+        the_reaction = [1,0,0,0, 1,1,0,0, 0,0,1,0, 0,1,0,1, 0,0,0,0, 0,1,0,0, 0,1] # run_reaction.reaction(voice_input_str)   
         combined_reaction = np.maximum(t2, the_reaction)
+        np.save("tts_cache/emotts/combined_reaction", combined_reaction)
 
-        run_face.main(combined_reaction)
+        img = run_face.main(combined_reaction)
+
+        cv2.imshow('Hello', img)
+
+        k = cv2.waitKey(33)
+        if k==27:    # Esc key to stop
+            break
 
         if voice_input_str != "":
             core.run_input_str(voice_input_str)
 
-        print("Hello3")
         core._update_timers()
-
-        print("Hello4")

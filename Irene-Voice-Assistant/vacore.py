@@ -397,8 +397,8 @@ class VACore(JaaCore):
 
                 import sys
                 sys.path.append("/home/vboxuser/Voice-Assistant/personaGPT")
-                from personaGPT import run_persona
-                from personaGPT.load_configs import tokenizer
+                import run_persona
+                from load_configs import tokenizer
                 personas = run_persona.get_personas()
 
                 dialog_hx, msg = run_persona.interact(1, personas, command , length=8, top_k=10, top_p=.92, max_length=1000)

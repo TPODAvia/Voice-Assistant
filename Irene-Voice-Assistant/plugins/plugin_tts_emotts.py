@@ -13,6 +13,10 @@ sys.path.append("/home/vboxuser/Voice-Assistant/Multilingual_Text_to_Speech")
 from utilss import audio, text
 from utilss import build_model
 from params.params import Params as hp
+import numpy as np
+from numpy import argmax
+from numpy import dot
+from numpy.linalg import norm
 
 modname = os.path.basename(__file__)[:-3] # calculating modname
 
@@ -58,15 +62,14 @@ def towavfile(core:VACore, text_to_speech:str,wavfile:str):
         print(f"Random seed set to {args.seed}")
         torch.manual_seed(args.seed)
 
-    print("Building model ...")
-
     model = build_model(args.checkpoint, args.cpu)
     model.eval()
 
-    #total_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
-    #print(f"Builded model with {total_params} parameters")
+    # Emotion choose
+    emotion = emotion_to_voice()
 
-    inputs = ["04|" + text_to_speech + "|00-de|ru"]
+    # The input is "04|голоса в системе|00-de|ru"
+    inputs = ["04|" + text_to_speech + "|00-de|"+ emotion]
     progress = tqdm(enumerate(inputs), total=len(inputs), desc='Synthesizing')
 
     spectrograms = []
@@ -87,7 +90,8 @@ def towavfile(core:VACore, text_to_speech:str,wavfile:str):
 
         if not args.ignore_wav:
             w = audio.inverse_spectrogram(s, not hp.predict_linear)
-            audio.save(w, os.path.join(args.output, f'temp/vacore_1.wav'))
+            # audio.save(w, os.path.join(args.output, f'temp/vacore_1.wav'))
+            audio.save(w, os.path.join(args.output, wavfile))
 
     pass
 
@@ -135,3 +139,27 @@ def synthesize(model, input_data, force_cpu=False):
     s = audio.denormalize_spectrogram(s, not hp.predict_linear)
 
     return s
+
+def emotion_to_voice():
+
+    combined_reaction = np.load('/home/vboxuser/Voice-Assistant/Irene-Voice-Assistant/tts_cache/emotts/combined_reaction.npy')
+
+    lib =  [[  1,0,0,0, 1,1,0,0, 0,0,1,0, 0,1,0,1, 0,0,0,0, 0,1,0,0, 0,1  ],
+            [  1,0,0,0, 1,1,0,0, 0,0,1,0, 0,1,0,1, 0,0,0,0, 0,1,0,0, 0,1  ],
+            [  1,0,0,0, 1,1,0,0, 0,0,1,0, 0,1,0,1, 0,0,0,0, 0,1,0,0, 0,1  ]]
+    
+    lib_lang = ['ru', 'de', 'fr' ]
+
+    list = []
+    
+    for i in range(len(lib)):
+		# counting cosine similarity
+		# print(i, "num: ", norm(text_input)*norm(library[i][:]))
+        cos_sim = dot(combined_reaction, lib[i][:])/(norm(combined_reaction)*norm(lib[i][:]))
+        list.append(cos_sim)
+	
+    pred = argmax(list, axis = None, out = None)
+
+    pred = lib_lang[pred]
+
+    return pred
