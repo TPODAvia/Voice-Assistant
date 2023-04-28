@@ -11,13 +11,11 @@ from scipy.io import wavfile
 import phonemizer
 from random import SystemRandom
 
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-
-sys.path.append(os.path.dirname(SCRIPT_DIR))
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from models import build_model, load_ASR_models, load_F0_models
 from utils import *
 
-sys.path.append(SCRIPT_DIR + "/hifi-gan")
+sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/hifi-gan")
 
 import glob
 import os
@@ -28,6 +26,8 @@ from vocoder import Generator
 import librosa
 import numpy as np
 import torchaudio
+
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 class TextCleaner:
     def __init__(self, dummy=None):

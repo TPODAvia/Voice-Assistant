@@ -32,22 +32,7 @@ whisper_model = whisper.load_model("base")
 # most from @EnjiRouz code: https://habr.com/ru/post/529590/
 
 async def function_async():
-
-    fs = 16000  # Sample rate
-    duration = 0.5 # duration in second
-    myrecording = sd.rec(int(duration * fs), samplerate=fs, channels=1)
-    sd.wait()
-
-    parser = argparse.ArgumentParser(description='Audio Classification Training')
-
-    parser.add_argument('--sr', type=int, default=16000, help='sample rate of clean audio')
-    args, _ = parser.parse_known_args()
-
-    emo_classf = run_classification.make_prediction(args, myrecording )
-
-    # print("emo_classf ", emo_classf)
-
-    return emo_classf
+    return None
 
 def record_and_recognize_audio(*args: tuple):
     """
@@ -56,14 +41,19 @@ def record_and_recognize_audio(*args: tuple):
     with microphone:
         recognized_data = ""
 
-        with speech_recognition.Microphone() as source:
+        with speech_recognition.Microphone(sample_rate=16000) as source:
             print("Listening...")
-            audio = recognizer.record(source, duration=4)
-            # audio_data = audio.get_wav_data()
-
+            audio = recognizer.listen(source)
+            audio_data = audio.get_wav_data()
+            data_s16 = np.frombuffer(audio_data, dtype=np.int16, count=len(audio_data)//2, offset=0)
+            float_data = data_s16.astype(np.float32, order='C') / 32768.0
         try:
             #print("Started recognition...")
             recognized_data = recognizer.recognize_whisper(audio, model="base", language="russian")
+
+            sr=16000
+            emo_classf = run_classification.make_prediction(sr, float_data)
+
 
         except speech_recognition.UnknownValueError:
             pass
@@ -72,17 +62,17 @@ def record_and_recognize_audio(*args: tuple):
         except speech_recognition.RequestError:
             print("Check your Internet Connection, please")
 
-        return recognized_data
+        return recognized_data, emo_classf
     
 async def function_2():
 
-    voice_input_str = record_and_recognize_audio()
+    voice_input_str, emo_classf = record_and_recognize_audio()
 
     # remove punctuations and caps: Ирина, привет! --> ирина привет
     no_punct_str = re.sub(r'[^\w\s]', '', voice_input_str)
     lowercase_str = no_punct_str.lower().strip()
 
-    print("recognized_data:", lowercase_str)
+    # print("recognized_data:", lowercase_str)
 
     if voice_input_str != "":
         core.run_input_str(lowercase_str)
@@ -90,17 +80,17 @@ async def function_2():
 
     core._update_timers()
 
-    return voice_input_str
+    return voice_input_str, emo_classf
 
 
-async def function3(result2, result1):
+async def function3(result): # function3(result1, result2)
 
-    if not result2=="":
-        predictions, raw_outputs = model.predict([result2])
-        combined_reaction = np.maximum(result1, raw_outputs)
+    if not result[0]=="":
+        predictions, raw_outputs = model.predict([result[0]])
+        combined_reaction = np.maximum(result[1], raw_outputs)
 
     else:
-        combined_reaction = result1
+        combined_reaction = result[1]
 
         
     img = run_face.main(combined_reaction)
@@ -111,7 +101,8 @@ async def function3(result2, result1):
 async def main():
 
     while True:
-        results = await asyncio.gather(function_2(), function_async())
+        # results = await asyncio.gather(function_2(), function_async())
+        results = await asyncio.gather(function_2())
         await function3(*results)
 
 if __name__ == "__main__":

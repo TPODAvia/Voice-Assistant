@@ -14,10 +14,10 @@ custom_objects={'STFT':STFT,
                 'ApplyFilterbank':ApplyFilterbank,
                 'MagnitudeToDecibel':MagnitudeToDecibel})
 
-def make_prediction(args, wav_fn):
+def make_prediction(sr, wav_fn):
    
     clean_wav=wav_fn
-    step = int(args.sr)
+    step = sr
     batch = []
 
     for i in range(0, clean_wav.shape[0], step):
@@ -39,13 +39,14 @@ if __name__ == '__main__':
 
     from clean import downsample_mono
 
-    parser = argparse.ArgumentParser(description='Audio Classification Training')
-    parser.add_argument('--sr', type=int, default=16000, help='sample rate of clean audio')
-    args, _ = parser.parse_known_args()
+    # parser = argparse.ArgumentParser(description='Audio Classification Training')
+    # parser.add_argument('--sr', type=int, default=16000, help='sample rate of clean audio')
+    # args, _ = parser.parse_known_args()
 
     wav_fn = SCRIPT_DIR + '/wavfiles/Snare_drum/ae7d1c37.wav'
 
-    rate, clean_wav = downsample_mono(wav_fn, args.sr)
-    result = make_prediction(args, clean_wav)
+    sr = 16000
+    rate, clean_wav = downsample_mono(wav_fn, sr)
+    result = make_prediction(sr, clean_wav)
     print("Answer: ", result)
 
