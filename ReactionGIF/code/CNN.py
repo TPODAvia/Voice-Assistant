@@ -20,12 +20,12 @@ from nltk.tokenize import TweetTokenizer
 from keras import optimizers
 from keras.layers import Input, Embedding, LSTM, Dense, Flatten, GlobalMaxPooling1D, GlobalMaxPool1D, Dropout, Convolution1D, Bidirectional, Concatenate, GlobalAveragePooling1D
 from keras.layers.core import Activation, Dropout, Dense
-from keras.layers import Embedding
+from keras.layers.core import Embedding
 from keras.models import Model, load_model, Sequential
 from keras.optimizers import RMSprop, Adam
 from keras.utils import to_categorical
 from keras.preprocessing.text import Tokenizer
-# from keras.preprocessing.sequence import pad_sequences
+# from keras import pad_sequences
 from keras.callbacks import EarlyStopping, ModelCheckpoint, ReduceLROnPlateau
 
  # reproducibility
@@ -151,9 +151,11 @@ class Embed:
 
 """# Get Data"""
 
+embed = Embed('/home/vboxuser/Voice-Assistant/ReactionGIF/archive/glove.twitter.27B.100d.txt', 40)
+preprocess = BasicPreprocess(0, 80, emoji=True)
+
+
 def get_data(task):
-    embed = Embed('/home/vboxuser/Voice-Assistant/ReactionGIF/glove.twitter.27B/glove.twitter.27B.100d.txt', 40)
-    preprocess = BasicPreprocess(0, 80, emoji=True)
     file = '/home/vboxuser/Voice-Assistant/ReactionGIF/ReactionGIF.json'
     df = pd.read_json(file, lines=True)
     train_data, test_data = train_test_split(df, random_state=42, test_size=0.1)
@@ -245,52 +247,49 @@ def cnn(X_train, y_train, embedding_matrix, X_test, y_test):
     print(n_classes)
     batch_size = 128
     learning_rate = 0.0005
-    filename = '/home/vboxuser/Voice-Assistant/ReactionGIF/model.hd5'
+    filename = 'model.hd5'
 
-    if False:
-      x = Convolution1D(filters=units,
-                          kernel_size=3,
-                          padding="valid",
-                          activation="relu",
-                          strides=1)(embedding_layer)
+    x = Convolution1D(filters=units,
+                        kernel_size=3,
+                        padding="valid",
+                        activation="relu",
+                        strides=1)(embedding_layer)
 
-      x = GlobalMaxPool1D()(x)
-      x = Dense(units, activation="relu")(x)
-      x = Dropout(dropout)(x)
-      x = Dense(units, activation="relu")(x)
-      x = Dropout(dropout)(x)
-      preds = Dense(n_classes, activation="softmax")(x)
-      model = Model(sequence_input, preds)
-      init_weights = model.get_weights()
+    x = GlobalMaxPool1D()(x)
+    x = Dense(units, activation="relu")(x)
+    x = Dropout(dropout)(x)
+    x = Dense(units, activation="relu")(x)
+    x = Dropout(dropout)(x)
+    preds = Dense(n_classes, activation="softmax")(x)
+    model = Model(sequence_input, preds)
+    init_weights = model.get_weights()
 
-      opt = Adam(learning_rate=learning_rate)
-      if n_classes in [2,26]: # no neutral, no grief
-          loss = 'binary_crossentropy'
-      else:
-          loss='categorical_crossentropy'
-      model.compile(loss=loss,
-                  optimizer=opt,
-                  metrics=['accuracy'])
+    opt = Adam(learning_rate=learning_rate)
+    if n_classes in [2,26]: # no neutral, no grief
+        loss = 'binary_crossentropy'
+    else:
+        loss='categorical_crossentropy'
+    model.compile(loss=loss,
+                optimizer=opt,
+                metrics=['accuracy'])
 
-      print('Fitting')
-      model.set_weights(init_weights)
-      earlyStopping = EarlyStopping(monitor='val_loss', patience=10, mode='min', verbose=1)
-      mcp_save = ModelCheckpoint(filename, save_best_only=True, monitor='val_loss', mode='min', verbose=0)
-      reduce_lr_loss = ReduceLROnPlateau(monitor='val_loss', factor=0.1, patience=10, verbose=1, min_delta=1e-5, mode='min')
-      model.fit(X_train, y_train, epochs = epochs, verbose=1,
-              callbacks=[earlyStopping, mcp_save, reduce_lr_loss], batch_size=batch_size, validation_split=0.2)
+    print('Fitting')
+    model.set_weights(init_weights)
+    earlyStopping = EarlyStopping(monitor='val_loss', patience=10, mode='min', verbose=1)
+    mcp_save = ModelCheckpoint(filename, save_best_only=True, monitor='val_loss', mode='min', verbose=0)
+    reduce_lr_loss = ReduceLROnPlateau(monitor='val_loss', factor=0.1, patience=10, verbose=1, min_delta=1e-5, mode='min')
+    model.fit(X_train, y_train, epochs = epochs, verbose=1,
+            callbacks=[earlyStopping, mcp_save, reduce_lr_loss], batch_size=batch_size, validation_split=0.2)
 
     print('Predicting')
     model = load_model(filename)
     y_pred = model.predict(X_test, batch_size=batch_size)
     return y_pred
 
-
-if __name__ == '__main__':
-  for task in ['reaction', 'sentiment', 'emotion']:
-      X_train, y_train, embedding_matrix, X_test, y_test = get_data(task)
-      y_pred = cnn(X_train, y_train, embedding_matrix, X_test, y_test)
-      print(task)
-      if task in ['reaction', 'sentiment']:
-          y_pred = np.argmax(y_pred,axis=1)
-      report(task, y_test, y_pred)
+for task in ['reaction', 'sentiment', 'emotion']:
+    X_train, y_train, embedding_matrix, X_test, y_test = get_data(task)
+    y_pred = cnn(X_train, y_train, embedding_matrix, X_test, y_test)
+    print(task)
+    if task in ['reaction', 'sentiment']:
+        y_pred = np.argmax(y_pred,axis=1)
+    report(task, y_test, y_pred)

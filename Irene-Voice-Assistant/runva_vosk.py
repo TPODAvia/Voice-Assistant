@@ -2,6 +2,7 @@ import argparse
 import os
 import queue
 import sounddevice as sd
+import torch
 import vosk
 import sys
 import traceback

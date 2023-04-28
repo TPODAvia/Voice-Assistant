@@ -1,0 +1,61 @@
+; BOOK_ID: Book ID in the LibriVox project ID
+; CHAPTER_ID: The ID of the chapter on LibriVox
+; CHAPTER_TITLE: The title of the chapter on LibriVox, 'ALL' - means the whole book is read by the same reader
+; READER_ID: The ID of the reader in the LibriVox's database
+; READER_NAME: The NAME of the reader in the LibriVox's database
+; GENDER: Reader's gender
+; SUBSET: The corpus subset to which this chapter is assigned
+;
+;BOOK_ID| CHAPTER_ID| CHAPTER_TITLE                                               | READER_ID| READER_NAME    | GENDER | SUBSET 
+13240   | -         | ALL                                                         | 8169     | tovarisch      | M      | train  
+15088   | -         | ALL                                                         | 8086     | Mark Chulsky   | M      | train  
+14105   | -         | ALL                                                         | 8169     | tovarisch      | M      | train  
+11365   | -         | ALL                                                         | 8086     | Mark Chulsky   | M      | train  
+7771    | -         | ALL                                                         | 8086     | Mark Chulsky   | M      | train  
+12256   | -         | ALL                                                         | 8169     | tovarisch      | M      | train  
+7531    | -         | ALL                                                         | 8086     | Mark Chulsky   | M      | train      
+10422   | -         | ALL                                                         | 8169     | tovarisch      | M      | train  
+9515    | -         | ALL                                                         | 8086     | Mark Chulsky   | M      | train  
+559     | -         | ALL                                                         | 295      | Yakovlev Valery| M      | train  
+13744   | -         | ALL                                                         | 8086     | Mark Chulsky   | M      | train  
+162     | -         | ALL                                                         | 295      | Yakovlev Valery| M      | train  
+11018   | -         | ALL                                                         | 9014     | Xenium5        | F      | train  
+8641    | -         | ALL                                                         | 9014     | Xenium5        | F      | train  
+557     | -         | ALL                                                         | 295      | Yakovlev Valery| M      | train  
+15349   | -         | ALL                                                         | 13587    | Kazbek         | M      | train  
+2145    | 1         | РУСЛАН И ЛЮДМИЛА 1                                          | 2671     | Foreign Girl   | F      | test   
+2145    | 2         | РУСЛАН И ЛЮДМИЛА 2                                          | 2671     | Foreign Girl   | F      | test   
+2145    | 3         | РУСЛАН И ЛЮДМИЛА 3                                          | 2671     | Foreign Girl   | F      | test   
+2145    | 4         | РУСЛАН И ЛЮДМИЛА 4                                          | 3056     | albus865       | F      | test   
+2145    | 5         | РУСЛАН И ЛЮДМИЛА 5                                          | 3056     | albus865       | F      | test   
+2145    | 6         | РУСЛАН И ЛЮДМИЛА 6                                          | 4471     | Create         | M      | test   
+2145    | 7         | РУСЛАН И ЛЮДМИЛА - ЭПИЛОГ                                   | 4471     | Create         | M      | test   
+2145    | 8         | КАВКАЗСКИЙ ПЛЕННИК 1                                        | 2826     | Chamberlain    | M      | test   
+2145    | 9         | КАВКАЗСКИЙ ПЛЕННИК 2                                        | 2826     | Chamberlain    | M      | test   
+2145    | 10        | КАВКАЗСКИЙ ПЛЕННИК - ЧЕРКЕССКАЯ ПЕСНЯ                       | 4471     | Create         | M      | test   
+2145    | 11        | КАВКАЗСКИЙ ПЛЕННИК - ЭПИЛОГ                                 | 4471     | Create         | M      | test   
+2145    | 12        | ГАВРИИЛИАДА                                                 | 5397     | violin         | F      | dev    
+2145    | 13        | БРАТЬЯ РАЗБОЙНИКИ                                           | 5397     | violin         | F      | dev    
+2145    | 14        | БАХЧИСАРАЙСКИЙ ФОНТАН                                       | 5548     | ni             | F      | test   
+2145    | 15        | ЦЫГАНЫ                                                      | 4372     | Cardray        | M      | test   
+2145    | 16        | ГРАФ НУЛИН                                                  | 5397     | violin         | F      | dev    
+2145    | 17        | ПОЛТАВА - ПОСВЯЩЕНИЕ, 1                                     | 5397     | violin         | F      | dev    
+2145    | 18        | ПОЛТАВА 2                                                   | 5397     | violin         | F      | dev    
+2145    | 19        | ПОЛТАВА 3                                                   | 5397     | violin         | F      | dev    
+2145    | 20        | ТАЗИТ                                                       | 5397     | violin         | F      | dev    
+2145    | 21        | ДОМИК В КОЛОМНЕ                                             | 5397     | violin         | F      | dev    
+2145    | 22        | АНДЖЕЛО 1                                                   | 5397     | violin         | F      | dev    
+2145    | 23        | АНДЖЕЛО 2                                                   | 5397     | violin         | F      | dev    
+2145    | 24        | АНДЖЕЛО 3                                                   | 5397     | violin         | F      | dev    
+2145    | 25        | МЕДНЫЙ ВСАДНИК - ПРЕДИСЛОВИЕ, ВСТУПЛЕНИЕ                    | 4091     | RussLib        | F      | test   
+2145    | 26        | МЕДНЫЙ ВСАДНИК 1                                            | 4091     | RussLib        | F      | test   
+2145    | 27        | МЕДНЫЙ ВСАДНИК 2                                            | 4091     | RussLib        | F      | test   
+2145    | 28        | МОНАХ 1                                                     | 5397     | violin         | F      | dev    
+2145    | 29        | МОНАХ 2                                                     | 5397     | violin         | F      | dev    
+2145    | 30        | МОНАХ 3                                                     | 5397     | violin         | F      | dev    
+2145    | 31        | БОВА (отрывок из поэмы)                                     | 5397     | violin         | F      | dev    
+2145    | 32        | ИСПОВЕДЬ (незавершенная поэма)                              | 5397     | violin         | F      | dev    
+2145    | 34        | ВАДИМ (незавершенная поэма)                                 | 5397     | violin         | F      | dev    
+2145    | 35        | БОВА, МСТИСЛАВ, АГАСФЕР, КИРДЖАЛИ, КАЗАЧКА И ЧЕРКЕС (планы) | 5397     | violin         | F      | dev    
+2145    | 36        | ЕЗЕРСКИЙ (незавершенная поэма)                              | 5548     | ni             | F      | test   
+2145    | 37        | ЮДИФЬ (незавершенная поэма)                                 | 5397     | violin         | F      | dev  

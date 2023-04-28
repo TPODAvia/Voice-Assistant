@@ -41,25 +41,53 @@ report(test_data['labels'], test_data['pred'])
 
 """#TFIDF"""
 
-from sklearn.feature_extraction.text import TfidfVectorizer
+# from sklearn.feature_extraction.text import TfidfVectorizer
 
-vectorizer = TfidfVectorizer(ngram_range=(1,2), min_df=2, max_features=1000, stop_words='english') # using default parameters
-vectorizer.fit(train_data['text'])
-train_X = vectorizer.transform(train_data['text'])
-test_X = vectorizer.transform(test_data['text'])
-print(train_X.shape, test_X.shape)
+# vectorizer = TfidfVectorizer(ngram_range=(1,2), min_df=2, max_features=1000, stop_words='english') # using default parameters
+# vectorizer.fit(train_data['text'])
+# train_X = vectorizer.transform(train_data['text'])
+# test_X = vectorizer.transform(test_data['text'])
+# print(train_X.shape, test_X.shape)
 
-"""#LogisticRegressionCV
+# """#LogisticRegressionCV
 
-"""
+# """
 
-from sklearn.linear_model import LogisticRegressionCV
+# from sklearn.linear_model import LogisticRegressionCV
 
 
-model = LogisticRegressionCV(Cs=3, cv=5, verbose=1, max_iter=1000, n_jobs=-1)
-model.fit(train_X, train_data['labels'])
-pred_y = model.predict(test_X)
-report(test_data['labels'], pred_y)
+# model = LogisticRegressionCV(Cs=3, cv=5, verbose=1, max_iter=1000, n_jobs=-1)
+# model.fit(train_X, train_data['labels'])
+# pred_y = model.predict(test_X)
+# report(test_data['labels'], pred_y)
+
+import sys
+train_df = pd.DataFrame(train_data['text'])
+
+list = []
+for i in range(0,train_data['labels'].shape[0]):
+    arr0 = [0] * len(categories) # arrays of len(categories)=43 zeros
+    s = train_data['labels'].values[i]
+    arr0[s] = 1
+    list.append(arr0)
+
+train_df.reset_index(drop=True, inplace=True)
+train_df['labels'] = pd.Series(list)
+
+# Get the total number of rows in the DataFrame
+total_rows = train_df.shape[0]
+
+# Calculate the index of the row up to which all rows need to be preserved
+preserve_index = total_rows - 18000
+
+# Drop all the rows after the specified index
+train_df.drop(train_df.index[preserve_index:], inplace=True)
+
+print(train_df)
+print(train_df.shape)
+print(len(categories))
+# sys.exit()
+
 
 """#RoBERTa"""
 
@@ -68,11 +96,26 @@ report(test_data['labels'], pred_y)
 # !pip install simpletransformers
 # !pip install tensorboardx
 
-from simpletransformers.classification import ClassificationModel
-model = ClassificationModel('roberta', 'roberta-base',
-                            num_labels=len(categories), use_cuda=False)
+from simpletransformers.classification import (
+    MultiLabelClassificationModel, MultiLabelClassificationArgs
+)
 
-model.train_model(train_data, args={
+# Optional model configuration
+model_args = MultiLabelClassificationArgs(num_train_epochs=1, use_multiprocessing=False, use_multiprocessing_for_evaluation=False)
+
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
+
+# Create a MultiLabelClassificationModel
+model = MultiLabelClassificationModel(
+    "roberta",
+    "roberta-base",
+    num_labels=43,
+    args=model_args,
+    use_cuda=False
+)
+
+# Train the model
+model.train_model(train_df, args={
     'fp16': False,
     'overwrite_output_dir': True,
     'train_batch_size': 32,
@@ -80,7 +123,15 @@ model.train_model(train_data, args={
     'max_seq_length': 96,
     'num_train_epochs': 3
 })
-_, model_outputs, _ = model.eval_model(test_data)
-test_data['probabilities'] = model_outputs.tolist()
-test_data['pred'] = test_data['probabilities'].apply(lambda x: x.index(max(x)))
-report(test_data['labels'], test_data['pred'])
+
+# Evaluate the model
+# result, model_outputs, wrong_predictions = model.eval_model(
+#     eval_df
+# )
+
+# Make predictions with the model
+predictions, raw_outputs = model.predict(["I hate this school homework dumb shit"])
+
+print("Prediction: ", predictions)
+
+print("raw_outputs: ", raw_outputs)

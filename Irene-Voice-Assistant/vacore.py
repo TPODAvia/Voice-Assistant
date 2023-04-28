@@ -12,6 +12,12 @@ from jaa import JaaCore
 
 from collections.abc import Callable
 
+from transformers import AutoTokenizer, AutoModelForCausalLM
+import re
+
+tokenizer = AutoTokenizer.from_pretrained('tinkoff-ai/ruDialoGPT-medium')
+model = AutoModelForCausalLM.from_pretrained('tinkoff-ai/ruDialoGPT-medium')
+
 version = "8.1"
 
 # main VACore class
@@ -395,16 +401,30 @@ class VACore(JaaCore):
                 # no context
                 # self.say(self.plugin_options("core")["replyNoCommandFound"])
 
-                import sys
-                sys.path.append("/home/vboxuser/Voice-Assistant/personaGPT")
-                import run_persona
-                from load_configs import tokenizer
-                personas = run_persona.get_personas()
+                inputs = tokenizer('@@ПЕРВЫЙ@@ Hello @@ВТОРОЙ@@', return_tensors='pt')
+                generated_token_ids = model.generate(
+                    **inputs,
+                    top_k=10,
+                    top_p=0.95,
+                    num_beams=3,
+                    num_return_sequences=1,
+                    do_sample=True,
+                    no_repeat_ngram_size=2,
+                    temperature=1.2,
+                    repetition_penalty=1.2,
+                    length_penalty=1.0,
+                    eos_token_id=50257,
+                    max_new_tokens=40
+                )
+                context_with_response = [tokenizer.decode(sample_token_ids) for sample_token_ids in generated_token_ids]
 
-                dialog_hx, msg = run_persona.interact(1, personas, command , length=8, top_k=10, top_p=.92, max_length=1000)
-                text = tokenizer.decode(msg, skip_special_tokens=True)
-                
-                self.play_voice_assistant_speech(text)
+                pattern = r'@@ВТОРОЙ@@(.*?)@@ПЕРВЫЙ@@'
+
+                match = re.search(pattern, context_with_response[0])
+                if match:
+                    extracted_text = match.group(1)
+                    print("Responce Text: ", extracted_text)
+                    self.play_voice_assistant_speech(extracted_text)
 
             else:
                 # in context

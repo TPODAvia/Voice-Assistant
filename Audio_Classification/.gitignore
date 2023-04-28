@@ -1,7 +1,5 @@
 __pycache__
 .ipynb_checkpoints
-<<<<<<< HEAD
-clean
-=======
-clean
->>>>>>> 5162ffbda62dcf1ff6eaaadb70bf3be12598becd
+clean/
+cache_dir/
+runs/

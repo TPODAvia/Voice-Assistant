@@ -1,0 +1,21 @@
+;BOOK_ID: Book ID in the LibriVox project ID
+;Title: Book title
+;
+;BOOK_ID| Title
+13240	| Обрыв                                       | Obryv									| https://librivox.org/obryv-by-ivan-goncharov/
+15088	| Силуэты русских писателей, Выпуск 3         | Silhouettes Russian Writers Issue 3)    | https://librivox.org/silhouettes-russian-writers-issue-3-by-yuly-aykhenvald/
+14105	| Обыкновенная история 		        		  | Obyknovennaya Istorya					| https://librivox.org/obyknovennaya-istorya-by-ivan-goncharov/
+11365	| Pассказы для детей и взрослых               | Short Stories for Children and Adults	| https://librivox.org/p-short-stories-for-children-and-adults-by-vsevolod-garshin/
+7771	| Ранние рассказы                             | Early Short Stories						| https://librivox.org/early-short-stories-by-zeev-jabotinsky/
+2145	| Поэмы                                       | Poems									| https://librivox.org/poemi-alexander-pushkin/ 
+12256	| Дворянское гнездо                           | Dvoryanskoe gnezdo						| https://librivox.org/dvoryanskoegnezdo-by-ivan-turgenev/
+7531	| Евреи и Россия                              | Jews and Russia  						| https://librivox.org/jews-and-russia-by-vladimir-jabotinsky/
+10422	| Вешние воды                                 | Veshnie Vody         					| https://librivox.org/by-ivan-turgenev/
+9515	| Ледяной поход                               | Ice March           					| https://librivox.org/ice-march-by-roman-gul/
+559	    | Записки из подполья                         | Notes from the Underground				| https://librivox.org/zapiski-iz-podpolya-by-fyodor_dostoevsky/
+13744	| На краю света                               | On the Edge of the World                | https://librivox.org/on-the-edge-of-the-world-by-nikolai-leskov/
+162	    | Детство                                     | Childhood 								| https://librivox.org/childhood-russian-by-leo-tolstoy/
+11018	| Евгений Онегин                              | Eugene Onegin                           | https://librivox.org/eugene-onegin-by-alexander-pushkin/
+8641	| Повести покойного Ивана Петровича Белкина   | Belkin Tales      						| https://librivox.org/belkin-tales-by-alexander-pushkin/
+557	    | Белые ночи                                  | White Nights  							| https://librivox.org/white-nights-by-fyodor-dostoevsky/
+15349	| Вехи-Сборник статей о русской интеллигенции | Vekhi (Landmarks) 						| https://librivox.org/vekhi-by-various/

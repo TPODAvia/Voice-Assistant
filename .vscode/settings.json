@@ -1,7 +1,9 @@
 {
     "python.analysis.extraPaths": [
-        "/home/vboxuser/Voice-Assistant/personaGPT",
-        "/home/vboxuser/Voice-Assistant/Multilingual_Text_to_Speech",
-        "/home/vboxuser/Voice-Assistant/Audio_decision",
+        "./StyleTTS/Demo/hifi-gan",
+        "./StyleTTS/Demo",
+        "./Audio_Classification",
+        "./Face_ui",
+        "./ReactionGIF"
     ]
 }

@@ -38,6 +38,7 @@ positive = [
     'thank_you',
     ]
 
+
 file = '/home/vboxuser/Voice-Assistant/ReactionGIF/ReactionGIF.json'
 df = pd.read_json(file, lines=True)
 train_data, test_data = train_test_split(df, random_state=43, test_size=0.1)

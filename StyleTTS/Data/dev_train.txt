@@ -1,0 +1,100 @@
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0000.wav|vʌˈisʲtʲinu jɪvrʲˈejkʲɪ mʌɭʌdˈoj mnʲˈe dˈorʌvʌ duʃˈɛvnʌjɪ spasʲˈenjjɪ. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0001.wav|prʲidʲˈɪ kˈo mnʲˈe, prʲiɭʲˈestnyj ˈɑnɡʲiɭ mˈoj, ˈi mʲˈirnʌjɪ prʲimʲˈɪ bɭʌɡʌsɭʌvʲˈenjjɪ. spasʲtʲˈɪ xʌtʃʲˈu ʑimnˈuju krʌsʌtˈu! |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0002.wav|ɭʲu"bʲˈeznyx ˈust uɭˈypkʌju dʌvˈoɭnyj, tsarʲˈu" nʲibʲˈes ˈi ɡʌspˈodu xrʲistˈu pʌˈju sʲtʲixˈɪ nə ɭʲˈirʲi bʌɡʌmˈoɭnʌj. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0003.wav|smʲirʲˈennyx strˈun, bytʲ mˌoʒyt, nʌkʌnʲˈets jɪjˈe pɭʲinʲˈɑt tsyrkˈovnyjɪ napʲˈevy, ˈi dˈux svʲatˈoj sʌjdʲˈet nə sʲˈerdtsy dʲˈevy |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0004.wav|vɭasʲtʲˈitʲiɭʲ ˈon ˈi mˈysɭʲij ˈi sʲirdʲˈets. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0005.wav|ʃystnˈɑdtsʌtʲ ɭʲˈet, nʲivʲˈinnʌjɪ smʲirʲˈenjjɪ, brˈof tʲˈemnʌja, dvˈux dʲˈevstvʲinnyx xʌɭmˈof pˈot pʌɭʌtnˈom uprˈuɡʌjɪ dvʲiʒˈɛnjjɪ, nʌɡˈɑ ɭʲu"bvʲˈɪ, ʒymtʃʲˈuʒnyj rʲˈɑt zˈubʌf. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0006.wav|zatʃʲˈem ʒˈɛ tˈy, jɪvrʲˈejka, uɭybnˈuɭʌsʲ, ˈi pˈo ɭʲitsˈu rumʲˈɑnʲits prʌbʲiʒˈɑɭ? |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0007.wav|nʲˈet, mʲˈiɭʌja, tˈy prˈɑvʌ ʌbmanˈuɭʌsʲ: ˈja nʲe tʲibʲˈɑ, marʲˈiju ʌpʲˈisʌɭ. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0008.wav|v ɡɭuʃˈɪ pʌɭʲˈej, vdaɭʲˈɪ jɪrusaɭʲˈima, vdaɭʲˈɪ zabˈɑf ˈi ˈjunyx vʌɭʌkʲˈit kʌtˈoryx bʲˈes dɭʲɑ ɡʲˈibʲiɭʲɪ xranʲˈit, krasˈɑvʲitsa, nʲikʲˈem jɪɕˈe nʲe zrʲˈima, bʲˈes prʲˈixʌtʲij vʲiɭˈɑ spʌkˈojnyj vʲˈek. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0009.wav|jɪjˈe suprˈuk, pʌtʃʲtʲˈennyj tʃʲiɭʌvʲˈek, sʲidˈoj starʲˈik, pɭʌxˈoj stʌɭʲˈɑr ˈi pɭˈotʲnʲik, f sʲiɭʲˈenjjɪ byɭ jɪdʲˈinstvʲinnyj rabˈotʲnʲik. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0010.wav|ˈi dʲˈenʲ ˈi nˈotʃʲ, ɪmʲˈeja mnˈoɡʌ dʲˈeɭ tˈo s ˈurʌvnʲim, tˈo s vʲˈernʌju pʲiɭˈoju, tˈo s tʌpʌrˈom, nʲe mnˈoɡʌ ˈon smʌtrʲˈeɭ nə prʲˈeɭʲisʲtʲɪ, kʌtˈorymʲɪ vɭadʲˈeɭ, ˈi tˈɑjnyj tsvʲˈet, kʌtˈorʌmu sudʲbˈoju naznˈɑtʃʲina byɭˈɑ ɪnˈɑja tʃʲˈestʲ, nə sʲtʲibʲiɭkʲˈe nʲe smʲˈeɭ jɪɕˈe prʌtsvʲˈestʲ. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0011.wav|ɭʲinʲˈivyj mˈuʒ svʌjˈeju stˈɑrʌj ɭʲˈejkʌj f tʃʲˈɑs ˈutrʲinnʲij nʲe ʌrʌʃˈɑɭ jɪvˈo |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0012.wav|ˈon kˈɑk ʌtʲˈets s nʲivʲˈinnʌj ʒˈyɭ jɪvrʲˈejkʌj, jɪjˈe kʌrmʲˈiɭ ˈi bˈoɭʃy nʲitʃʲivˈo. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0014.wav|ˈuʒy pˈoɭʲʌ nʲimˈɑja nˈotʃʲ ʌbjjˈemɭʲit; v svʌjˈem uɡɭˈu marʲˈija sɭˈɑdkʌ drʲˈemɭʲit. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0015.wav|fsʲivˈyʃnʲij rʲˈek, ˈi dʲˈevʲi sʲnʲˈitsʌ sˈon: prʲˈet nʲˈeju vdrˈuk ʌtkrˈyɭsʲʌ nʲibʌskɭˈon |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0017.wav|ˈi svʲˈetʲiɭ vdrˈuk ʌtʃʲˈɑm javʲˈiɭsʲʌ ˈon. fsʲˈe pˈɑɭʲɪ nʲˈits. umˈoɭknuɭ ˈɑrfy zvˈon. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0018.wav|skɭʌnʲˈiv ɡɭavˈu, jɪdvˈɑ marʲˈija dˈyʃyt, drʌʒˈyt kˈɑk ɭʲˈist ˈi ɡˈoɭʌs bˈoɡa sɭˈyʃyt: "krasˈɑ ʑimnˈyx ɭʲu"bʲˈeznyx dʌtʃʲirʲˈej, ɪzrˈɑiɭʲʌ nadʲˈeʒda mʌɭʌdˈɑja! |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0019.wav|zˈovu tʲibʲˈɑ, ɭʲu"bˈovʲiju pyɭˈɑja, prʲitʃʲˈɑstʲnʲitsa tˈy sɭˈɑvy bˈutʲ mʌjˈej: ɡʌtˈova bˈutʲ kˈɑ nʲivʲidˈovʌj sudʲbʲˈinʲi, ʒynʲˈix ɡrʲadʲˈet, ɡrʲadʲˈet kˈɑ svʌjˈej rabˈynʲi". |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0020.wav|vnˈofʲ ˈobɭʌkʌm ʌdʲˈeɭsʲʌ bˈoʒyj trˈon |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0021.wav|vʌsstˈɑɭ dˈuxʌf kryɭˈɑtyj ɭʲiɡʲiˈon, ˈi rʌzdaɭʲˈisʲ nʲibʲˈesnʌj ˈɑrfy zvˈukʲɪ. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0022.wav|ʌtkrˈyf ustˈɑ, sɭʌʒˈyf umʲˈiɭnʌ rˈukʲɪ, ɭʲitsˈu nʲibʲˈes marʲˈija prʲidstʌˈit. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0023.wav|no ʃto ʒˈɛ tˈɑk vʌɭnˈujit ˈi mˈɑnʲit jɪjˈe kˈɑ sʲˈebʲi vnʲimˈɑtʲiɭnyjɪ vzˈory? |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0024.wav|ktˈo sʲˈej f tʌɭpʲˈe prʲidvˈornyx mʌɭʌdˈyx s nʲijˈe ʌtʃʲˈej nʲe svˈodʲit ɡʌɭubˈyx? |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0025.wav|pʲirnˈɑtyj ʃɭʲˈem, rʌskˈoʃnyjɪ ubˈory, sʲiˈjanjjɪ krʲˈiɭ ˈi ɭˈokʌnʌv zɭatˈyx, vysˈokʲij stˈɑn, vzˈor tˈomnyj ˈi stydɭʲˈivyj fsʲˈe nrˈɑvʲitsʌ marʲˈiɪ mʌɭtʃʲaɭʲˈivʌj. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0026.wav|zamʲˈetʃʲin ˈon, ʌdʲˈin ˈon sʲˈerdtsu mʲˈiɭ! |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0027.wav|ɡʌrdʲˈisʲ, ɡʌrdʲˈisʲ, arxˈɑnɡʲiɭ ɡʌvrʲiˈiɭ! prʌpˈɑɭʌ fsʲˈe. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0028.wav|nʲe vnʲˈemɭʲʌ dʲˈetskʌj pʲˈenʲɪ, nə pʌɭʌtʲnʲˈe tˈɑk ɪɕizˈɑjut tʲˈenʲɪ, rʌʒdʲˈennyjɪ v vʌɭʃˈɛbnʌm fʌnarʲˈe. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0029.wav|krasˈɑvʲitsa prʌsnˈuɭʌsʲ nə zˈɑrʲi ˈi nʲˈeʒyɭʌsʲ nə ɭˈoʒy tˈomnʌj ɭʲˈenʲɪ. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0030.wav|no dʲˈivnyj sˈon, no mʲˈiɭyj ɡʌvrʲiˈiɭ ˈɪs pˈɑmʲʌtʲɪ jɪjˈe nʲe vyxˈodʲiɭ. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0031.wav|tsarʲˈɑ nʲibʲˈes ɭʲu"bʲˈitʲ ʌnˈɑ xʌtʲˈeɭa, jɪvˈo sɭˈova prʲiˈjatny bˌyɭʲɪ jˈej, ˈi pʲirʲˈet nʲˈim ʌnˈɑ bɭʌɡʌɡˈovʲiɭa, no ɡʌvrʲiˈiɭ kazˈɑɭsʲʌ jˈej mʲˈiɭʲij. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0032.wav|tˈɑk ɪnʌɡdˈɑ suprˈuɡu ɡʲinʲirˈɑɭa zatʲˈɑnutyj prʲiɭɕˈɑjit adjjutˈɑnt. ʃto dʲˈeɭʌtʲ nˈɑm? |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0033.wav|sudʲbˈɑ tˈɑk prʲikazˈɑɭa, sʌɡɭˈɑsny f tˈom nʲivʲˈeʒda ˈi pʲidˈɑnt. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0034.wav|pʌɡʌvʌrʲˈim ˈo strˈɑnnʌsʲtʲʌx ɭʲu"bvʲˈɪ druɡˈovʌ ˈja nʲe smˈysɭʲu" rʌzɡʌvˈora. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0035.wav|f tʲˈe dnʲˈɪ, kʌɡdˈɑ ot ˈoɡnʲinnʌvʌ vzˈora mˈy tʃʲˈuvstvujim vʌɭnʲˈenʲijɪ f krˈovʲɪ, kʌɡdˈɑ tʌskˈɑ ʌbmˈɑntʃʲivyx ʒyɭˈɑnʲij ʌbjjˈemɭʲit nˈɑs ˈi dˈuʃu tʲʌɡʌtʲˈit, ˈi fsʲˈu"du nˈɑs prʲisɭʲˈedujit, tʌmʲˈit prʲidmʲˈet ʌdʲˈin ˈi dˈumy ˈi stradˈɑnʲij, nʲe prˈɑvda ɭʲˈɪ? |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0036.wav|f tʌɭpʲˈe mɭadˈyx druʑˈej napʲˈersʲnʲika mˈy ˈɪɕim ˈi naxˈodʲim. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0037.wav|s nʲˈim tˈɑjnyj ɡɭˈɑs mutʃʲˈitʲiɭnyx strasʲtʲˈej narʲˈetʃʲijim vʌstˈorɡʌf pʲirʲivˈodʲim. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0038.wav|kʌɡdˈɑ ʒˈɛ mˈy pʌjmˈɑɭʲɪ nə ɭʲˈetu kryɭˈɑtyj mʲˈik nʲibʲˈesnyx upʌjˈenʲij ˈi kˈɑ rˈɑdʌsʲtʲʌm nə ɭˈoʒy nʌsɭaʒdʲˈenʲij stydɭʲˈivuju skɭʌnʲˈiɭʲɪ krʌsʌtˈu, kʌɡdˈɑ ɭʲu"bvʲˈɪ zabˈyɭʲɪ mˈy stradˈɑnjjɪ ˈi nʲˈetʃʲivʌ nˈɑm bˈoɭʲijɪ ʒyɭˈɑtʲ, ʃtˈop ʌʒyvʲˈitʲ ˈo nʲˈej vʌspʌmʲinˈɑnjjɪ, s napʲˈersʲnʲikʌm mˈy ɭʲˈu"bʲim pʌbʌɭtˈɑtʲ. ˈi tˈy, ɡʌspˈotʲ! |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0039.wav|pʌznˈɑɭ jɪjˈe vʌɭnʲˈenjjɪ, ˈi tˈy pyɭˈɑɭ, ˈo bˈoʒy, kˈɑk ˈi mˈy. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0040.wav|sʌzdˈɑtʲiɭʲu" pʌstˈyɭʌ fsʲˈe tvʌrʲˈenjjɪ, naskˈutʃʲiɭʌ nʲibʲˈesnʌjɪ mʌɭʲˈenjjɪ, ˈon sʌtʃʲinʲˈɑɭ ɭʲu"bˈovnyjɪ psaɭmˈy ˈi ɡrˈomkʌ pʲˈeɭ: "ɭʲu"bɭʲˈu", ɭʲu"bɭʲˈu" marʲˈiju, v unˈynʲiɪ bʲissmʲˈertʲijɪ vɭatʃʲˈu. ɡdʲˈe kryɭʲˈija? |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0041.wav|kˈɑ marʲˈiɪ pʌɭʲitʃʲˈu ˈi nə ɡrˈudʲɪ krasˈɑvʲitsy pʌtʃʲˈiju!. " ˈi prˈotʃʲijɪ. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0042.wav|fsʲˈe, ʃto prʲidˈumʌtʲ mok, tvʌrʲˈets ɭʲu"bʲˈiɭ vʌstˈotʃʲnyj, pʲˈestryj sɭˈok. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0043.wav|pˈotʌm, prʲizvˈɑf ɭʲu"bʲˈimtsa ɡʌvrʲiˈiɭa, svʌˈju ɭʲu"bˈofʲ ˈon prˈozʌj ʌbjjasʲnʲˈɑɭ. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0044.wav|bʲisʲˈedy ˈɪx nˈɑm tsˈɛrkʌfʲ utaˈiɭa, jɪvʌnɡʲiɭʲˈist nʲimnˈovʌ ʌpɭʌʃˈɑɭ! |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0045.wav|no ɡʌvʌrʲˈit armʲˈɑnskʌjɪ prʲidˈɑnjjɪ, ʃto tsˈɑrɪ^ nʲibʲˈes, nʲe pʌʒaɭʲˈef pʌxvˈɑɭ, v mʲirkˈurʲiɪ arxˈɑnɡʲiɭa ɪzbrˈɑɭ, zamʲˈetʲʌ v nʲˈem ˈi ˈum ˈi darˈovʌnjjɪ, ˈi vʲitʃʲirkˈom kˈɑ marʲˈiɪ pʌdʌsɭˈɑɭ. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0046.wav|arxˈɑnɡʲiɭu druɡˈoj xʌtʲˈeɭʌsʲ tʃʲˈesʲtʲɪ: nʲirʲˈedkʌ ˈon f pʌsˈoɭstvʌx byɭ ɕˈɑstɭʲif |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0047.wav|pʲirʲinʌsʲˈitʲ zapʲˈisʌtʃʲkʲɪ dˈɑ vʲˈesʲtʲɪ xˈotʲ vˈyɡʌdnʌ, no ˈon sʌmʌɭʲu"bʲˈif. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0048.wav|ˈi sɭˈɑvy sˈyn, namʲˈerʲinjja sˈokryf, stˈɑɭ nʲˈexʌtʲʌ usɭˈuʒɭʲivyj uɡˈodnʲik tsarʲˈu" nʲibʲˈes. ˈɑ pˈoʑimnˈomu svˈodnʲik. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0049.wav|no, stˈɑryj vrˈɑk, nʲe drʲˈemɭʲit sʌtanˈɑ! |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0050.wav|usɭˈyʃʌɭ ˈon, ʃatˈɑjasʲ v bʲˈeɭʌm svʲˈetʲi, ʃto bˈok ɪmʲˈeɭ jɪvrʲˈejku nə prʲimʲˈetʲi, krasˈɑvʲitsu, kʌtˈorʌja dʌɭʒnˈɑ spasʲtʲˈɪ nˈɑʃ rˈot ot vʲˈeʃnʌj mˈukʲɪ ˈɑda. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0051.wav|ɭukˈɑvʌmu vʲiɭʲˈikʌja dʌsˈɑda xɭʌpˈotʃʲit ˈon. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0052.wav|fsʲivˈyʃnʲij mʲˈeʒdu tʲˈem nə nʲibʲisˈɑx sʲidʲˈeɭ v unˈynjjɪ sɭˈɑdkʌm, vʲˈesʲ mʲˈir zabˈyf, nʲe prˈɑvʲiɭ ˈon nʲitʃʲˈem ˈi bʲˈes nʲivˈo fsʲˈe ʃɭˈo svʌˈim pʌrʲˈɑdkʌm. ʃto ʒɛ dʲˈeɭʌjit marʲˈija? |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0053.wav|ɡdʲˈe ʌnˈɑ, ɪˈosʲifa pʲitʃʲˈɑɭnʌja suprˈuɡa? |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0054.wav|v svʌjˈem sˈɑdu, pʲitʃʲˈɑɭnyx dˈum pʌɭnˈɑ, prʌvˈodʲit tʃʲˈɑs nʲivʲˈinnʌvʌ dʌsˈuɡa ˈi snˈova ʒdʲˈet pɭʲinʲˈitʲiɭnʌvʌ snˈɑ. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0055.wav|s jɪjˈe dˈuʃɪ nʲe sxˈodʲit ˈobrʌs mʲˈiɭyj, kˈɑ arxˈɑnɡʲiɭu ɭʲitʲˈit duʃˈoj unˈyɭʌj. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0056.wav|f prʌxɭˈɑdʲi pˈɑɭm, pˈot ɡˈovʌrʌm rutʃʲjˈja zadˈumʌɭʌsʲ krasˈɑvʲitsa mˈoja |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0057.wav|nʲe mʲˈiɭʌ jˈej tsvʲitˈov bɭʌɡʌˈuxʌnjjɪ, nʲe vʲˈesʲiɭʌ prʌzrˈɑtʃʲnyx vˈot ʒurtʃʲˈɑnjjɪ. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0058.wav|ˈi vʲˈidʲit vdrˈuk: prʲikrˈɑsnʌja zmʲˈija, prʲimantʃʲˈivʌj bɭʲistˈɑja tʃʲiʃujˈeju, f tʲˈenʲɪ vʲitvʲˈej katʃʲˈɑjitsʌ nˈɑt nʲˈeju ˈi ɡʌvʌrʲˈit: "ɭʲu"bʲˈimʲitsa nʲibʲˈes! |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0059.wav|nʲe ubʲiɡˈɑj, ˈja pɭʲˈennʲik tvˈoj pʌsɭˈuʃnyj. " vʌzmˈoʒnʌ ɭʲˈɪ? ˈo, tʃʲˈudʌ ˈɪs tʃʲudʲˈes! |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0060.wav|ktˈo ʒɛ ɡʌvʌrʲˈiɭ marʲˈiɪ prʌstʌdˈuʃnʌj, ktˈo ʒɛ ˈɛtʌ byɭ? uvˈy, kʌnʲˈeʃnʌ, bʲˈes. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0061.wav|krasˈɑ zmʲˈiɪ, tsvʲitˈof rʌznʌˈobrʌznʌstʲ, jɪjˈe prʲivʲˈet, ʌɡˈon ɭukˈɑvyx ɡɭˈɑs pʌnrˈɑvʲiɭʲisʲ marʲˈiɪ f tˈot ʒˈɛ tʃʲˈɑs. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0062.wav|ʃtˈop usɭadʲˈitʲ mɭadˈovʌ sʲˈerdtsa prˈɑzdnʌstʲ, nə sʌtanʲˈe pʌkˈoja nʲˈeʒnyj vzˈor, s nʲˈim zʌvʲiɭˈɑ ʌpˈɑsnyj rʌzɡʌvˈor: "ktˈo tˈy, zmʲˈija? |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0063.wav|pˈo ˈɛɭsʲtʲivˈomu napʲˈevu, pˈo krʌsʌtʲˈe, pˈo bɭʲˈesku, pˈo ɡɭazˈɑm ˈja uznˈɑju tʌvˈo, ktˈo nˈɑʃu jˈevu prʲivɭʲˈetʃʲ uspʲˈeɭ kˈɑ taˈinstvʲinnʌmu drʲˈevu ˈi tˈɑm skɭʌnʲˈiɭ nʲiɕˈɑstnuju kˈɑ ɡrʲixˈɑm. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0064.wav|tˈy pʌɡubʲˈiɭ nʲiˈopytnuju dʲˈevu, ˈɑ s nʲˈeju vʲˈesʲ adˈɑmʌf rˈot ˈi nˈɑs. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0066.wav|nʲe stˈydnʌ ɭʲˈɪ?" pˈopy vˈɑs ʌbmanˈuɭʲɪ, ˈi jˈevu ˈja nʲe pʌɡubʲˈiɭ, ˈɑ spˈɑs! "spˈɑs! ot kʌvˈo?" ot bˈoɡa. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0067.wav| "vrˈɑk ʌpˈɑsnyj!" ˈon byɭ vɭʲu"bɭʲˈen. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0068.wav| "pʌsɭˈuʃʌj, bʲirʲiɡʲˈisʲ!" ˈon kˈɑ nʲˈej pyɭˈɑɭ "mʌɭtʃʲˈɪ!" ɭʲu"bˈovjju strˈɑstnʌj, ʌnˈɑ byɭˈɑ v ʌpˈɑsnʌsʲtʲɪ uʒˈɑsnʌj. "zmʲˈija, tˈy ɭʒˈɛʃ! jˈejbˈoɡu! "nʲe bʌʒˈysʲ". no vˈysɭuʃʌj. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0069.wav|pʌdˈumʌɭa marʲˈija: "nʲe xʌrʌʃˈo f sˈɑdu, nʌjidʲinʲˈe, ukrˈɑdkʌju vnʲimˈɑtʲ navʲˈetʌm zmʲˈija, ˈi kstˈɑtʲɪ ɭʲˈɪ pʌvʲˈerʲitʲ sʌtanʲˈe? |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0070.wav|no tsˈɑrɪ^ nʲibʲˈes mʲinʲˈɑ xranʲˈit ˈi ɭʲˈu"bʲit, fsʲivˈyʃnʲij bɭˈɑk: ˈon, vʲˈernʌ, nʲe pʌɡˈubʲit svʌjˈej rabˈy, zˈɑ ʃto ʒˈɛ? zˈɑ rʌzɡʌvˈor! |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0071.wav|kˈɑ tˈomu ʒˈɛ ˈon nʲe dˈɑst mʲinʲˈɑ v ʌbʲˈidu, dˈɑ ˈi zmʲˈija skrʌmnˈɑ dʌvˈoɭnʌ s vʲˈidu. kakˈoj tˈut ɡrʲˈex? ɡdʲˈe zɭˈo? |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0072.wav|pustˈojɪ, vzdˈor!" pʌdˈumʌɭa ˈi ˈuxʌ prʲikɭˈonʲiɭa, zabˈyf nə tʃʲˈɑs ɭʲu"bˈofʲ ˈi ɡʌvrʲiˈiɭa. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0073.wav|ɭukˈɑvyj bʲˈes, nadmʲˈennʌ rʌzvʲirnˈuv ɡrʲimˈutʃʲij xvˈost, sʌɡnˈuv duɡˈoju ʃˈɛju, s vʲitvʲˈej skʌɭʑˈit ˈi pˈɑdʌjit prʲˈet nʲˈeju |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0074.wav|ʒyɭˈɑnʲij ˈoɡn vˈo ɡrˈutʲ jɪjˈe vdʌxnˈuf, ˈon ɡʌvʌrʲˈit: "s rasskˈɑzʌm mʌisʲˈeja nʲe sʌɡɭˈɑʃu rasskˈɑza mʌjivˈo: ˈon vˈymysɭʌm xʌtʲˈeɭ pɭʲinʲˈitʲ jɪvrʲˈeja, ˈon vˈɑʒnʌ ɭɡˈɑɭ, ˈi sɭˈuʃʌɭʲɪ jɪvˈo. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0075.wav|bˈok nʌɡradʲˈiɭ v nʲˈem sɭˈok ˈi ˈum pʌkˈornyj, stˈɑɭ mʌisʲˈej ɪzvʲˈestnyj ɡʌspʌdʲˈin, no ˈja, pʌvʲˈerɪ^, ɪstˈorʲik nʲe prʲidvˈornyj, nʲe nˈuʒyn mnʲˈe prʌrˈoka vˈɑʒnyj tʃʲˈin! |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0076.wav|ʌnʲˈɪ dʌɭʒnˈy, krasˈɑvʲitsy druɡʲˈijɪ, zavʲˈidʌvʌtʲ ʌɡnʲˈu" tvʌˈix ʌtʃʲˈej |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0077.wav|tˈy rʌʒdʲinˈɑ, ˈo skrˈomnʌja marʲˈija, ʃtˈop ɪzumɭʲˈɑtʲ adamˈovyx dʲitʲˈej, ʃtˈop vɭˈɑstvʌvʌtʲ ˈɪx ɭʲˈexkʲimʲɪ sʲirdtsˈɑmʲɪ, uɭˈypkʌju bɭaʒˈɛnstvʌ ˈɪm darʲˈitʲ, svʌdʲˈitʲ s umˈɑ dvumʲˈɑtrʲimʲˈɑ sɭʌvˈɑmʲɪ, pˈo prʲˈixʌtʲɪ ɭʲu"bʲˈitʲ ˈi nʲe ɭʲu"bʲˈitʲ. vˈot ʒrʲˈebʲij tvˈoj. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0078.wav|kˈɑk tˈy mɭadˈɑja jˈeva v svʌjˈem sˈɑdu skrʌmnˈɑ, umnˈɑ, mʲˈiɭa, no bʲˈes ɭʲu"bvʲˈɪ v unˈynʲiɪ tsvʲiɭˈɑ |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0079.wav|fsʲiɡdˈɑ ʌdnʲˈɪ, ɡɭˈɑsnəɡɭˈɑs, mˈuʃ ˈi dʲˈeva nə bʲirʲiɡˈɑx ɛdʲˈema svʲˈetɭyx rʲˈek f spʌkˈojstvʲiɪ vʲiɭʲˈɪ nʲivʲˈinnyj vʲˈek. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0080.wav|skuʃnˈɑ byɭˈɑ ˈɪx dnʲˈej ʌdnʌʌbrˈɑznʌstʲ. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0081.wav|nʲˈɪ rˈoɕɪ sʲˈen, nʲˈɪ mˈoɭʌdʌstʲ, nʲˈɪ prˈɑzdnʌstʲ nʲitʃʲtˈo ɭʲu"bvʲˈɪ nʲe vʌskrʲˈeʃʌɭʌ v nʲˈix |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0082.wav|rukˈɑ s rukˈoj ɡuɭʲˈɑɭʲɪ, pʲˈiɭʲɪ, jˈeɭʲɪ, ʑivˈɑɭʲɪ dnʲˈem, ˈɑ nˈotʃʲjju nʲe ɪmʲˈeɭʲɪ nʲˈɪ strˈɑstnyx ˈɪɡr, nʲˈɪ rˈɑdʌsʲtʲij ʒyvˈyx. ʃto skˈɑʒyʃ tˈy? |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0083.wav|tʲirˈɑn nʲisprʌvʲidɭʲˈivyj, jɪvrʲˈejskʲij bˈok, uɡrʲˈu"myj ˈi rʲivnʲˈivyj, adˈɑmʌvu pʌdrˈuɡu pʌɭʲˈu"bʲʌ, jɪjˈe xranʲˈiɭ dɭʲɑ sˈɑmʌvʌ sʲibʲˈɑ. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0084.wav|kakˈɑja tʃʲˈestʲ ˈi ʃto zˈɑ nʌsɭaʒdʲˈenjjɪ! |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0085.wav|nə nʲibʲisˈɑx kˈɑk bˈudtʌ v zatˈotʃʲinjjɪ, ˈu nˈok jɪvˈo mʌɭʲˈisʲʌ dˈɑ mʌɭʲˈisʲ, xvaɭʲˈɪ jɪvˈo, krasʲˈe jɪvˈo dʲˈivʲisʲ, vzɡɭʲanˈutʲ nʲe smʲˈej ukrˈɑdkʌj nə druɡˈovʌ, s arxˈɑnɡʲiɭʌm tʲixˈonkʌ mˈoɭvʲitʲ sɭˈovʌ |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0086.wav|vˈot ʒrʲˈebʲij tˈoj, kʌtˈoruju tvʌrʲˈets sʲˈebʲi vʌʑmʲˈet f pʌdrˈuɡʲɪ nʌkʌnʲˈets. ˈi ʃto ʒɛ pˈotʌm? |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0087.wav|zˈɑ skˈuku, zˈɑ mutʃʲˈenjjɪ, naɡrˈɑda fsʲˈɑ dʲjˈjatʃʲkʌf ʌsʲˈipɭyx pʲˈenjjɪ, svʲˈetʃʲɪ, starˈux dʌkˈutʃʲnʌja mʌɭbˈɑ, dˈɑ tʃʲˈɑt kˈɑdʲiɭ, dˈɑ ˈobrʌs pˈot aɭmˈɑzʌm, napʲˈisʌnnyj kakʲˈimtˈo bʌɡʌmˈɑzʌm. kˈɑk vʲˈesʲiɭʌ! zavʲˈidnʌja sudʲbˈɑ! |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0088.wav|mnʲˈe stˈɑɭʌ ʒˈɑɭ mʌjˈej prʲiɭʲˈestnʌj jˈevy |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0089.wav|rʲiʃˈyɭsʲʌ ˈja, sʌzdˈɑtʲiɭʲu" nazɭˈo, razrˈuʃytʲ sˈon ˈi ˈjunʌʃɪ ˈi dʲˈevy. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0090.wav|tˈy sɭˈyʃʌɭa, kˈɑk fsʲˈe prʌizʌʃɭˈo? |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0092.wav|ɭʲu"bvʲˈɪ mʌjˈej naˈukʲɪ prʲikrˈɑsnʌjɪ natʃʲˈɑɭʌ vʲˈidʲiɭ ˈja. v ɡɭuxˈoj ɭʲisˈok uʃɭˈɑ tʃʲitˈɑ mˈoja. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0093.wav|tˈɑm bˈystrʌ ˈɪx bɭuʒdˈɑɭʲɪ vzɡɭʲˈɑdy, rˈukʲɪ. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0094.wav|mʲˈeʃ mʲˈiɭyx nˈok suprˈuɡʲɪ mʌɭʌdˈoj, zabˈotɭʲivyj, nʲiɭˈofkʲij ˈi nʲimˈoj, adˈɑm ɪskˈɑɭ vʌstˈorɡʌf upˈojinjja, nʲiˈistʌvym ɪspˈoɭnʲinnyj ʌɡnʲˈem, ˈon vʌprʌʃˈɑɭ ɪstˈotʃʲnʲik nʌsɭaʒdʲˈenjja ˈi, zakʲˈipʲiv duʃˈoj, tʲirʲˈɑɭsʲʌ v nʲˈem. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0096.wav|uvʲˈentʃʲʌnnyj suprˈuk ʒynˈu ɭaskˈɑɭ s ˈutra dˈo tʲˈemnʌj nˈotʃʲɪ, vˈo tʲmʲˈe nʌʃnˈoj smykˈɑɭ ˈon rʲˈedkʌ ˈotʃʲɪ, kˈɑk ˈɪx tʌɡdˈɑ ukrˈɑʃyn byɭ dʌsˈuk! |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0097.wav|tˈy znˈɑjiʃ: bˈok, utʲˈexɪ prʲiryvˈɑja, tʃʲˈetu mˈoju ɭʲiʃˈyɭ navʲˈekʲɪ rˈɑja. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0098.wav|ˈon ˈɪx ɪzɡnˈɑɭ ˈɪs mʲˈiɭʌj stʌrˈony, ɡdʲˈe bʲˈes trudˈof ʌnʲˈɪ tˈɑk dˈoɭɡʌ ʒˈyɭʲɪ ˈi dnʲˈɪ svʌˈɪ nʲivʲˈinnʌ prʌvʌdʲˈiɭʲɪ v ʌbjˈjatʲijax ɭʲinʲˈivʌj tʲiʃynˈy. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0099.wav|no ˈɪm ʌtkrˈyɭ ˈja tˈɑjnu sɭʌdʌstrˈɑstʲjja ˈi mɭˈɑdʌsʲtʲɪ vʲisʲˈeɭyjɪ prˈɑva, tʌmɭʲˈenjjɪ tʃʲˈufstf, vʌstˈorɡʲɪ, sɭʲˈezy ɕˈɑstʲjja, ˈi pʌtsyɭˈuj, ˈi nʲˈeʒnyjɪ sɭˈova. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0100.wav|skaʒˈɪ tʲipʲˈerɪ^: uʒˈɛɭʲɪ ˈja prʲidˈɑtʲiɭ? |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0101.wav|uʒˈɛɭʲ adˈɑm nʲiɕˈɑstɭʲif ot mʲinʲˈɑ? nʲe dˈumʌju! |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0102.wav|no znˈɑju tˈoɭkʌ ˈja, ʃto s jɪvˈoju ʌstˈɑɭsʲʌ ˈja prʲiˈjatʲiɭ". umˈoɭknuɭ bʲˈes. |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0103.wav|marʲˈija f tʲiʃynʲˈe kʌvˈɑrnʌmu vnʲimˈɑɭa sʌtanʲˈe. "ʃto ʒˈɛ? |0
+ruls_data/dev/audio/5397/2145/poemi_12_pushkin_0104.wav|dˈumʌɭa, bytʲ mˌoʒyt, prˈɑf ɭukˈɑvyj |0

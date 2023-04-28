@@ -8,7 +8,7 @@ import numpy as np
 from sklearn.utils.class_weight import compute_class_weight
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
-from models import Conv1D, Conv2D, LSTM
+from models_audio_clasf import Conv1D, Conv2D, LSTM
 from tqdm import tqdm
 from glob import glob
 import argparse
