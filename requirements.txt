@@ -1,0 +1,14 @@
+tensorflow
+torch
+opencv-python
+simpletransformers
+openai-whisper
+transformers
+numpy
+pandas
+matplotlib
+scipy
+shutil
+torchaudio
+tqdm
+scikit-learn
