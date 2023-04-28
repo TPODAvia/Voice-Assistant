@@ -21,7 +21,7 @@ def callback(data):
 
 def main(text_input):
 	
-	_images = '/home/vboxuser/Voice-Assistant/Face_ui/Faces/'
+	_images = SCRIPT_DIR + '/Faces/'
 
 	# print("Library lenght is: ",  len(library))
 	list = []
@@ -37,27 +37,27 @@ def main(text_input):
 	if emot_convert in [22,35]:
 		# Angry
 		print("Angry")
-		save("/home/vboxuser/Voice-Assistant/Irene-Voice-Assistant/tts_cache/emotts/emotion", 0)
+		save(os.path.dirname(SCRIPT_DIR) + "/Irene-Voice-Assistant/tts_cache/emotts/emotion", 0)
 
 	elif emot_convert in [2,3,4,5,10,11,12,13,14,15,17,21,25,32,34,38,39,40,42,43]:
 		# Happy
 		print("Happy")
-		save("/home/vboxuser/Voice-Assistant/Irene-Voice-Assistant/tts_cache/emotts/emotion", 1)
+		save(os.path.dirname(SCRIPT_DIR) + "/Irene-Voice-Assistant/tts_cache/emotts/emotion", 1)
 
 	elif emot_convert in [1,26,28,30,36,37]:
 		# Neutral
 		print("Neutral")
-		save("/home/vboxuser/Voice-Assistant/Irene-Voice-Assistant/tts_cache/emotts/emotion", 2)
+		save(os.path.dirname(SCRIPT_DIR) + "/Irene-Voice-Assistant/tts_cache/emotts/emotion", 2)
 
 	elif emot_convert in [6,7,16,19,24,31,33,41]:
 		# Sad
 		print("Sad")
-		save("/home/vboxuser/Voice-Assistant/Irene-Voice-Assistant/tts_cache/emotts/emotion", 3)
+		save(os.path.dirname(SCRIPT_DIR) + "/Irene-Voice-Assistant/tts_cache/emotts/emotion", 3)
 
 	elif emot_convert in [8,18,20,23,27,29]:
 		# Surprise
 		print("Surprise")
-		save("/home/vboxuser/Voice-Assistant/Irene-Voice-Assistant/tts_cache/emotts/emotion", 4)
+		save(os.path.dirname(SCRIPT_DIR) + "/Irene-Voice-Assistant/tts_cache/emotts/emotion", 4)
 
 	# print(img_library[pred])
 	img = cv2.imread(_images + img_library[pred] + ".png")

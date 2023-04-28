@@ -7,7 +7,7 @@ from sklearn.metrics import classification_report, label_ranking_average_precisi
 from sklearn.model_selection import train_test_split
 import torch
 import sys
-
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 import logging
 
@@ -23,7 +23,7 @@ random.seed(seed)
 np.random.seed(seed)
 torch.manual_seed(seed)
 
-file = '/home/vboxuser/Voice-Assistant/ReactionGIF/ReactionGIF.json'
+file = os.path.dirname(SCRIPT_DIR) + '/ReactionGIF.json'
 df = pd.read_json(file, lines=True)
 train_data, test_data = train_test_split(df, random_state=43, test_size=0.1)
 train_data = train_data.copy()
@@ -35,7 +35,7 @@ test_data = test_data.copy()
 
 test_data['label'] = pd.Categorical(test_data['label'], categories=categories)
 
-reactions2emotions = pd.read_csv('/home/vboxuser/Voice-Assistant/ReactionGIF/code/Reactions2GoEmotions.csv', index_col='Reaction').astype('int')
+reactions2emotions = pd.read_csv(SCRIPT_DIR + '/Reactions2GoEmotions.csv', index_col='Reaction').astype('int')
 
 for emotion in reactions2emotions.columns:
     if (len(reactions2emotions[emotion].value_counts()) == 1) or (emotion == 'Neutral'):
@@ -105,7 +105,7 @@ model = MultiLabelClassificationModel('roberta', 'roberta-base',
 model.train_model(train_data ,args={
     'fp16': False,
     'overwrite_output_dir': True,
-    'output_dir': "/home/vboxuser/Voice-Assistant/ReactionGIF/outputs/",
+    'output_dir': os.path.dirname(SCRIPT_DIR) + "/outputs/",
     'train_batch_size': 32,
     "eval_batch_size": 32,
     'max_seq_length': 96,

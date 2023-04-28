@@ -6,31 +6,24 @@
 # https://github.com/EnjiRouz/Voice-Assistant-App/blob/master/README.md
 
 import speech_recognition
-import traceback
 from vacore import VACore
-
-import time
 import asyncio
-
 import sounddevice as sd
-
 import numpy as np
 import cv2
-
 import argparse
+import os
 import sys
-
 import whisper
-
-
 import re
-
 from simpletransformers.classification import MultiLabelClassificationModel
 
-sys.path.append("/home/vboxuser/Voice-Assistant/Audio_Classification")
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+sys.path.append(os.path.dirname(SCRIPT_DIR) + "/Audio_Classification")
 import run_classification
 
-sys.path.append("/home/vboxuser/Voice-Assistant/Face_ui")
+sys.path.append(os.path.dirname(SCRIPT_DIR) + "/Face_ui")
 import run_face
 
 # Load the Whisper model
@@ -123,7 +116,7 @@ async def main():
 
 if __name__ == "__main__":
 
-    model = MultiLabelClassificationModel("roberta", "/home/vboxuser/Voice-Assistant/ReactionGIF/outputs/checkpoint-9-epoch-3/", num_labels=26, use_cuda=False)
+    model = MultiLabelClassificationModel("roberta", os.path.dirname(SCRIPT_DIR) + "/ReactionGIF/outputs/checkpoint-9-epoch-3/", num_labels=26, use_cuda=False)
 
     # инициализация инструментов распознавания и ввода речи
     recognizer = speech_recognition.Recognizer()

@@ -1,8 +1,10 @@
 import pandas as pd
+import os
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Read the JSON files
-data1 = pd.read_json('/home/vboxuser/Voice-Assistant/ReactionGIF_new.json', lines=True)
-data2 = pd.read_json('/home/vboxuser/Voice-Assistant/output2.json', lines=True)
+data1 = pd.read_json(os.path.dirname(SCRIPT_DIR) + '/ReactionGIF_new.json', lines=True)
+data2 = pd.read_json(os.path.dirname(SCRIPT_DIR) + '/output2.json', lines=True)
 
 # Convert the data into DataFrames
 df1 = pd.DataFrame(data1)

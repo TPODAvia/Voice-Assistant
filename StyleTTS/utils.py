@@ -9,6 +9,8 @@ import torch.nn.functional as F
 import torchaudio
 import librosa
 import matplotlib.pyplot as plt
+import os
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 def maximum_path(neg_cent, mask):
   """ Cython optimized version.
@@ -27,9 +29,9 @@ def maximum_path(neg_cent, mask):
 
 def get_data_path_list(train_path=None, val_path=None):
     if train_path is None:
-        train_path = "/home/vboxuser/Voice-Assistant/StyleTTS/Data/train_list.txt"
+        train_path = SCRIPT_DIR + "/Data/train_list.txt"
     if val_path is None:
-        val_path = "/home/vboxuser/Voice-Assistant/StyleTTS/Data/val_list.txt"
+        val_path = SCRIPT_DIR + "/Data/val_list.txt"
 
     with open(train_path, 'r') as f:
         train_list = f.readlines()

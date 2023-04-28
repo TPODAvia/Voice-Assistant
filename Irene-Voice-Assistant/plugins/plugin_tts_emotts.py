@@ -9,7 +9,9 @@ import torch
 import phonemizer
 from numpy import load
 
-sys.path.append("/home/vboxuser/Voice-Assistant/StyleTTS/Demo")
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+sys.path.append(os.path.dirname(os.path.dirname(SCRIPT_DIR)) + "/StyleTTS/Demo")
 from run_tts import from_pretrained, main, save_wave_scipy
 
 # load phonemizer
@@ -46,7 +48,7 @@ def say(core:VACore, text_to_speech:str):
 
 def towavfile(core:VACore, text_to_speech:str,wavfile:str):
 
-    n = load("/home/vboxuser/Voice-Assistant/Irene-Voice-Assistant/tts_cache/emotts/emotion.npy")
+    n = load(os.path.dirname(SCRIPT_DIR) + "/tts_cache/emotts/emotion.npy")
 
     emotion = ['Angry', 'Happy', 'Neutral', 'Sad', 'Surprise']
 

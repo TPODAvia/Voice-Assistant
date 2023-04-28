@@ -21,6 +21,8 @@ import torch.nn.functional as F
 import torchaudio
 import librosa
 
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+
 from models import *
 from meldataset import build_dataloader
 from utils import *
@@ -46,7 +48,7 @@ handler.setLevel(logging.DEBUG)
 logger.addHandler(handler)
 
 @click.command()
-@click.option('-p', '--config_path', default='/home/vboxuser/Voice-Assistant/StyleTTS/Configs/config.yml', type=str)
+@click.option('-p', '--config_path', default= SCRIPT_DIR + '/Configs/config.yml', type=str)
 def main(config_path):
 
     config = yaml.safe_load(open(config_path))

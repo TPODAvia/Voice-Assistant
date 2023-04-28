@@ -6,6 +6,7 @@
 # !wget http://nlp.stanford.edu/data/glove.twitter.27B.zip
 # !unzip glove.twitter.27B.zip
 
+
 import numpy as np
 import pandas as pd
 import tensorflow as tf
@@ -28,6 +29,7 @@ from keras.preprocessing.text import Tokenizer
 # from keras import pad_sequences
 from keras.callbacks import EarlyStopping, ModelCheckpoint, ReduceLROnPlateau
 
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
  # reproducibility
 seed = 0
 os.environ['PYTHONHASHSEED'] = str(seed)
@@ -151,12 +153,12 @@ class Embed:
 
 """# Get Data"""
 
-embed = Embed('/home/vboxuser/Voice-Assistant/ReactionGIF/archive/glove.twitter.27B.100d.txt', 40)
+embed = Embed(os.path.dirname(SCRIPT_DIR) +'/archive/glove.twitter.27B.100d.txt', 40)
 preprocess = BasicPreprocess(0, 80, emoji=True)
 
 
 def get_data(task):
-    file = '/home/vboxuser/Voice-Assistant/ReactionGIF/ReactionGIF.json'
+    file = os.path.dirname(SCRIPT_DIR) +'/ReactionGIF.json'
     df = pd.read_json(file, lines=True)
     train_data, test_data = train_test_split(df, random_state=42, test_size=0.1)
     train_data = train_data.copy()
@@ -178,7 +180,7 @@ def get_data(task):
         categories = train_data['label'].cat.categories
         test_data['label'] = pd.Categorical(test_data['label'], categories=categories)
 
-        reactions2emotions = pd.read_csv('/home/vboxuser/Voice-Assistant/ReactionGIF/code/Reactions2GoEmotions.csv', index_col='Reaction').astype('int')
+        reactions2emotions = pd.read_csv(SCRIPT_DIR +'/Reactions2GoEmotions.csv', index_col='Reaction').astype('int')
         emotions = reactions2emotions.columns
 
         for emotion in reactions2emotions.columns:

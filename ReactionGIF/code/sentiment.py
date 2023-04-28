@@ -7,6 +7,7 @@ import torch
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, f1_score, accuracy_score, precision_score, recall_score
 
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # reproducibility
 seed = 0
@@ -39,7 +40,7 @@ positive = [
     ]
 
 
-file = '/home/vboxuser/Voice-Assistant/ReactionGIF/ReactionGIF.json'
+file = os.path.dirname(SCRIPT_DIR) + '/ReactionGIF.json'
 df = pd.read_json(file, lines=True)
 train_data, test_data = train_test_split(df, random_state=43, test_size=0.1)
 train_data = train_data.copy()

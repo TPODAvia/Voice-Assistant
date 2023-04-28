@@ -1,5 +1,6 @@
 # load packages
 import sys
+import os
 import yaml
 from munch import Munch
 import numpy as np
@@ -10,11 +11,13 @@ from scipy.io import wavfile
 import phonemizer
 from random import SystemRandom
 
-sys.path.append("/home/vboxuser/Voice-Assistant/StyleTTS")
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+sys.path.append(os.path.dirname(SCRIPT_DIR))
 from models import build_model, load_ASR_models, load_F0_models
 from utils import *
 
-sys.path.append("/home/vboxuser/Voice-Assistant/StyleTTS/Demo/hifi-gan")
+sys.path.append(SCRIPT_DIR + "/hifi-gan")
 
 import glob
 import os
@@ -74,7 +77,7 @@ def compute_style(ref_dicts, model, device):
     keys_list = list(ref_dicts.keys())
     emotion = keys_list[0] # Angry Happy Sad Surprise etc
 
-    path = '/home/vboxuser/Voice-Assistant/StyleTTS/Emotion/' + emotion + '/evaluation/'
+    path = os.path.dirname(SCRIPT_DIR) + '/Emotion/' + emotion + '/evaluation/'
     wav_filenames = [filename for filename in glob.glob(os.path.join(path, '*.wav'))]
 
     cryptogen = SystemRandom()
@@ -111,9 +114,9 @@ def from_pretrained(device):
 
     textclenaer = TextCleaner()
 
-    cp_g = scan_checkpoint("/home/vboxuser/Voice-Assistant/StyleTTS/Vocoder/LibriTTS/", 'g_')
+    cp_g = scan_checkpoint(os.path.dirname(SCRIPT_DIR) + "/Vocoder/LibriTTS/", 'g_')
 
-    config_file = os.path.join(os.path.split(cp_g)[0], '/home/vboxuser/Voice-Assistant/StyleTTS/Vocoder/LibriTTS/config.json')
+    config_file = os.path.join(os.path.split(cp_g)[0], os.path.dirname(SCRIPT_DIR) + '/Vocoder/LibriTTS/config.json')
     with open(config_file) as f:
         data = f.read()
     json_config = json.loads(data)
@@ -129,8 +132,8 @@ def from_pretrained(device):
     generator.remove_weight_norm()
 
     # load StyleTTS
-    model_path = "/home/vboxuser/Voice-Assistant/StyleTTS/Models/LJSpeech/epoch_2nd_00008.pth"
-    model_config_path = "/home/vboxuser/Voice-Assistant/StyleTTS/Models/LJSpeech/config.yml"
+    model_path = os.path.dirname(SCRIPT_DIR) + "/Models/LJSpeech/epoch_2nd_00008.pth"
+    model_config_path = os.path.dirname(SCRIPT_DIR) + "/Models/LJSpeech/config.yml"
 
     config = yaml.safe_load(open(model_config_path))
 

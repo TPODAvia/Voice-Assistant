@@ -4,8 +4,11 @@ from kapre.time_frequency import STFT, Magnitude, ApplyFilterbank, MagnitudeToDe
 import numpy as np
 import argparse
 import os
+import sys
 
-model = load_model('/home/vboxuser/Voice-Assistant/Audio_Classification/models/lstm.h5',
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+model = load_model(SCRIPT_DIR + '/models/lstm.h5',
 custom_objects={'STFT':STFT,
                 'Magnitude':Magnitude,
                 'ApplyFilterbank':ApplyFilterbank,
@@ -40,7 +43,7 @@ if __name__ == '__main__':
     parser.add_argument('--sr', type=int, default=16000, help='sample rate of clean audio')
     args, _ = parser.parse_known_args()
 
-    wav_fn ='/home/vboxuser/Voice-Assistant/Audio_Classification/wavfiles/Snare_drum/ae7d1c37.wav'
+    wav_fn = SCRIPT_DIR + '/wavfiles/Snare_drum/ae7d1c37.wav'
 
     rate, clean_wav = downsample_mono(wav_fn, args.sr)
     result = make_prediction(args, clean_wav)
