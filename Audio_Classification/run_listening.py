@@ -7,7 +7,7 @@ import re
 import sounddevice as sd
 import speech_recognition
 import numpy as np
-
+from playsound import playsound
 
 recognizer = speech_recognition.Recognizer()
 microphone = speech_recognition.Microphone()
@@ -21,7 +21,10 @@ with microphone:
 
     with speech_recognition.Microphone(sample_rate=16000) as source:
         print("Listening...")
+        # playsound('/home/vboxuser/Voice-Assistant/Audio_Classification/output_scipy.wav', False)
+        # print("Listening...")
         audio = recognizer.listen(source)
+        # recognizer.listen_in_background
         audio_data = audio.get_wav_data()
         data_s16 = np.frombuffer(audio_data, dtype=np.int16, count=len(audio_data)//2, offset=0)
         float_data = data_s16.astype(np.float32, order='C') / 32768.0

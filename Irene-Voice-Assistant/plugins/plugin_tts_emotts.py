@@ -8,6 +8,7 @@ from vacore import VACore
 import torch
 import phonemizer
 from numpy import load
+from playsound import playsound
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -47,6 +48,8 @@ def say(core:VACore, text_to_speech:str):
     pass
 
 def towavfile(core:VACore, text_to_speech:str,wavfile:str):
+
+    # playsound('/some_humble_sound.wav', False)
 
     n = load(os.path.dirname(SCRIPT_DIR) + "/tts_cache/emotts/emotion.npy")
 

@@ -8,6 +8,15 @@
   <img src="https://media.giphy.com/media/dWesBcTLavkZuG35MI/giphy.gif" width="447" height="358"/>
 </div>
 
+## TODO:
+
+- Implementing Wake Word reaction
+- Sound "thinking" effect in plugin_tts_emotts.py
+- Train StyleTTS for Russian language
+- Implementing Face UI. Replacing Emoji Picture with art.
+- Create module that responce without spelling assistant name. 
+
+
 ## Table of Contents
 
 - [Introduction](#introduction)
