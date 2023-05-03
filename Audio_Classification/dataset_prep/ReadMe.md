@@ -49,3 +49,7 @@ Cluster 2 -> 63 files, 55 common with the speech folder, 8 common with the music
 
 Using the percentage of low energy frame across the audio files allowed to get reasonably accurate clusters. But to be sure this is relevent we have to see whether keeping the same clusters, we can add files from another dataset and keep the same level of accuracy, which will be the next part of this work.
 
+
+## Datasets
+
+From freefield1010

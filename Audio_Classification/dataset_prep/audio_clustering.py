@@ -4,8 +4,8 @@ import wave
 
 if __name__ == "__main__":
 
-	directory = 'D:\\Datasets\\audio_clustering\\music_speech\\all'
-	n = 5
+	directory = '/home/vboxuser/Voice-Assistant/Audio_Classification/dataset_prep/data'
+	n = 4
 	print(f"The number of clusters is: {n}. Running, please wait...")
 	audio_list, map_coords_objects = analyse_folder(directory)
 	clusters = cluster(audio_list, map_coords_objects,n)
@@ -20,8 +20,8 @@ if __name__ == "__main__":
 	# 	# Add more arrays as needed
 	# ]
 
-	input_path = 'D:\\Datasets\\audio_clustering\\music_speech\\all'
-	output_base_path = 'D:\\Datasets\\audio_clustering'
+	input_path = directory
+	output_base_path = '/home/vboxuser/Voice-Assistant/Audio_Classification/dataset_prep'
 
 	for i, array in enumerate(arrays):
 		folder_name = f"folder{i + 1}"
@@ -37,4 +37,4 @@ if __name__ == "__main__":
 					wav_out.setparams(wav_in.getparams())
 					wav_out.writeframes(wav_in.readframes(wav_in.getnframes()))
 		
-		print("Finish")
+	print("Finish")
