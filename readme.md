@@ -14,10 +14,10 @@ https://drive.google.com/drive/folders/1KI7uF_-IYh3w4z0uLBNcCo3tRd-1nlm9?usp=sha
 ## TODO:
 
 - Implementing Wake Word reaction
-- Sound "thinking" effect in plugin_tts_emotts.py
+- Sound "thinking" effect in plugin_tts_emotts.py (DONE)
 - Train StyleTTS for Russian language
 - Implementing Face UI. Replacing Emoji Picture with art.
-- Create module that responce without spelling assistant name. 
+- Create module that responce without spelling assistant name. (DONE)
 
 
 ## Table of Contents

@@ -16,6 +16,7 @@ import os
 import sys
 import whisper
 import re
+import time
 from simpletransformers.classification import MultiLabelClassificationModel
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -28,6 +29,12 @@ import run_face
 
 # Load the Whisper model
 whisper_model = whisper.load_model("base")
+
+
+# Initialize variables
+first_statement_active = True
+second_statement_active = False
+timer_duration = 15  # Duration in seconds for the timer
 
 # most from @EnjiRouz code: https://habr.com/ru/post/529590/
 
@@ -75,7 +82,27 @@ async def function_2():
     # print("recognized_data:", lowercase_str)
 
     if voice_input_str != "":
-        core.run_input_str(lowercase_str)
+        if first_statement_active:
+            # print("First statement is active")
+            haveRun = core.run_input_str(lowercase_str)
+            
+            if haveRun:
+                # Trigger the second if statement and deactivate the first if statement
+                first_statement_active = False
+                second_statement_active = True
+                start_time = time.time()  # Store the current time as the start time
+
+        if second_statement_active:
+            # print("Second statement is active")
+            core.context_set(lowercase_str)
+            core.run_input_str(lowercase_str)
+
+            # Check if the timer has reached its duration
+            elapsed_time = time.time() - start_time
+            if elapsed_time >= timer_duration:
+                # Deactivate the second statement and activate the first statement
+                second_statement_active = False
+                first_statement_active = True
 
 
     core._update_timers()
