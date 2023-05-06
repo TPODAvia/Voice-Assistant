@@ -112,7 +112,7 @@ class DemoAction:
         self.detect_in_row = 0
 
         self.sensitivity = sensitivity
-        folder = realpath(join(realpath(__file__), '..', '..', '..', 'fun', 'arnold_audio'))
+        folder = realpath(join(os.path.dirname(os.path.abspath(__file__)), 'fun', 'arnold_audio'))
         self.arnold_mp3 = [
             os.path.join(folder, x)
             for x in os.listdir(folder)
@@ -139,14 +139,14 @@ class DemoAction:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="demoing the wakeword engine")
-    parser.add_argument('--model_file', type=str, default="/home/vboxuser/A-Hackers-AI-Voice-Assistant/VoiceAssistant/wakeword.pt", required=False,
+    parser.add_argument('--model_file', type=str, default="/home/vboxuser/Voice-Assistant/Wakeword/wakeword.pt", required=False,
                         help='optimized file to load. use optimize_graph.py')
     parser.add_argument('--sensitivty', type=int, default=10, required=False,
                         help='lower value is more sensitive to activations')
 
     args = parser.parse_args()
     wakeword_engine = WakeWordEngine(args.model_file)
-    action = DemoAction(sensitivity=10)
+    action = DemoAction(sensitivity=60)
 
     print("""\n*** Make sure you have sox installed on your system for the demo to work!!!
     If you don't want to use sox, change the play function in the DemoAction class
@@ -154,4 +154,5 @@ if __name__ == "__main__":
     """)
     # action = lambda x: print(x)
     wakeword_engine.run(action)
+
     threading.Event().wait()

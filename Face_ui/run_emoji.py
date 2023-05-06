@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 
 import cv2
-from numpy import save
-from numpy import argmax
-from numpy import dot
+from numpy import save, argmax, dot
 from numpy.linalg import norm
 import sys
 import os

@@ -16,7 +16,7 @@ https://drive.google.com/drive/folders/1KI7uF_-IYh3w4z0uLBNcCo3tRd-1nlm9?usp=sha
 - Implementing Wake Word reaction
 - Sound "thinking" effect in plugin_tts_emotts.py (DONE)
 - Train StyleTTS for Russian language
-- Implementing Face UI. Replacing Emoji Picture with art.
+- Implementing Face UI. Replacing Emoji Picture with art. (DONE)
 - Create module that responce without spelling assistant name. (DONE)
 
 
@@ -58,7 +58,8 @@ To install the Emotional Offline Voice Assistant, follow these steps:
    pip install -r requirements.txt
    sudo apt-get install libasound-dev portaudio19-dev libportaudio2 libportaudiocpp0 -y
    sudo apt-get install python3-tk python3-dev -y
-   sudo pip install pyaudio
+   sudo pip install pyaudio -y
+   sudo apt-get install sox -y
    ```
 
 3. Configure the voice assistant settings as needed:

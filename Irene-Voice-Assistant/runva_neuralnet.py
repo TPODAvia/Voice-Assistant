@@ -8,16 +8,17 @@
 import speech_recognition
 from vacore import VACore
 import asyncio
-import sounddevice as sd
+# import sounddevice as sd
 import numpy as np
-import cv2
-import argparse
+# import cv2
+# import argparse
 import os
 import sys
 import whisper
 import re
 import time
 from simpletransformers.classification import MultiLabelClassificationModel
+import threading
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -25,7 +26,7 @@ sys.path.append(os.path.dirname(SCRIPT_DIR) + "/Audio_Classification")
 import run_classification
 
 sys.path.append(os.path.dirname(SCRIPT_DIR) + "/Face_ui")
-import run_face
+import run_gif
 
 # Load the Whisper model
 whisper_model = whisper.load_model("base")
@@ -119,13 +120,16 @@ async def function3(result): # function3(result1, result2)
     else:
         combined_reaction = result[1]
 
-        
-    img = run_face.main(combined_reaction)
-    cv2.imshow('Hello', img)
-    cv2.waitKey(1)
+    global text_input
+    global run_prediction
+    text_input = combined_reaction
+    run_prediction = True
 
 
 async def main():
+
+    tkinter_thread = threading.Thread(target=run_gif.run_tkinter)
+    tkinter_thread.start()
 
     while True:
         # results = await asyncio.gather(function_2(), function_async())
@@ -133,6 +137,10 @@ async def main():
         await function3(*results)
 
 if __name__ == "__main__":
+
+    # Global variable input
+    text_input = [  0,2,0,0, 0,0,0,0, 1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0  ]
+    run_prediction = False
 
     model = MultiLabelClassificationModel("roberta", os.path.dirname(SCRIPT_DIR) + "/ReactionGIF/outputs/checkpoint-9-epoch-3/", num_labels=26, use_cuda=False)
 
