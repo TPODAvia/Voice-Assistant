@@ -5,18 +5,17 @@
 # if you have problems with PyAudio install, check this:
 # https://github.com/EnjiRouz/Voice-Assistant-App/blob/master/README.md
 
+import time
+start_time = time.time()
+
 import speech_recognition
 from vacore import VACore
 import asyncio
-# import sounddevice as sd
 import numpy as np
-# import cv2
-# import argparse
 import os
 import sys
 import whisper
 import re
-import time
 from simpletransformers.classification import MultiLabelClassificationModel
 import threading
 
@@ -34,8 +33,7 @@ import run_gif
 
 # Initialize variables
 first_statement_active = True
-second_statement_active = False
-timer_duration = 15  # Duration in seconds for the timer
+timer_duration = 20  # Duration in seconds for the timer
 
 # most from @EnjiRouz code: https://habr.com/ru/post/529590/
 
@@ -85,27 +83,23 @@ async def function_2():
     print("Sound:", lowercase_str)
 
     if lowercase_str != ("" or "редактор субтитров асемкин корректор аегорова"):
-        if first_statement_active:
-            # print("First statement is active")
+
+        # Check if the timer has reached its duration
+        elapsed_time = time.time() - start_time
+        if elapsed_time >= timer_duration:
+
+            print("First statement is active")
             haveRun = core.run_input_str(lowercase_str)
             
             if haveRun:
-                # Trigger the second if statement and deactivate the first if statement
-                first_statement_active = False
                 start_time = time.time()  # Store the current time as the start time
 
         else: # second_statement_active:
-            # print("Second statement is active")
-            # core.context_set(lowercase_str)
-            # core.run_input_str(lowercase_str)
-            # core.run_input_str(lowercase_str)
+            print("Second statement is active")
 
-            # Check if the timer has reached its duration
-            elapsed_time = time.time() - start_time
-            if elapsed_time >= timer_duration:
-                # Deactivate the second statement and activate the first statement
-                first_statement_active = True
-
+            start_time = time.time()
+            core.context_set(lowercase_str)
+            core.run_input_str(lowercase_str)
 
     core._update_timers()
 
