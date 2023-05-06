@@ -1,7 +1,3 @@
-# you need to install:
-# pip install PyAudio
-# pip install SpeechRecognition
-
 # if you have problems with PyAudio install, check this:
 # https://github.com/EnjiRouz/Voice-Assistant-App/blob/master/README.md
 
@@ -31,9 +27,8 @@ import run_gif
 whisper_model = whisper.load_model("base")
 
 
-# Initialize variables
-first_statement_active = True
-timer_duration = 20  # Duration in seconds for the timer
+# Duration in seconds for the timer
+timer_duration = 20
 
 # most from @EnjiRouz code: https://habr.com/ru/post/529590/
 
@@ -57,6 +52,7 @@ def record_and_recognize_audio(*args: tuple):
             print("Started recognition...")
             recognized_data = recognizer.recognize_whisper(audio, model="base", language="russian")
 
+            # Sound induced emotion analysis
             sr=16000
             emo_classf = run_classification.make_prediction(sr, float_data)
 
@@ -77,9 +73,7 @@ async def function_2():
     no_punct_str = re.sub(r'[^\w\s]', '', voice_input_str)
     lowercase_str = no_punct_str.lower().strip()
 
-    # print("recognized_data:", lowercase_str)
-    global first_statement_active
-    global start_time
+    # global start_time
     print("Sound:", lowercase_str)
 
     if lowercase_str != ("" or "редактор субтитров асемкин корректор аегорова"):
@@ -108,6 +102,7 @@ async def function_2():
 
 async def function3(result): # function3(result1, result2)
 
+    # result[0] = voice_input_str and result[1] = emo_classf
     if not result[0]=="":
         predictions, raw_outputs = model.predict([result[0]])
         combined_reaction = np.maximum(result[1], raw_outputs)
@@ -115,6 +110,7 @@ async def function3(result): # function3(result1, result2)
     else:
         combined_reaction = result[1]
 
+    # Update image GIF
     run_gif.text_input = combined_reaction
     run_gif.run_prediction = True    
 
