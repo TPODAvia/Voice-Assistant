@@ -29,7 +29,7 @@ sys.path.append(os.path.dirname(SCRIPT_DIR) + "/Face_ui")
 import run_gif
 
 # Load the Whisper model
-whisper_model = whisper.load_model("base")
+# whisper_model = whisper.load_model("base")
 
 
 # Initialize variables
@@ -56,7 +56,7 @@ def record_and_recognize_audio(*args: tuple):
             data_s16 = np.frombuffer(audio_data, dtype=np.int16, count=len(audio_data)//2, offset=0)
             float_data = data_s16.astype(np.float32, order='C') / 32768.0
         try:
-            #print("Started recognition...")
+            print("Started recognition...")
             recognized_data = recognizer.recognize_whisper(audio, model="base", language="russian")
 
             sr=16000
@@ -69,7 +69,6 @@ def record_and_recognize_audio(*args: tuple):
         # в случае проблем с доступом в Интернет происходит выброс ошибки
         except speech_recognition.RequestError:
             print("Check your Internet Connection, please")
-
         return recognized_data, emo_classf
     
 async def function_2():
@@ -81,8 +80,11 @@ async def function_2():
     lowercase_str = no_punct_str.lower().strip()
 
     # print("recognized_data:", lowercase_str)
+    global first_statement_active
+    global start_time
+    print("Sound:", lowercase_str)
 
-    if voice_input_str != "":
+    if lowercase_str != ("" or "редактор субтитров асемкин корректор аегорова"):
         if first_statement_active:
             # print("First statement is active")
             haveRun = core.run_input_str(lowercase_str)
@@ -90,19 +92,18 @@ async def function_2():
             if haveRun:
                 # Trigger the second if statement and deactivate the first if statement
                 first_statement_active = False
-                second_statement_active = True
                 start_time = time.time()  # Store the current time as the start time
 
-        if second_statement_active:
+        else: # second_statement_active:
             # print("Second statement is active")
-            core.context_set(lowercase_str)
-            core.run_input_str(lowercase_str)
+            # core.context_set(lowercase_str)
+            # core.run_input_str(lowercase_str)
+            # core.run_input_str(lowercase_str)
 
             # Check if the timer has reached its duration
             elapsed_time = time.time() - start_time
             if elapsed_time >= timer_duration:
                 # Deactivate the second statement and activate the first statement
-                second_statement_active = False
                 first_statement_active = True
 
 
@@ -128,8 +129,8 @@ async def function3(result): # function3(result1, result2)
 
 async def main():
 
-    tkinter_thread = threading.Thread(target=run_gif.run_tkinter)
-    tkinter_thread.start()
+    # tkinter_thread = threading.Thread(target=run_gif.run_tkinter)
+    # tkinter_thread.start()
 
     while True:
         # results = await asyncio.gather(function_2(), function_async())

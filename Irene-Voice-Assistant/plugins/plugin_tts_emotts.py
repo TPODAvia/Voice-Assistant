@@ -15,7 +15,7 @@ from playsound import playsound
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Get all WAV files in the folder
-wav_files = glob.glob("/home/vboxuser/Voice-Assistant/voices/humble/*.wav")
+wav_files = glob.glob("/home/vboxuser/Voice-Assistant/Voices/humble/*.wav")
 
 sys.path.append(os.path.dirname(os.path.dirname(SCRIPT_DIR)) + "/StyleTTS/Demo")
 from run_tts import from_pretrained, main, save_wave_scipy
@@ -54,12 +54,12 @@ def say(core:VACore, text_to_speech:str):
 
 def towavfile(core:VACore, text_to_speech:str,wavfile:str):
 
-    threshold = 0.3  # 30% chance of running the function
-    if random.random() < threshold:
-        random_wav = choose_random_wav()
+
+    threshold = 16 # run if text input is long
+    if len(text_to_speech) > threshold:
+        random_wav = random.choice(wav_files)
         playsound(random_wav, False)
-    else:
-        print("Function skipped")
+
 
     n = load(os.path.dirname(SCRIPT_DIR) + "/tts_cache/emotts/emotion.npy")
 
@@ -70,9 +70,4 @@ def towavfile(core:VACore, text_to_speech:str,wavfile:str):
 
     save_wave_scipy(wavfile, main(text_to_speech, ref_dicts, model, generator, textclenaer, device, global_phonemizer), 24000)
 
-
     pass
-
-# Function to choose a random WAV file
-def choose_random_wav():
-    return random.choice(wav_files)
