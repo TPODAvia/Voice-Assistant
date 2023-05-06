@@ -28,7 +28,7 @@ sys.path.append(os.path.dirname(SCRIPT_DIR) + "/Face_ui")
 import run_gif
 
 # Load the Whisper model
-# whisper_model = whisper.load_model("base")
+whisper_model = whisper.load_model("base")
 
 
 # Initialize variables
@@ -115,16 +115,11 @@ async def function3(result): # function3(result1, result2)
     else:
         combined_reaction = result[1]
 
-    global text_input
-    global run_prediction
-    text_input = combined_reaction
-    run_prediction = True
+    run_gif.text_input = combined_reaction
+    run_gif.run_prediction = True    
 
 
 async def main():
-
-    # tkinter_thread = threading.Thread(target=run_gif.run_tkinter)
-    # tkinter_thread.start()
 
     while True:
         # results = await asyncio.gather(function_2(), function_async())
@@ -134,8 +129,12 @@ async def main():
 if __name__ == "__main__":
 
     # Global variable input
-    text_input = [  0,2,0,0, 0,0,0,0, 1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0  ]
-    run_prediction = False
+    run_gif.text_input = [  1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0  ]
+    run_gif.run_prediction = False    
+
+    # Run the tkinter event loop in a separate thread
+    tkinter_thread = threading.Thread(target=run_gif.run_tkinter)
+    tkinter_thread.start()
 
     model = MultiLabelClassificationModel("roberta", os.path.dirname(SCRIPT_DIR) + "/ReactionGIF/outputs/checkpoint-9-epoch-3/", num_labels=26, use_cuda=False)
 
