@@ -1,2 +1,3 @@
 cache_dir/
 output_scipy.wav
+/neuralnet/__pycache__

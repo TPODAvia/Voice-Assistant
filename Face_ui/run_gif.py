@@ -44,7 +44,13 @@ class ImageLabel(tk.Label):
                 frame_duration = frame.info['duration']
                 frame_rate = frame_duration if frame_duration > 0 else 0
                 self.frame_rates.append(frame_rate)
-                self.frames.append(ImageTk.PhotoImage(frame.copy()))
+                
+                # Resize the frame to 50% of its original size
+                new_width = int(frame.width * 0.5)
+                new_height = int(frame.height * 0.5)
+                resized_frame = frame.resize((new_width, new_height))
+
+                self.frames.append(ImageTk.PhotoImage(resized_frame.copy()))
 
     def unload(self):
         self.config(image="")

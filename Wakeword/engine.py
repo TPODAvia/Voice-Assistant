@@ -72,6 +72,7 @@ class WakeWordEngine:
             # mfcc = self.featurizer(waveform).transpose(0, 1).unsqueeze(1)
 
             out = self.model(mfcc)
+            print(torch.sigmoid(out))
             pred = torch.round(torch.sigmoid(out))
             return pred.item()
 
@@ -132,7 +133,7 @@ class DemoAction:
         filename = self.random.choice(self.arnold_mp3)
         try:
             print("playing", filename)
-            self.subprocess.check_output(['play', '-v', '.1', filename])
+            self.subprocess.check_output(['play', '-v', '.1', filename , '-t', 'alsa'])
         except Exception as e:
             print(str(e))
 

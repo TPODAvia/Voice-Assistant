@@ -43,7 +43,7 @@ if __name__ == '__main__':
     # parser.add_argument('--sr', type=int, default=16000, help='sample rate of clean audio')
     # args, _ = parser.parse_known_args()
 
-    wav_fn = SCRIPT_DIR + '/wavfiles/Snare_drum/ae7d1c37.wav'
+    wav_fn = SCRIPT_DIR + '/wavfiles/Admiration/1051.wav'
 
     sr = 16000
     rate, clean_wav = downsample_mono(wav_fn, sr)

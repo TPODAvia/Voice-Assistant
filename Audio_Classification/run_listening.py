@@ -1,13 +1,7 @@
 from run_classification import make_prediction
-import argparse
-import os
-import sys
-import whisper
-import re
 import sounddevice as sd
 import speech_recognition
 import numpy as np
-from playsound import playsound
 
 recognizer = speech_recognition.Recognizer()
 microphone = speech_recognition.Microphone()
@@ -34,12 +28,9 @@ with microphone:
         #print("Started recognition...")
         # recognized_data = recognizer.recognize_whisper(audio, model="base", language="russian")
 
-        parser = argparse.ArgumentParser(description='Audio Classification Training')
-
-        parser.add_argument('--sr', type=int, default=16000, help='sample rate of clean audio')
-        args, _ = parser.parse_known_args()
-
-        emo_classf = make_prediction(args, float_data )
+        # Sound induced emotion analysis
+        sr=16000
+        emo_classf = make_prediction(sr, float_data)
 
 
     except speech_recognition.UnknownValueError:
@@ -55,5 +46,4 @@ duration = 0.5 # duration in second
 myrecording = sd.rec(int(duration * fs), samplerate=fs, channels=1)
 sd.wait()
 
-print("Hello")
 # print(emo_classf)

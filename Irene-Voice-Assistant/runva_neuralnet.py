@@ -73,7 +73,7 @@ async def function_2():
     no_punct_str = re.sub(r'[^\w\s]', '', voice_input_str)
     lowercase_str = no_punct_str.lower().strip()
 
-    # global start_time
+    global start_time
     print("Sound:", lowercase_str)
 
     if lowercase_str != ("" or "редактор субтитров асемкин корректор аегорова"):
