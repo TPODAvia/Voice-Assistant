@@ -34,3 +34,4 @@ playsound
 attrdict
 sonopy
 sox
+pygame

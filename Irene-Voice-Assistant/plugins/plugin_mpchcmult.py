@@ -18,7 +18,7 @@ def start(core:VACore):
         "require_online": False,
 
         "default_options": {
-            "multPath": '',
+            "multPath": '/home/vboxuser/Voice-Assistant/Voices/sing',
             "serialPath": '',
         },
 
@@ -26,6 +26,7 @@ def start(core:VACore):
             "запусти плеер": run_player,
             "мультик": play_mult,
             "сериал": play_serial,
+            "спеи": play_music,
         }
     }
     return manifest
@@ -59,7 +60,7 @@ def play_mult(core:VACore, phrase: str):
         name = str(f)[:-4].lower().replace(".","").replace(",","")
         if name == phrase:
             print("Мульт ",f)
-            subprocess.Popen([core.mpcHcPath, multPath+"\\"+f])
+            subprocess.Popen([core.mpcHcPath, multPath+"/"+f])
             return
 
     core.say("Не нашла. Пожалуйста, повтори только название.")
@@ -180,6 +181,34 @@ def serial_list():
     # files = [str(f)[:-4].lower() for f in files]
     # files = [str(f).replace(".","").replace(",","") for f in files]
     return res
+
+def play_music(core:VACore, phrase: str):
+    if multPath == "":
+        core.say("Не установлена папка с музыками")
+        return
+
+    if phrase == "":
+        core.say("Пожалуйста, уточни какая именно музыка")
+        core.context_set(play_music)
+        return
+
+    #core.play_voice_assistant_speech("Ищу мультфильм "+find)
+    mult_files= mult_list()
+    for f in mult_files:
+        name = str(f)[:-4].lower().replace(".","").replace(",","")
+        if name == phrase:
+            print("Мульт ",f)
+            from pygame import mixer
+            import time
+            mixer.init()
+            mixer.music.load(multPath+"/"+f)
+            mixer.music.play()
+            while mixer.music.get_busy():  # wait for music to finish playing
+                time.sleep(1)
+            return
+
+    core.say("Не нашла. Пожалуйста, повтори только название.")
+    core.context_set(play_mult)
 
 if __name__ == "__main__":
     print(serial_list())

@@ -17,6 +17,10 @@ import threading
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
+current_path = os.getcwd()
+if current_path != SCRIPT_DIR:
+    sys.exit('Program can only be run from path ' + SCRIPT_DIR)
+
 sys.path.append(os.path.dirname(SCRIPT_DIR) + "/Audio_Classification")
 import run_classification
 
