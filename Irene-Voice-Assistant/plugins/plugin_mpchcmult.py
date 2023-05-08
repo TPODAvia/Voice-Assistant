@@ -26,7 +26,12 @@ def start(core:VACore):
             "запусти плеер": run_player,
             "мультик": play_mult,
             "сериал": play_serial,
-            "спеи": play_music,
+            "спей": play_music,
+            "спой песню": play_music,
+            "с бой песню": play_music,
+            "спой песня": play_music,
+            "с попесню": play_music,
+            "спой песни": play_music,
         }
     }
     return manifest

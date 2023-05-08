@@ -399,9 +399,12 @@ class VACore(JaaCore):
             # if not founded
             if self.context == None:
                 # no context
-                # self.say(self.plugin_options("core")["replyNoCommandFound"])
+                self.say(self.plugin_options("core")["replyNoCommandFound"])
 
-                inputs = tokenizer('@@ПЕРВЫЙ@@ Hello @@ВТОРОЙ@@', return_tensors='pt')
+            else:
+                # in context
+                # self.say(self.plugin_options("core")["replyNoCommandFoundInContext"])
+                inputs = tokenizer(f'@@ПЕРВЫЙ@@ {command} @@ВТОРОЙ@@', return_tensors='pt')
                 generated_token_ids = model.generate(
                     **inputs,
                     top_k=10,
@@ -425,10 +428,7 @@ class VACore(JaaCore):
                     extracted_text = match.group(1)
                     print("Responce Text: ", extracted_text)
                     self.play_voice_assistant_speech(extracted_text)
-
-            else:
-                # in context
-                self.say(self.plugin_options("core")["replyNoCommandFoundInContext"])
+                    
                 # restart timer for context
                 if self.contextTimer != None:
                     self.context_set(self.context,self.contextTimerLastDuration)

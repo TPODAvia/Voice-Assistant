@@ -55,7 +55,7 @@ def say(core:VACore, text_to_speech:str):
 def towavfile(core:VACore, text_to_speech:str,wavfile:str):
 
     # run if text input is long
-    if len(text_to_speech) > 20:
+    if len(text_to_speech) > 30:
         random_wav = random.choice(wav_files)
         playsound(random_wav, False)
 

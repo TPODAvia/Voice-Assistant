@@ -21,7 +21,7 @@ if __name__ == "__main__":
         traceback.print_exc()
 
 
-    exit(0) # если нужно - закомментируйте и можно будет работать с командной строкой
+    # exit(0) # если нужно - закомментируйте и можно будет работать с командной строкой
 
     print("Enter command (user text like 'привет') or 'exit'")
     while True:

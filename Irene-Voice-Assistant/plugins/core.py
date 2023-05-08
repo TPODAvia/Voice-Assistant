@@ -26,7 +26,7 @@ def start(core:VACore):
 
             
 
-            "replyNoCommandFound": "Извини, я не поняла",
+            "replyNoCommandFound": "Извини, я не поняла, повтори еще раз",
             "replyNoCommandFoundInContext": "Не поняла...",
             "replyOnlineRequired": "Для этой команды необходим онлайн",
 
