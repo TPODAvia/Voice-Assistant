@@ -56,10 +56,9 @@ To install the Emotional Offline Voice Assistant, follow these steps:
    ```
    cd Voice-Assistant
    pip install -r requirements.txt
-   sudo apt-get install libasound-dev portaudio19-dev libportaudio2 libportaudiocpp0 -y
-   sudo apt-get install python3-tk python3-dev sox -y
-   sudo apt-get install python3-pil python3-pil.imagetk -y
-   sudo apt install espeak -y
+   sudo apt-get install libasound-dev portaudio19-dev libportaudio2 libportaudiocpp0 python3-tk python3-dev sox python3-pil python3-pil.imagetk espeak -y
+   ```
+   ```
    pip install PyAudio
    ```
 
