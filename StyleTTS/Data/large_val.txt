@@ -1,0 +1,119 @@
+Speech_Dataset/ESD/0017/Surprise/0017_001717.wav|æt lˈɛŋθ ðeɪ kˈeɪm tʊ ɐ ʃˈɑːɹp bˈɛnd. |0
+Speech_Dataset/ESD/0017/Surprise/0017_001718.wav|ðə nˈeɪm ʌvðə sˈɔŋ ɪz kˈɔːld hˈædəks. |0
+Speech_Dataset/ESD/0017/Surprise/0017_001719.wav|hˌaʊ kʊd aɪ dˈɪɡ bˈɜːɹoʊz wɪð ʃˈɔːɹt tˈoʊ nˈeɪlz? |0
+Speech_Dataset/ESD/0017/Surprise/0017_001720.wav|ɡˈoʊt bˈɪli ˈæskt ðɪ ˈoʊld tʃaɪnˈiːz ɡˈaɪ. |0
+Speech_Dataset/ESD/0017/Surprise/0017_001721.wav|kˈɔːld ˈaʊt ðə klˈaʊd. |0
+Speech_Dataset/ESD/0017/Surprise/0017_001722.wav|ɐ spˈɛʃəl pˈɑːt tˈuː. |0
+Speech_Dataset/ESD/0017/Surprise/0017_001723.wav|wˌaɪ dˈɪd aɪ wˈeɪk ˈʌp! |0
+Speech_Dataset/ESD/0017/Surprise/0017_001724.wav|ænd ʃiː kˈɔːt æt ðə bɹˈoʊtʃ. |0
+Speech_Dataset/ESD/0015/Sad/0015_001124.wav|kˈʌm ˌɔn maɪ dʒˈæk ɪnðə bˈɑːksᵻz! |0
+Speech_Dataset/ESD/0015/Sad/0015_001125.wav|aɪd fˈɑːɹ ɹˈæðɚ ɡˌoʊ wɪðˌaʊt ðˌɛm ðɐn ˈiːt ðˌɛm! |0
+Speech_Dataset/ESD/0015/Sad/0015_001126.wav|ðə hˈæɡ lˈʊkt ɪnðə stˈoʊv. |0
+Speech_Dataset/ESD/0015/Sad/0015_001127.wav|bˌʌt aɪ sˈɔː juː wˈɔːkɪŋ. |0
+Speech_Dataset/ESD/0015/Sad/0015_001128.wav|ðɪ ˈɑːɹt kwˈaɪt sˈeɪf wɪð mˌiː. |0
+Speech_Dataset/ESD/0015/Sad/0015_001129.wav|ˈɔːl maɪ ɡˈʌm tˈɪps ɡɔn æz wˈɛl. |0
+Speech_Dataset/ESD/0019/Surprise/0019_001464.wav|ænd wiː ɑːɹ sˌoʊ θˈɜːsti! |0
+Speech_Dataset/ESD/0019/Surprise/0019_001465.wav|tˈɑːm kʊd hˈɑːɹdli spˈiːk fɔːɹ lˈæfɪŋ. |0
+Speech_Dataset/ESD/0019/Surprise/0019_001466.wav|ʃˌæl wiː lˈɛt bˈɑːɹbɚɹə ˈɪn? |0
+Speech_Dataset/ESD/0019/Surprise/0019_001467.wav|aɪ səpˈoʊz nˈoʊ, ɪt dˈʌzənt! |0
+Speech_Dataset/ESD/0019/Surprise/0019_001468.wav|aɪ duːnˌɑːt ˈiːt bɹˈɛd. |0
+Speech_Dataset/ESD/0019/Happy/0019_000966.wav|wiː mˈeɪ dʒˈɔɪn wɪð ðæt pˈaʊɚ. |0
+Speech_Dataset/ESD/0019/Happy/0019_000967.wav|tʃˈæptɚɹ ᵻlˈɛvən ɔnðə dˈoːɹstɛp. |0
+Speech_Dataset/ESD/0019/Happy/0019_000968.wav|hiː ʃˈoʊd nˈoʊ sˈaɪnz ʌv ˈeɪdʒ. |0
+Speech_Dataset/ESD/0019/Happy/0019_000969.wav|bˌʌt ʃˈoʊ mˌiː nˈaʊ jʊɹ mˈæp! |0
+Speech_Dataset/ESD/0019/Happy/0019_000970.wav|tʃˈuː lˈiːvz kwˈɪkli, sˈɛd ɹˈæbɪt. |0
+Speech_Dataset/ESD/0019/Happy/0019_000971.wav|aɪ sˈeɪ aɪ wɪl biː ˈɛmpɚɹɚ. |0
+Speech_Dataset/ESD/0015/Neutral/0015_000272.wav|nˈoʊ ɐdmˈɪtəns ɛksˈɛpt ˌɔn pˈɑːɹɾi bˈɪznəs. |0
+Speech_Dataset/ESD/0015/Neutral/0015_000273.wav|ɪt dʒˈʌst sˈuːn swˈɪm jʊɹ wˈeɪ æz ˈʌðɚz dˈuː. |0
+Speech_Dataset/ESD/0015/Neutral/0015_000274.wav|bɪkˈʌz hiː wʌzɐ mˈæn wɪð ˈɪnfɪnət ɹᵻsˈoːɹs ænd səɡˈæsᵻɾi. |0
+Speech_Dataset/ESD/0015/Neutral/0015_000275.wav|juː ʃˌʊdənthəv pɹˈɪkt hˌɪm wɪð jʊɹ hˈɔːɹn. |0
+Speech_Dataset/ESD/0015/Neutral/0015_000276.wav|kæn jʊɹ nˈeɪm biː mˈoːɹ hɪlˈɛɹiəs? |0
+Speech_Dataset/ESD/0015/Neutral/0015_000277.wav|ðɪ ˈɛnd pˈɑːɹt ɪz fˈɪʃ mˈaʊθ. |0
+Speech_Dataset/ESD/0015/Neutral/0015_000278.wav|aɪ nˈoʊ juː . |0
+Speech_Dataset/ESD/0015/Angry/0015_000439.wav|lˈɛt ɡˌoʊ ʌv maɪ tˈɑːp nˈɑːt. |0
+Speech_Dataset/ESD/0015/Angry/0015_000440.wav|ænd ðeɪ dˈɪd pˈʊʃ sˈoʊ! |0
+Speech_Dataset/ESD/0015/Angry/0015_000441.wav|wiː ɛkspˈɛktᵻd tˈɑːm wʊd dʒˈʌmp fɔːɹ dʒˈɔɪ. |0
+Speech_Dataset/ESD/0015/Angry/0015_000442.wav|dˈʌz ðə wˈʌn ðæt wˈɪnz ɡɛt ðə kɹˈaʊnd? |0
+Speech_Dataset/ESD/0015/Angry/0015_000443.wav|tə bˈaɪ tˈuː pˈoːɹk tʃˈɑːps. |0
+Speech_Dataset/ESD/0015/Angry/0015_000444.wav|ðeɪ fˈaʊnd ɐ kˈaʊ ɡɹˈeɪzɪŋ ɪn ɐ fˈiːld. |0
+Speech_Dataset/ESD/0015/Angry/0015_000445.wav|ɑːhˈɑː wʌt ˈaɪ hæv wiː hˈɪɹ? |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_34_pushkin_0043.wav|jɪvˈo tʲixˈonkʌ uvɭʲikˈɑjit kˈɑ zaɭʲˈivu svʲˈetɭʌja rʲikˈɑ, ˈi rˈyba vˈoɭnʌja fpadˈɑjit f tʲaʒˈɛɭyj nʲˈevʌt stʌrʲikˈɑ |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_34_pushkin_0044.wav|fsʲˈe tʲˈixʌ: mˈorʲi pʌtʃʲivˈɑjit, no tˈutʃʲʌ vʲˈisʲnʲit |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_34_pushkin_0045.wav|dˈɑɭnyj ɡrˈom nˈɑt zvˈuʃnʌj bʲˈezdnʌju ɡrʌxˈotʃʲit, ˈi vˈot putʃʲˈina pˈot tʃʲiɭnˈom kʲipʲˈit, pʌdjjˈemɭʲitsʌ, kɭʌkˈotʃʲit |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_34_pushkin_0046.wav|naprˈɑsnʌ kˈɑ vʲˈernym bʲirʲiɡˈɑm nʲiɕˈɑstnyj vʌzvratʲˈitʲsʲʌ xˈotʃʲit, tʃʲiɭnˈok trʲiɕˈit ˈi pʌpʌɭˈɑm! rybˈɑk ɪdʲˈet nə dnˈo mʌrskˈojɪ. |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_34_pushkin_0047.wav|ˈi, prʌbudʲˈɑsʲ, trʲipʲˈeɕit ˈon, ɡɭʲadʲˈit ʌkrʲˈest: brʲˈeɡa f pʌkˈojɪ, nə pʌɭusvʲˈetɭyj nʲibʌskɭˈon vʌsxˈodʲit ˈutrʌ zʌɭʌtˈojɪ |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_34_pushkin_0049.wav|tʲixˈonkʌ ˈjunʌʃu starʲˈik nʌɡˈoj tʌɭkˈɑjit ʌstʌrˈoʒnʌj ˈi uɭʲitˈɑjit prʲˈizrʌk ɭˈoʒnyj s jɪvˈo ɡɭˈɑvy, ˈon vʌsstajˈet ˈi, vʲˈidʲʌ sˈoɭnʲitʃʲnyj vʌsxˈot, prʌɕˈɑjasʲ, stʌrʲikˈu sʲidˈomu sˈo zɭˈɑtʌm rˈuku pʌdajˈet. |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_34_pushkin_0051.wav|starʲˈik s vʲisʲˈeɭʌju duʃˈoj bɭʌɡʌsɭʌvɭʲˈɑjit sɭavʲˈɑnʲina: "dˈɑ sʌxranʲˈɑt tʲibʲˈɑ pʲirˈun, rʌdʲˈitʲiɭ bˈurʲɪ, tsˈɑrɪ^ pʌɭnˈoɕnyj, ˈi svʲitʌvʲˈit, ˈi ɭˈɑdʌ mˈoɕnyj |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_35_pushkin_0000.wav|pɭˈɑny ʑinʑˈevʲij ʌsaʒdʲˈen mʌrkʌbrˈunʌm bˈova sɭˈyʃyt ˈi jˈedʲit nˈotʃʲjju dʲirʲˈetsʌ s vˈoinʌmʲɪ s ɭukapʲˈerʌm ˈi vʌzvraɕˈɑjitsʌ. |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_35_pushkin_0001.wav|rˈɑnʲinyj prʲijiʒʒˈɑjit rasskˈɑzyvʌjit svʌˈju ɪstˈorʲiju smʲˈertʲ ɡvʲidˈona tʲimnʲˈitsu ɭʲu"bˈovnʲitsu pʌbʲˈek. |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_35_pushkin_0002.wav|vʑˈɑtʲijɪ jɪvˈo razbˈojnʲikʌmʲɪ prˈodʌn ʑinʑˈevʲiju nə druɡˈuju nˈotʃʲ ʌnˈɑ jɪvˈo saʒˈɑjit nə kʌnʲˈɑ. |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_35_pushkin_0003.wav|ˈon rʌzbʲivˈɑjit vˈojskʌ ʑinʑˈevʲij pˈo nʌuɕˈenʲiju pʌsyɭˈɑjit jɪvˈo kˈɑ markˈobrunu ˈon ʌbʌkrˈɑdʲin vʌɭʃˈɛbnʲikʌm prʲijiʒʒˈɑjit kˈɑ markˈobrunu. |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_35_pushkin_0004.wav|mʲiɭtʃʲˈiɡrʲija vɭʲu"bɭʲˈɑjitsʌ v nʲivˈo, prʲidɭaɡˈɑjit rˈuku bˈova f tʲimnʲˈitsy naxˈodʲit mʲˈetʃʲ, kˈɑ nʲimˈu pʌsyɭˈɑjut pʌɭatʃʲˈɑ, ˈon jɪvˈo ubʲivˈɑjit ˈi vyxˈodʲit vˈon. |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_35_pushkin_0005.wav|zˈɑ nʲˈim pʌɡˈonʲʌ ˈon s pʌɭkˈɑnʌm rʌzbʲivˈɑjit jɪjˈe buɭˈɑt skˈɑzyvʌjit jɪmˈu skˈɑskʲɪ. |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_35_pushkin_0006.wav|markˈobrun v ʌtsˈutstvʲijɪ ʌsaʒdˈɑjit ɡˈorʌt ˈi bʲirʲˈet f pɭʲˈen druʒnʲˈevnu. |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_35_pushkin_0008.wav|ʒynʲˈix ubʲˈit nʲivʲˈesta vɭʲu"bɭʲˈɑjitsʌ, bˈova prʌvˈodʲit nˈotʃʲ ˈu nʲijˈe, ʌtkryvˈɑjit svʌˈju ɪstˈorʲiju. |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_35_pushkin_0009.wav|tsˈɑrʲ uznajˈet ˈi vysyɭˈɑjit vˈon bˈovu bˈova jˈedʲit vˈon ˈis ɡʌsudˈɑrstva ʌsvʌbʌʒdˈɑjit razbˈojnʲika trʲˈi sɭˈuʒby. |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_35_pushkin_0011.wav|bˈova f tʲimnʲˈitsy, tsarʲˈevna jɪvˈo ʌbʌɭɕˈɑjit ˈon jɪjˈe prʲiʑirˈɑjit ʌnˈɑ tʃʲʌrʌdʲˈejka, stˈɑrʲits dˈux, jˈeju pʌdˈosɭʌnnyj. |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_35_pushkin_0012.wav|bˈova ʌsuʒdʲˈen nə smʲˈertʲ pʲˈervʌja sɭˈuʒba. |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_35_pushkin_0013.wav|ˈon vʲˈidʲit kʌrˈɑbɭʲ ˈi jˈedʲit kˈɑ sʲˈebʲi bˈurʲʌ kʌrˈɑbɭ razrˈuʃyn ftʌrˈɑja sɭˈuʒba prʲijiʒʒˈɑjit, ubʲivˈɑjit dadˈona. |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_35_pushkin_0014.wav|jˈedʲit kˈɑ nʲivʲˈesʲtʲi, naxˈodʲit pʲiɭʲiɡrʲˈima, bʲirʲˈet ˈu nʲivˈo trʲˈi ʑiɭʲˈija. pˈo skˈɑskʲi. |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_35_pushkin_0016.wav|vɭadʲˈimʲir, rʌʑdʲiɭʲˈif nə udʲˈeɭy rʌsʲsʲˈiju, ʌstajˈetsʌ f kʲˈijivʲi |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_35_pushkin_0017.wav|mʌɭʌdˈyjɪ bʌɡʌtyrʲˈi sˈo skˈukʲɪ rʌzjjiʒʒˈɑjutsʌ |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_35_pushkin_0021.wav|msʲtʲisɭˈɑf nə ˈostrʌvʲi nʌsɭaʒdʲˈenʲij. |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_35_pushkin_0022.wav|ɡʌnʲˈets prʲijiʒʒˈɑjit kˈɑ jɪvˈo druʒˈynʲi, nʲe zʌstajˈet jɪvˈo. vɭadʲˈimʲir v ʌttʃʲˈɑjanʲiɪ. |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_35_pushkin_0023.wav|tsarʲˈevna ʒˈɑɭujitsʌ svʌjˈej mˈɑtʲirʲɪ, tˈɑ ʌbʲiɕˈɑjit sʌjidʲinʲˈitʲ jɪjˈe s msʲtʲisɭˈɑvʌm. |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_35_pushkin_0024.wav|ɪɭʲiˈja v mˈoɭʌdʌsʲtʲɪ ʌbrʲu"xˈɑtʲiɭ tsarʲˈevnu tatˈɑrskuju ʌnˈɑ vˈyʃɭa zˈɑmuʃ, ʌbjjavʲˈiɭa sˈynu, sˈyn jˈedʲit ʌtˈyskʲivʌtʲ ʌttsˈɑ. |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_35_pushkin_0025.wav|ɪɭʲiˈja naxˈodʲit pustˈynnʲika, kʌtˈoryj prʌrˈotʃʲistvujit jɪmˈu ˈutʃʲʌstʲ rʌsʲsʲˈiɪ. |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_35_pushkin_0026.wav|msʲtʲisɭˈɑf uvɭʲitʃʲˈen tʃʲʌrʌdʲˈejstvʌm v ɡˈory kafkˈɑsskʲijɪ. |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_35_pushkin_0027.wav|nə rʌsʲsʲˈiju nʌpadˈɑjut s rˈɑznyx stʌrˈon fsʲˈe vraɡʲˈi jɪjˈe. |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_35_pushkin_0028.wav|msʲtʲisɭˈɑf pˈo vʲitʃʲirˈɑm vʲˈidʲit ɭadʲˈiju ˈi dʲˈevu. |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_35_pushkin_0030.wav|nˈɑt kʌɭybʲˈeɭʲiju pustˈoj jɪvrʲˈejka pɭˈɑtʃʲit mʌɭʌdˈɑja. |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_35_pushkin_0031.wav|sʲidʲˈit v drˈuɡʌm uɡɭˈu, ɡɭavˈoj pʌnʲˈiknuf, mʌɭʌdˈoj jɪvrʲˈej, ɡɭubʌkˈo v dˈumu pʌɡrˈuʒynnyj. |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_35_pushkin_0032.wav|f pʲitʃʲˈɑɭnʌj xˈiʒynʲi starˈuʃka ɡʌtˈovʲit pˈozdnʲu"ju trˈɑpʲizu. |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_35_pushkin_0033.wav|starʲˈik, zakrˈyv svʲatˈuju knʲˈiɡu, zasʲtʲˈeʃkʲɪ mʲˈednyjɪ sʌmknˈuɭ. |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_35_pushkin_0034.wav|starˈuxa stˈɑvʲit bʲˈednyj ˈuʒyn nə stˈoɭ ˈi fsʲˈu" sʲimʲjˈju zʌvʲˈet. nʲiktˈo nʲijdʲˈet, zabˈyf ˈo pʲˈiɕi. tʲikˈut v bʲizmˈoɭvʲiɪ tʃʲasˈy. usnˈuɭʌ fsʲˈe pˈot sʲˈenjju nˈotʃʲɪ. |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_35_pushkin_0035.wav|jɪvrʲˈejskʌj xˈiʒyny ʌdnˈoj nʲe pʌsʲitʲˈiɭ ʌtrˈɑdnyj sˈon. |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_35_pushkin_0036.wav|nə kʌɭʌkˈoɭnʲi ɡʌrʌdskˈoj bjjˈet pˈoɭnʌtʃʲ. |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_35_pushkin_0037.wav|vdrˈuk rukˈoj tʲaʒˈɛɭʌj stutʃʲˈɑtʲsʲʌ kˈɑ nʲˈim. |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_35_pushkin_0038.wav|sʲimʲjˈja vzdrˈoɡnuɭa, mɭadˈoj jɪvrʲˈej fstajˈet ˈi dvʲˈerɪ^ s nʲidʌˈumʲinjjim ʌtvʌrʲˈɑjit ˈi fxˈodʲit nʲiznakˈomyj strˈɑnnʲik. |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_35_pushkin_0040.wav|sʲimʲˈejstvʌmʲɪ bʌɭɡˈɑry tˈut v bʲispʲˈeʃnʌj dʲˈikʌsʲtʲɪ ʒyvˈut, xranʲˈɑ rʌdʲˈitʲiɭskʲijɪ nrˈɑvy, pʲitˈɑjasʲ trudˈom, ˈi nʲe zabˈotʲʌtsʌ ˈo tˈom, kˈɑk rʌtʌbˈorstvujut dʲirʒˈɑvy ˈi ɡrˈoznʌ prˈɑvʲʌt ˈix sudʲbˈoj. |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_37_pushkin_0000.wav|kʌɡdˈɑ vɭadˈyka asʲsʲirʲˈijskʲij narˈody kaʑnʲˈiju kaʑnʲˈiɭ, ˈi ʌɭˈofʲirn vʲˈesʲ krˈɑj aʑˈijskʲij jɪvˈo dʲisʲnʲˈitsy pʌkʌrʲˈiɭ, vysˈok smʲirʲˈenjjim tʲirpʲiɭʲˈivym ˈi krʲˈepʌk vʲˈerʌj v bˈoɡa sʲˈiɭ, pʲirʲˈet satrˈɑpʌm ɡʌrdʲiɭʲˈivym ɪzrˈɑiɭ vˈyɪ nʲe skɭʌnʲˈiɭ |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_37_pushkin_0001.wav|vˈo fsʲˈe prʲidʲˈeɭy ɪudʲˈeɪ prʌnʲˈiknuɭ trʲˈepʲit. ɪjirʲˈeɪ ʌdʲˈeɭʲɪ vrʲitʲˈiɕim aɭtˈɑrɪ^ |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_37_pushkin_0002.wav|narˈot zavˈyɭ, ʌbjˈjatyj strˈɑxʌm, ɡɭavˈu pʌkrˈyv zʌɭˈoj ˈi prˈɑxʌm, ˈi vnʲˈɑɭ jɪmˈu fsʲivˈyʃnʲij tsˈɑrɪ^. |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_37_pushkin_0003.wav|prʲitʲˈek satrˈɑp kˈɑ uɕˈeɭjjam ɡˈornym ˈi zrʲˈit: ˈix ˈuskʲijɪ vratˈɑ zˈɑmkʌm zˈɑmknuty nʲipʌkˈornym |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_37_pushkin_0004.wav|sʲtʲinˈoj, kˈɑk pˈojasʌm uzˈornym, prʲipʌˈjasʌɭʌsʲ vysʌtˈɑ. |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_37_pushkin_0005.wav|ˈi, nˈɑt tʲisʲnʲˈinʌj tʌrʒystvˈuja, kˈɑk mˈuʃ nə strˈɑʒy, f tʲiʃynʲˈe stʌˈit, bʲiɭʲˈejasʲ, vʲitʲˈiɭuja v nʲidʌsʲtʲiʒˈymʌj vyʃynʲˈe. |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_37_pushkin_0006.wav|satrˈɑp smutʲˈiɭsʲʌ ɪzumɭʲˈennyj ˈi ɡnʲˈev v nʲˈem dˈuʃu pʌmrˈɑtʃʲiɭ. |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_37_pushkin_0007.wav|ˈi svˈoj sʌvʲˈet rʌznʌpɭʲˈemʲinnyj ˈon ɭʲu"bʌpˈytnyj vʌprʌsʲˈiɭ: "ktˈo sʲˈej narˈot? |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_37_pushkin_0008.wav|ˈi ʃto ˈix sʲˈiɭa, ˈi ktˈo ˈim vˈoʃtʲ, ˈi ʌttʃʲivˈo sʲˈerdtsa ˈix dʲˈerzʌstʲ vʌspˈɑɭʲiɭa, ˈi ˈix nadʲˈeʒda nə kʌvˈo?. |0
+Speech_Dataset/ruls_data/dev/audio/5397/2145/poemi_37_pushkin_0009.wav|" ˈi fstˈɑɭ tʌɡdˈɑ synˈof ammˈona vʌjinatʃʲˈɑɭnʲik axˈiʌr ˈi rʲˈek ˈi ʌɭˈofʲirn sˈo trˈona skɭʌnʲˈiɭ kˈɑ nʲimˈu ˈi sɭˈux ˈi vzˈor. |0
+Speech_Dataset/vivos/train/waves/VIVOSSPK46/VIVOSSPK46_277.wav|mˈəː2j kˌaːɜc bˈaː6n bˈəɜm vˈaː2w ɗˈəɪ ɗˌe4 tˈaːm xˈaː4w zˈe-ɲ sˈe-ɜc nˈa2j |0
+Speech_Dataset/vivos/train/waves/VIVOSSPK46/VIVOSSPK46_278.wav|ˈe-ɲ lˈaː6j ˈəɜp ˈu4 xˈaːɜt̪ vˈɔ6ŋ lˈaː2m ɲˌy5ŋ tʃˈiɛɜc ɗˈo6k bˈi2ɲ tˈə6t̪ lˈəːɜn |0
+Speech_Dataset/vivos/train/waves/VIVOSSPK46/VIVOSSPK46_279.wav|ŋˈəɜt̪ xˌi tʃˈa4j mˈaɜw ɲˈiɛ2w lˈaː6j lˌaː2 mˈo6t̪ fˈaː4n ˈyɜŋ sˈiɲ t̪ˈo2n |0
+Speech_Dataset/vivos/train/waves/VIVOSSPK46/VIVOSSPK46_280.wav|tʃˈyə2ŋ hˈɔ6k tʃˌɔ t̪ˈaː zˈəɜt̪ ɲˈiɛ2w ɲˌy5ŋ tˈiɜc ˈyɜŋ t̪ˈiɲ tˈə2n |0
+Speech_Dataset/vivos/train/waves/VIVOSSPK46/VIVOSSPK46_281.wav|twˈi4 ɗˈe-ɜɲ kˈəː2 vˌaː2 lˈɔ tʃˈaː2 nˈyəɜc t̪ˈiɛɜp tʃwˈiɛ6n vˌəːɜj xˈe-ɜc |0
+Speech_Dataset/vivos/train/waves/VIVOSSPK46/VIVOSSPK46_282.wav|kˈaː6n t̪ˈo tʃˌyə kˈe4 tʃˈəɜm kˈaːɜ zˈaw tˈi6t̪ lˈuə6c hˈaj bˈuɜn bˈe-ɜɲ ɗˈuɜc |0
+Speech_Dataset/vivos/train/waves/VIVOSSPK46/VIVOSSPK46_283.wav|t̪ˈoj mˈi4m kˈyə2j mˈo6t̪ kˈe-ɜc lˈəː ɗˈaː5ŋ zˈo2j bˈyəɜc vˈaː2w tʃˈɔŋ |0
+Speech_Dataset/vivos/train/waves/VIVOSSPK46/VIVOSSPK46_284.wav|vˈiɲ lˈi2 kˈeɜt̪ lwˈə6n kˌaːɜc ˈe-ɲ kˈaː2ŋ kˈaːw tʃˈəɜt̪ sˈoɜŋ tˌi2 kˈaː2ŋ ˈiɜt̪ t̪ˈiɛ2n |0
+Speech_Dataset/vivos/train/waves/VIVOSSPK46/VIVOSSPK46_285.wav|kˌaːɜc tʃˈaɜw xˌoŋ nˌen bˈɔ4 hˈɔ6k vˌi2 lˈiɜ zˈɔ t̪ˈaː2j tʃˈiɜɲ |0
+Speech_Dataset/vivos/train/waves/VIVOSSPK46/VIVOSSPK46_286.wav|tʃwˈiɛɜn nˈa2j lˌaː2 tʃwˈiɛɜn ɗˈə2w t̪ˈiɛn tˈiɜm ɗˈi mˈaɜj bˈaj tʃˈuɜ ˈaː6 |0
+Speech_Dataset/vivos/train/waves/VIVOSSPK46/VIVOSSPK46_287.wav|ŋˈɛ ɗˈo2n zˈa2ŋ bˈeɜn sˈɛ nˈa2j hwˈaː6t̪ ɗˈo6ŋ kˈɔɜ bˈaː4w kˈe |0
+Speech_Dataset/vivos/train/waves/VIVOSSPK46/VIVOSSPK46_288.wav|ɗˈɔɜ lˌaː2 kˈəː hˈo6j ɗˌe4 nˈəŋ kˈaːw zˈaːɜ tʃˈi6 tʃˈiɜɲ bˈaː4n tˈən mˈi2ɲ |0
+Speech_Dataset/vivos/train/waves/VIVOSSPK46/VIVOSSPK46_289.wav|tʃˈaː4 lˈəː2j kˌuə4 fˈɔɜ zˈaːɜm ɗˈoɜk sˈəː4 sˈəɪ zˈy6ŋ kwˈe-ɜc hˈo2ŋ t̪wˈiɛɜn |0
+Speech_Dataset/vivos/train/waves/VIVOSSPK46/VIVOSSPK46_290.wav|ŋˈoj bˈiɛ6t̪ tˈy6 kˌuə4 ˈuɜt̪ kˈu5ŋ t̪ˈɔ ɲˈəɜt̪ lˈaː2ŋ vˌaː2 zˈaːɜ tʃˈi6 ɗˌeɜn vˈaː2j t̪ˈi4 |0
+Speech_Dataset/vivos/train/waves/VIVOSSPK46/VIVOSSPK46_291.wav|hˈi2ɲ ˈe-4ɲ ˈe-ɲ kˈu2ŋ ɲˌy5ŋ tˈaːɜŋ ŋˈa2j hˈe-6ɲ fˈuɜc ˈuə2 vˈe2 |0
+Speech_Dataset/vivos/train/waves/VIVOSSPK46/VIVOSSPK46_292.wav|ɗˈəɪ kˈu5ŋ lˌaː2 ŋwˈiɛn ɲˈən zˈə5n ɗˌeɜn t̪ˈi2ɲ tʃˈaː6ŋ hˈon mˈe |0
+Speech_Dataset/vivos/train/waves/VIVOSSPK46/VIVOSSPK46_293.wav|hˈo2ŋ ɗˈe-2ɲ bˈaː4w lˈiw kˈeɜt̪ kwˈaː4 kˈiɛɜm t̪ˈiɛ2n ɗˌe4 t̪ˈiɛɜp t̪ˈu6c hˈɔ6k |0
+Speech_Dataset/vivos/train/waves/VIVOSSPK46/VIVOSSPK46_294.wav|zˈiɛŋ t̪ˈoj tˈəɪɜ sˈəɜw hˈo4 kwˈaːɜ tʃˌa4ŋ lˈɛ5 hˈeɜt̪ tʃˈaːj vˈiɛ6t̪ zˈo2j sˈaːw ˈe-ɲ hˈaːj |0
+Speech_Dataset/vivos/train/waves/VIVOSSPK46/VIVOSSPK46_295.wav|bˈaː2 ɗˈə1w bˈiɛɜt̪ mˈəɪɜ tʃˈo5 ˈeɜ ˈə4m lˈaː2m kˈɛɜm tʃˈəɜt̪ lˈyə6ŋ mˈəːɜj nˈuəj kˈɔ2 |0
+Speech_Dataset/vivos/train/waves/VIVOSSPK46/VIVOSSPK46_296.wav|zˈoɜŋ ɲˌy ŋˈiə5 tʃˈuɜ bˈɛɜ bˈi2ɲ ˈan ŋˈu4 kˈu2ŋ tˈeɜ zˈəːɜj sˈiɛw ɲˈən |0
+Speech_Dataset/vivos/train/waves/VIVOSSPK46/VIVOSSPK46_297.wav|t̪ˈiɛɜp t̪ˈu6c tʃˈəɜm mˈo6t̪ ˈiɜt̪ nˈyəɜc bˈɔɜŋ lˈen fˈə2n zˈyə5 kˌuə4 mˈoj zˈo2j twˈaː ɗˈe2w |0
+Speech_Dataset/vivos/train/waves/VIVOSSPK46/VIVOSSPK46_298.wav|ɲˌy5ŋ lˈə2n ɗˈɔɜ kˌɔn t̪ˈu4j tˈən t̪ˈaː6j sˈaːw bˈaː mˈɛ6 lˈaː6j lˈe-6ɲ lˈu2ŋ ɗˌeɜn vˈəɪ6 |0
+Speech_Dataset/vivos/train/waves/VIVOSSPK45/VIVOSSPK45_025.wav|sˈyə4 sˈaːj zˈu2ŋ mˈo6t̪ tʃˈiɛɜc ɣˈyəŋ lˈəːɜn ɗˌe4 kˈe-6ɲ kˈyə4 sˈo4 |0
+Speech_Dataset/vivos/train/waves/VIVOSSPK45/VIVOSSPK45_026.wav|vˌaː2 vˈə6n mˈaj xˌoŋ fˌaː4j lˌaː2 bˈaː6n ɗˈo2ŋ hˈe-2ɲ sˈuəɜt̪ ɗˈəː2j kˌuə4 kˌɔn ŋˈyə2j |0
+Speech_Dataset/vivos/train/waves/VIVOSSPK45/VIVOSSPK45_027.wav|bˈaː mˈyəj lˌaː2 bˈaː mˈyəj tʃˈi4 tʃˈaː4 t̪ˈiɛ2n xˌoŋ tʃˈaː4 hˈaː2ŋ |0
+Speech_Dataset/vivos/train/waves/VIVOSSPK45/VIVOSSPK45_028.wav|ŋˈaː xˈɔɜ tʃˈi6w kˈoɜ vˈu6t̪ xˈɔ4j vˌəːɜj ˈiɜ ŋˈi5 lˈə4m kˈə4m kwˈaːɜ |0
+Speech_Dataset/vivos/train/waves/VIVOSSPK45/VIVOSSPK45_029.wav|kˈuə6c sˈoɜŋ sˌɛ5 tʃˈəː4 nˌen ɲˈaː2m tʃˈaːɜn nˌeɜw xˌoŋ kˌɔ2n bˈiɜ mˈə6t̪ |0
+Speech_Dataset/vivos/train/waves/VIVOSSPK45/VIVOSSPK45_030.wav|vˈiɛ6c ŋˈə2m hwˈaːɜ zˈiɛŋ lˈɛ4 lˌaː2 xˌoŋ fˈu2 hˈəː6p vˌəːɜj tʃˈu4 tʃˈyəŋ tʃˈuŋ |0
+Speech_Dataset/vivos/train/waves/VIVOSSPK45/VIVOSSPK45_031.wav|kˈɔɜ ɗˈiɛ4m tʃwˈə4n zˈiɛŋ tʃˌɔ t̪ˈy2ŋ xˈoɜj tˈi vˌaː2 t̪ˈy2ŋ ɗˈoɜj t̪ˈyə6ŋ nˈaːm nˈy5 |0
+Speech_Dataset/vivos/train/waves/VIVOSSPK45/VIVOSSPK45_032.wav|nˈo6j zˈuŋ tʃˈuɜŋ t̪ˈaː vˈyə2 hwˈaː2n tˈe-2ɲ sˈɔŋ vˈəɜn ɗˈe2 tˈəː2j zˈaːn |0

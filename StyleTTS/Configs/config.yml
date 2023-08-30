@@ -1,22 +1,22 @@
 log_dir: "Models/LJSpeech"
-first_stage_path: "/home/vboxuser/Voice-Assistant/StyleTTS/Models/LJSpeech/epoch_1st_00008.pth"
-save_freq: 2
+first_stage_path: "C:\\Users\\User\\Desktop\\StyleTTS\\Models\\LJSpeech\\epoch_1st_00192.pth"
+save_freq: 8
 log_interval: 10
-device: "cpu"
+device: "cuda"
 multigpu: false
-epochs_1st: 10 # number of epochs for first stage training
-epochs_2nd: 10 # number of peochs for second stage training
-batch_size: 2
-pretrained_model: ""
+epochs_1st: 200 # number of epochs for first stage training
+epochs_2nd: 100 # number of peochs for second stage training
+batch_size: 28
+pretrained_model: "C:\\Users\\User\\Desktop\\StyleTTS\\Models\\LJSpeech\\epoch_1st_00104.pth"
 second_stage_load_pretrained: false # set to true if the pre-trained model is for 2nd stage
 load_only_params: false # set to true if do not want to load epoch numbers and optimizer parameters
 
-train_data: "/home/vboxuser/Voice-Assistant/StyleTTS/Data/dev_train.txt"
-val_data: "/home/vboxuser/Voice-Assistant/StyleTTS/Data/dev_val.txt"
+train_data: "C:\\Users\\User\\Desktop\\StyleTTS\\Data\\large_train.txt"
+val_data: "C:\\Users\\User\\Desktop\\StyleTTS\\Data\\large_val.txt"
 
-F0_path: "/home/vboxuser/Voice-Assistant/StyleTTS/Utils/JDC/bst.t7"
-ASR_config: "/home/vboxuser/Voice-Assistant/StyleTTS/Utils/ASR/config.yml"
-ASR_path: "/home/vboxuser/Voice-Assistant/StyleTTS/Utils/ASR/epoch_00080.pth"
+F0_path: "C:\\Users\\User\\Desktop\\StyleTTS\\Utils\\JDC\\bst.t7"
+ASR_config: "C:\\Users\\User\\Desktop\\StyleTTS\\Utils\\ASR\\config.yml"
+ASR_path: "C:\\Users\\User\\Desktop\\StyleTTS\\Utils\\ASR\\epoch_00080.pth"
 
 preprocess_params:
   sr: 24000

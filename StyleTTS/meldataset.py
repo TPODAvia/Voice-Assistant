@@ -110,14 +110,12 @@ class FilePathDataset(torch.utils.data.Dataset):
 
     def _load_tensor(self, data):
         wave_path, text, speaker_id = data
-        # print("speaker_id: ", data )
-        # print("speaker_id: ", speaker_id)
         speaker_id = int(speaker_id)
         wave, sr = sf.read(wave_path)
         if wave.shape[-1] == 2:
             wave = wave[:, 0].squeeze()
         if sr != 24000:
-            wave = librosa.resample(wave, orig_sr = sr, target_sr = 24000)
+            wave = librosa.resample(wave, orig_sr=sr, target_sr=24000)
             print(wave_path, sr)
             
         wave = np.concatenate([np.zeros([5000]), wave, np.zeros([5000])], axis=0)

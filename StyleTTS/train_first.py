@@ -21,8 +21,6 @@ import torch.nn.functional as F
 import torchaudio
 import librosa
 
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-
 from models import *
 from meldataset import build_dataloader
 from utils import *
@@ -48,7 +46,7 @@ handler.setLevel(logging.DEBUG)
 logger.addHandler(handler)
 
 @click.command()
-@click.option('-p', '--config_path', default= SCRIPT_DIR + '/Configs/config.yml', type=str)
+@click.option('-p', '--config_path', default='Configs/config.yml', type=str)
 def main(config_path):
 
     config = yaml.safe_load(open(config_path))
@@ -64,9 +62,9 @@ def main(config_path):
     file_handler.setFormatter(logging.Formatter('%(levelname)s:%(asctime)s: %(message)s'))
     logger.addHandler(file_handler)
 
-    batch_size = config.get('batch_size', 2)
+    batch_size = config.get('batch_size', 10)
     device = config.get('device', 'cpu')
-    epochs = config.get('epochs_1st', 20)
+    epochs = config.get('epochs_1st', 200)
     save_freq = config.get('save_freq', 2)
     train_path = config.get('train_data', None)
     val_path = config.get('val_data', None)
@@ -79,7 +77,7 @@ def main(config_path):
 
     train_dataloader = build_dataloader(train_list,
                                         batch_size=batch_size,
-                                        num_workers=2,
+                                        num_workers=8,
                                         dataset_config={},
                                         device=device)
 
@@ -138,16 +136,13 @@ def main(config_path):
         criterion = nn.L1Loss() 
 
         _ = [model[key].train() for key in model]
-        
-        # print(train_dataloader)
-        # print("Hello")
-        print(enumerate(train_dataloader))
+
         for i, batch in enumerate(train_dataloader):
 
             batch = [b.to(device) for b in batch]
             texts, input_lengths, mels, mel_input_length = batch
 
-            mask = length_to_mask(mel_input_length // (2 ** model.text_aligner.n_down)).to('cpu')
+            mask = length_to_mask(mel_input_length // (2 ** model.text_aligner.n_down)).to('cuda')
             m = length_to_mask(input_lengths)
 
             text_mask = length_to_mask(input_lengths).to(texts.device)
@@ -299,7 +294,7 @@ def main(config_path):
                 texts, input_lengths, mels, mel_input_length = batch
 
                 with torch.no_grad():
-                    mask = length_to_mask(mel_input_length // (2 ** model.text_aligner.n_down)).to('cpu')
+                    mask = length_to_mask(mel_input_length // (2 ** model.text_aligner.n_down)).to('cuda')
                     m = length_to_mask(input_lengths)
                     ppgs, s2s_pred, s2s_attn_feat = model.text_aligner(mels, mask, texts)
 
