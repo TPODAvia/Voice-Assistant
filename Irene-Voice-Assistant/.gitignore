@@ -11,5 +11,4 @@ __pycache__
 /venv/
 /.venv/
 *.pyc
-/tts_cache/
 /runva_webapi.json

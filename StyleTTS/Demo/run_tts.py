@@ -21,7 +21,7 @@ import glob
 import os
 import json
 import torch
-from attrdict import AttrDict
+from addict import Addict
 from vocoder import Generator
 import librosa
 import numpy as np
@@ -77,7 +77,7 @@ def compute_style(ref_dicts, model, device):
     keys_list = list(ref_dicts.keys())
     emotion = keys_list[0] # Angry Happy Sad Surprise etc
 
-    path = os.path.dirname(SCRIPT_DIR) + '/Emotion/' + emotion + '/evaluation/'
+    path = os.path.dirname(SCRIPT_DIR) + '/Sample/' + emotion
     wav_filenames = [filename for filename in glob.glob(os.path.join(path, '*.wav'))]
 
     cryptogen = SystemRandom()
@@ -121,7 +121,7 @@ def from_pretrained(device):
         data = f.read()
     json_config = json.loads(data)
     h = None
-    h = AttrDict(json_config)
+    h = Addict(json_config)
 
     device = torch.device(device)
     generator = Generator(h).to(device)
@@ -132,7 +132,7 @@ def from_pretrained(device):
     generator.remove_weight_norm()
 
     # load StyleTTS
-    model_path = os.path.dirname(SCRIPT_DIR) + "/Models/LJSpeech/epoch_2nd_00008.pth"
+    model_path = os.path.dirname(SCRIPT_DIR) + "/Models/LJSpeech/epoch_2nd_5_00096_196.pth"
     model_config_path = os.path.dirname(SCRIPT_DIR) + "/Models/LJSpeech/config.yml"
 
     config = yaml.safe_load(open(model_config_path))

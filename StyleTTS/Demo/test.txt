@@ -1,0 +1,4 @@
+Sample/Angry/0015_000351.wav|ðə nˈaɪn ðɪ ˈɛɡz, aɪ kˈiːp. |0
+Sample/Sad/0015_001051.wav|ðə nˈaɪn ðɪ ˈɛɡz, aɪ kˈiːp. |0
+Sample/Happy/0015_000701.wav|ðə nˈaɪn ðɪ ˈɛɡz, aɪ kˈiːp. |0
+Sample/0015/Sad/0015_001053.wav|ðæt aɪ ˈoʊ maɪ θˈæŋks tə juː. |0
