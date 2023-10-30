@@ -87,3 +87,8 @@ We welcome contributions to the Emotional Offline Voice Assistant project. If yo
 ## License
 
 This project is licensed under the [MIT License](./LICENSE.md).
+
+C:\Users\thepo\AppData\Local\Programs\Python\Python311\python.exe -m venv venv
+
+
+Remember to install Microsoft Visual Studio!!!!!!!!!!!!!

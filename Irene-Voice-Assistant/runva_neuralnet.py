@@ -12,7 +12,7 @@ import os
 import sys
 import whisper
 import re
-from simpletransformers.classification import MultiLabelClassificationModel
+# from simpletransformers.classification import MultiLabelClassificationModel
 import threading
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -21,8 +21,8 @@ current_path = os.getcwd()
 if current_path != SCRIPT_DIR:
     sys.exit('Program can only be run from path ' + SCRIPT_DIR)
 
-sys.path.append(os.path.dirname(SCRIPT_DIR) + "/Audio_Classification")
-import run_classification
+# sys.path.apspend(os.path.dirname(SCRIPT_DIR) + "/Audio_Classification")
+# import run_classification
 
 sys.path.append(os.path.dirname(SCRIPT_DIR) + "/Face_ui")
 import run_gif
@@ -58,7 +58,7 @@ def record_and_recognize_audio(*args: tuple):
 
             # Sound induced emotion analysis
             sr=16000
-            emo_classf = run_classification.make_prediction(sr, float_data)
+            # emo_classf = run_classification.make_prediction(sr, float_data)
 
 
         except speech_recognition.UnknownValueError:
@@ -67,11 +67,12 @@ def record_and_recognize_audio(*args: tuple):
         # в случае проблем с доступом в Интернет происходит выброс ошибки
         except speech_recognition.RequestError:
             print("Check your Internet Connection, please")
-        return recognized_data, emo_classf
+        return recognized_data #, emo_classf
     
 async def function_2():
 
-    voice_input_str, emo_classf = record_and_recognize_audio()
+    # voice_input_str, emo_classf = record_and_recognize_audio()
+    voice_input_str = record_and_recognize_audio()
 
     # remove punctuations and caps: Ирина, привет! --> ирина привет
     no_punct_str = re.sub(r'[^\w\s]', '', voice_input_str)
@@ -101,18 +102,21 @@ async def function_2():
 
     core._update_timers()
 
-    return voice_input_str, emo_classf
+    return voice_input_str #, emo_classf
 
 
 async def function3(result): # function3(result1, result2)
 
     # result[0] = voice_input_str and result[1] = emo_classf
+    # result[0] = voice_input_str
     if not result[0]=="":
-        predictions, raw_outputs = model.predict([result[0]])
-        combined_reaction = np.maximum(result[1], raw_outputs)
+        # predictions, raw_outputs = model.predict([result[0]])
+        # combined_reaction = np.maximum(result[1], raw_outputs)
+        # combined_reaction = result[1]
+        combined_reaction = [  1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0  ]
 
     else:
-        combined_reaction = result[1]
+        combined_reaction = [  1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0  ]
 
     # Update image GIF
     run_gif.text_input = combined_reaction
@@ -136,7 +140,7 @@ if __name__ == "__main__":
     tkinter_thread = threading.Thread(target=run_gif.run_tkinter)
     tkinter_thread.start()
 
-    model = MultiLabelClassificationModel("roberta", os.path.dirname(SCRIPT_DIR) + "/ReactionGIF/outputs/checkpoint-9-epoch-3/", num_labels=26, use_cuda=False)
+    # model = MultiLabelClassificationModel("roberta", os.path.dirname(SCRIPT_DIR) + "/ReactionGIF/outputs/checkpoint-9-epoch-3/", num_labels=26, use_cuda=False)
 
     # инициализация инструментов распознавания и ввода речи
     recognizer = speech_recognition.Recognizer()
