@@ -3,159 +3,190 @@
 
 import time
 start_time = time.time()
-
-import speech_recognition
-from vacore import VACore
-import asyncio
 import numpy as np
 import os
 import sys
-import whisper
-import re
-# from simpletransformers.classification import MultiLabelClassificationModel
-import threading
-
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-
 current_path = os.getcwd()
 if current_path != SCRIPT_DIR:
+    print("\n\n")
+    print("#"*100)
     sys.exit('Program can only be run from path ' + SCRIPT_DIR)
+import whisper
+import re
+import threading
+import argparse
+import pyaudio
+from openwakeword.model import Model
+import speech_recognition
+from vacore import VACore
 
 # sys.path.apspend(os.path.dirname(SCRIPT_DIR) + "/Audio_Classification")
 # import run_classification
-
-sys.path.append(os.path.dirname(SCRIPT_DIR) + "/Face_ui")
-import run_gif
+# sys.path.append(os.path.dirname(SCRIPT_DIR) + "/Face_ui")
+# import run_gif
 
 # Load the Whisper model
-whisper_model = whisper.load_model("base")
-
+whisper.load_model("base")
 
 # Duration in seconds for the timer
-timer_duration = 20
+_timer_duration = 20
+_recognized_data = ""
+_interrupted = True
 
-# most from @EnjiRouz code: https://habr.com/ru/post/529590/
+class WorkerThread(threading.Thread):
+    def __init__(self):
+        super(WorkerThread, self).__init__()
+        self.stop = False
+        self.recognizer = speech_recognition.Recognizer()
+        self.microphone = speech_recognition.Microphone()
 
-async def function_async():
-    return None
+        with self.microphone:
+            self.recognizer.adjust_for_ambient_noise(self.microphone, duration=1)
 
-def record_and_recognize_audio(*args: tuple):
-    """
-    Запись и распознавание аудио
-    """
-    with microphone:
-        recognized_data = ""
+    def run(self):
+        while not self.stop:
+            with self.microphone:
+                global _recognized_data
+                with speech_recognition.Microphone(sample_rate=16000) as source:                
+                    print("Listening...")
+                    audio = self.recognizer.listen(source)
+                    # audio_data = audio.get_wav_data()
+                    # data_s16 = np.frombuffer(audio_data, dtype=np.int16, count=len(audio_data)//2, offset=0)
+                    # float_data = data_s16.astype(np.float32, order='C') / 32768.0
+                try:
+                    print("Started recognition...")
+                    _recognized_data = self.recognizer.recognize_whisper(audio, model="base", language="russian")
 
-        with speech_recognition.Microphone(sample_rate=16000) as source:
-            print("Listening...")
-            audio = recognizer.listen(source)
-            audio_data = audio.get_wav_data()
-            data_s16 = np.frombuffer(audio_data, dtype=np.int16, count=len(audio_data)//2, offset=0)
-            float_data = data_s16.astype(np.float32, order='C') / 32768.0
-        try:
-            print("Started recognition...")
-            recognized_data = recognizer.recognize_whisper(audio, model="base", language="russian")
+                except speech_recognition.UnknownValueError:
+                    pass
 
-            # Sound induced emotion analysis
-            sr=16000
-            # emo_classf = run_classification.make_prediction(sr, float_data)
+                # в случае проблем с доступом в Интернет происходит выброс ошибки
+                except speech_recognition.RequestError:
+                    print("Check your Internet Connection, please")
+                return _recognized_data #, emo_classf
 
-
-        except speech_recognition.UnknownValueError:
-            pass
-
-        # в случае проблем с доступом в Интернет происходит выброс ошибки
-        except speech_recognition.RequestError:
-            print("Check your Internet Connection, please")
-        return recognized_data #, emo_classf
-    
-async def function_2():
-
-    # voice_input_str, emo_classf = record_and_recognize_audio()
-    voice_input_str = record_and_recognize_audio()
-
-    # remove punctuations and caps: Ирина, привет! --> ирина привет
-    no_punct_str = re.sub(r'[^\w\s]', '', voice_input_str)
-    lowercase_str = no_punct_str.lower().strip()
-
-    global start_time
-    print("Sound:", lowercase_str)
-
-    if lowercase_str != ("" or "редактор субтитров асемкин корректор аегорова"):
-
-        # Check if the timer has reached its duration
-        elapsed_time = time.time() - start_time
-        if elapsed_time >= timer_duration:
-
-            print("First statement is active")
-            haveRun = core.run_input_str(lowercase_str)
-            
-            if haveRun:
-                start_time = time.time()  # Store the current time as the start time
-
-        else: # second_statement_active:
-            print("Second statement is active")
-
-            start_time = time.time()
-            core.context_set(lowercase_str)
-            core.run_input_str(lowercase_str)
-
-    core._update_timers()
-
-    return voice_input_str #, emo_classf
+# Parse input arguments
+parser=argparse.ArgumentParser()
+parser.add_argument(
+    "--chunk_size", help="How much audio (in number of samples) to predict on at once",
+    type=int, default=1280, required=False
+)
+parser.add_argument(
+    "--model_path", help="The path of a specific model to load",
+    type=str, default="", required=False
+)
+parser.add_argument(
+    "--inference_framework",
+    help="The inference framework to use (either 'onnx' or 'tflite'",
+    type=str, default='tflite', required=False
+)
+args=parser.parse_args()
 
 
-async def function3(result): # function3(result1, result2)
+def my_function():
 
-    # result[0] = voice_input_str and result[1] = emo_classf
-    # result[0] = voice_input_str
-    if not result[0]=="":
-        # predictions, raw_outputs = model.predict([result[0]])
-        # combined_reaction = np.maximum(result[1], raw_outputs)
-        # combined_reaction = result[1]
-        combined_reaction = [  1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0  ]
+    FORMAT = pyaudio.paInt16
+    CHANNELS = 1
+    RATE = 16000
+    CHUNK = args.chunk_size
+    audio = pyaudio.PyAudio()
+    mic_stream = audio.open(format=FORMAT, channels=CHANNELS, rate=RATE, input=True, frames_per_buffer=CHUNK)
 
+    # Load pre-trained openwakeword models
+    if args.model_path != "":
+        owwModel = Model(wakeword_models=[args.model_path], inference_framework=args.inference_framework)
     else:
-        combined_reaction = [  1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0  ]
+        owwModel = Model(inference_framework=args.inference_framework)
 
-    # Update image GIF
-    run_gif.text_input = combined_reaction
-    run_gif.run_prediction = True    
+    threads = []
+    count = 0
+    thread_activate = True
+    global _interrupted
+    while _interrupted:
 
+        # print("Second thread doing some work...")
+        audio = np.frombuffer(mic_stream.read(CHUNK), dtype=np.int16)
+        owwModel.predict(audio)
 
-async def main():
+        for mdl in owwModel.prediction_buffer.keys():
 
-    while True:
-        # results = await asyncio.gather(function_2(), function_async())
-        results = await asyncio.gather(function_2())
-        await function3(*results)
+            if mdl == "alexa":
+                scores = list(owwModel.prediction_buffer[mdl])
+
+                if scores[-1] <= 0.5:
+                    thread_activate = True
+                else:
+                    if thread_activate:
+                        thread_activate = False
+                        thread = WorkerThread()
+                        thread.start()
+                        time.sleep(0.2)
+
+            elif mdl == "5_minute_timer":
+                scores = list(owwModel.prediction_buffer[mdl])
+                if scores[-1] <= 0.5:
+                    pass
+                else:
+                    print("Okay, the timer have started")
+
+        # deleting the 
+        threads_alive = []
+        for t in threads:
+            if not t.is_alive():
+                t.join()
+            else:
+                threads_alive.append(t)
+
+        threads = threads_alive
+        if threads:
+            threads.append(thread)
+
+            # Stop the threads after a certain time
+            for thread in threads:
+                thread.stop = True
+
 
 if __name__ == "__main__":
 
-    # Global variable input
-    run_gif.text_input = [  1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0  ]
-    run_gif.run_prediction = False    
-
-    # Run the tkinter event loop in a separate thread
-    tkinter_thread = threading.Thread(target=run_gif.run_tkinter)
-    tkinter_thread.start()
-
-    # model = MultiLabelClassificationModel("roberta", os.path.dirname(SCRIPT_DIR) + "/ReactionGIF/outputs/checkpoint-9-epoch-3/", num_labels=26, use_cuda=False)
-
-    # инициализация инструментов распознавания и ввода речи
-    recognizer = speech_recognition.Recognizer()
-    microphone = speech_recognition.Microphone()
-
-    with microphone:
-        # регулирование уровня окружающего шума
-        recognizer.adjust_for_ambient_noise(microphone, duration=2)
-
-    # initing core
     core = VACore()
-    #core.init_plugin("core")
-    #core.init_plugins(["core"])
     core.init_with_plugins()
 
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(main())
-    loop.close()
+    my_thread = threading.Thread(target = my_function)
+    my_thread.start()
+
+    try:
+        while _interrupted:
+
+            print("_recognized_data: " + str(_recognized_data))
+            # print(_recognized_data)
+            voice_input_str = ""
+            time.sleep(1)
+
+            # remove punctuations and caps: Ирина, привет! --> ирина привет
+            no_punct_str = re.sub(r'[^\w\s]', '', voice_input_str)
+            lowercase_str = no_punct_str.lower().strip()
+            # print("Sound:", lowercase_str)
+
+            if lowercase_str != ("" or "редактор субтитров асемкин корректор аегорова"):
+
+                # Check if the timer has reached its duration
+                elapsed_time = time.time() - start_time
+                if elapsed_time >= _timer_duration:
+
+                    print("First statement is active")
+                    haveRun = core.run_input_str(lowercase_str)
+                    
+                    if haveRun:
+                        start_time = time.time()  # Store the current time as the start time
+
+                else: # second_statement_active:
+                    print("Second statement is active")
+
+                    start_time = time.time()
+                    core.context_set(lowercase_str)
+                    core.run_input_str(lowercase_str)
+
+            core._update_timers()
+    except KeyboardInterrupt:
+        _interrupted = False
