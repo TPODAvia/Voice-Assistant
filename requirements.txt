@@ -1,8 +1,7 @@
-# tensorflow==2.11.0
 torch
-simpletransformers
+# simpletransformers
 openai-whisper
-transformers
+# transformers
 numba
 numpy
 pandas

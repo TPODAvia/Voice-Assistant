@@ -30,7 +30,7 @@ from vacore import VACore
 whisper.load_model("base")
 
 # Duration in seconds for the timer
-_timer_duration = 20
+_timer_duration = 30
 _recognized_data = ""
 _interrupted = True
 
@@ -45,7 +45,9 @@ class WorkerThread(threading.Thread):
             self.recognizer.adjust_for_ambient_noise(self.microphone, duration=1)
 
     def run(self):
-        while not self.stop:
+
+        global _interrupted
+        while _interrupted and not self.stop:
             with self.microphone:
                 global _recognized_data
                 with speech_recognition.Microphone(sample_rate=16000) as source:                
@@ -102,7 +104,10 @@ def my_function():
     threads = []
     count = 0
     thread_activate = True
+    waiting_activate = False
     global _interrupted
+    global start_time
+    global _timer_duration
     while _interrupted:
 
         # print("Second thread doing some work...")
@@ -118,10 +123,14 @@ def my_function():
                     thread_activate = True
                 else:
                     if thread_activate:
+                        print("Hearing...")
                         thread_activate = False
+                        waiting_activate = False
+                        start_time = time.time()  # Store the current time as the start time
                         thread = WorkerThread()
                         thread.start()
                         time.sleep(0.2)
+                        threads.append(thread)
 
             elif mdl == "5_minute_timer":
                 scores = list(owwModel.prediction_buffer[mdl])
@@ -129,6 +138,21 @@ def my_function():
                     pass
                 else:
                     print("Okay, the timer have started")
+
+        # if I still have timer on still execute thread
+        # print(threads)
+        elapsed_time = time.time() - start_time
+        if elapsed_time <= 10:
+            if not threads and waiting_activate:
+                # print("thread_activate")
+                # print(threads)
+                thread = WorkerThread()
+                thread.start()
+                time.sleep(0.2)
+                threads.append(thread)
+        
+        if elapsed_time > 4:
+            waiting_activate = True
 
         # deleting the 
         threads_alive = []
@@ -139,12 +163,10 @@ def my_function():
                 threads_alive.append(t)
 
         threads = threads_alive
-        if threads:
-            threads.append(thread)
 
-            # Stop the threads after a certain time
-            for thread in threads:
-                thread.stop = True
+        # Stop the threads after a certain time
+        for thread in threads:
+            thread.stop = True
 
 
 if __name__ == "__main__":
@@ -158,24 +180,23 @@ if __name__ == "__main__":
     try:
         while _interrupted:
 
-            print("_recognized_data: " + str(_recognized_data))
+            # print("_recognized_data: " + str(_recognized_data))
             # print(_recognized_data)
-            voice_input_str = ""
+            voice_input_str = _recognized_data
             time.sleep(1)
 
             # remove punctuations and caps: Ирина, привет! --> ирина привет
             no_punct_str = re.sub(r'[^\w\s]', '', voice_input_str)
             lowercase_str = no_punct_str.lower().strip()
-            # print("Sound:", lowercase_str)
 
-            if lowercase_str != ("" or "редактор субтитров асемкин корректор аегорова"):
+            if lowercase_str != ("" and "редактор субтитров асемкин корректор аегорова"):
 
                 # Check if the timer has reached its duration
                 elapsed_time = time.time() - start_time
                 if elapsed_time >= _timer_duration:
 
                     print("First statement is active")
-                    haveRun = core.run_input_str(lowercase_str)
+                    haveRun = core.run_input_str("ирина " + lowercase_str)
                     
                     if haveRun:
                         start_time = time.time()  # Store the current time as the start time
@@ -187,6 +208,7 @@ if __name__ == "__main__":
                     core.context_set(lowercase_str)
                     core.run_input_str(lowercase_str)
 
+                _recognized_data = ""
             core._update_timers()
     except KeyboardInterrupt:
         _interrupted = False

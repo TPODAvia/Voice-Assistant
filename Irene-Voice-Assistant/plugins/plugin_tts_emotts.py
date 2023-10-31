@@ -15,7 +15,7 @@ from playsound import playsound
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Get all WAV files in the folder
-wav_files = glob.glob("/home/vboxuser/Voice-Assistant/Voices/humble/*.wav")
+wav_files = glob.glob(os.path.dirname(os.path.dirname(SCRIPT_DIR)) + "/Voices/humble/*.wav")
 
 sys.path.append(os.path.dirname(os.path.dirname(SCRIPT_DIR)) + "/StyleTTS/Demo")
 from run_tts import from_pretrained, main, save_wave_scipy
