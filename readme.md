@@ -13,7 +13,7 @@ https://drive.google.com/drive/folders/1KI7uF_-IYh3w4z0uLBNcCo3tRd-1nlm9?usp=sha
 
 ## TODO:
 
-- Implementing Wake Word reaction
+- Implementing Wake Word reaction (DONE)
 - Sound "thinking" effect in plugin_tts_emotts.py (DONE)
 - Train StyleTTS for Russian language
 - Implementing Face UI. Replacing Emoji Picture with art. (DONE)
@@ -48,6 +48,11 @@ To install the Emotional Offline Voice Assistant, follow these steps:
 1. Clone the repository:
 
    ```
+   Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser
+   python -m venv venv
+
+   get the Microsoft Visual Studio
+
    git clone https://github.com/TPODAvia/Voice-Assistant
    ```
 
@@ -89,6 +94,3 @@ We welcome contributions to the Emotional Offline Voice Assistant project. If yo
 This project is licensed under the [MIT License](./LICENSE.md).
 
 C:\Users\thepo\AppData\Local\Programs\Python\Python311\python.exe -m venv venv
-
-
-Remember to install Microsoft Visual Studio!!!!!!!!!!!!!
