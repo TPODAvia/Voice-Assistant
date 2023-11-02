@@ -22,21 +22,36 @@ For more details make sure to visit these files to look at script arguments and 
 
 For more details make sure to visit these files to look at script arguments and description
 
+0. create dataset
+    1. create your own dataset or copy the the example from  `./data_s`
+        ```
+        cd VoiceAssistant/AudioReaction/scripts
+        mkdir data
+        cp -a /data_s/. /data/
+        ```
+
 1. collect data
     1. environment and wakeword data can be collected using `python collect_wakeword_audio.py`
        ```
-       cd VoiceAssistant/wakeword/scripts
+       cd VoiceAssistant/AudioReaction/scripts
        mkdir data
        cd data
        mkdir 0 1 wakewords
-       python collect_wakeword_audio.py --sample_rate 8000 --seconds 2 --interactive --interactive_save_path ./data/wakewords
+       cd ..
+       python 0_collect_wakeword_audio.py --sample_rate 8000 --seconds 2 --interactive --interactive_save_path ./data/wakewords
        ```
     2. to avoid the imbalanced dataset problem, we can duplicate the wakeword clips with 
        ```
-       python replicate_audios.py --wakewords_dir data/wakewords/ --copy_destination data/1/ --copy_number 100
+       python 1_replicate_audios.py --wakewords_dir data/wakewords/ --copy_destination data/1/ --copy_number 100
        ```
-    3. be sure to collect other speech data like common voice. split the data into n seconds chunk with `split_audio_into_chunks.py`.
-    4. put data into two seperate directory named `0` and `1`. `0` for non wakeword, `1` for wakeword. use `create_wakeword_jsons.py` to create train and test json
+    3. be sure to collect other speech data like common voice. split the data into n seconds chunk with `2_split_audio_into_chunks.py`.
+       ```
+       <!-- python 2_split_audio_into_chunks.py -->
+       ```
+    4. put data into two seperate directory named `0` and `1`. `0` for non wakeword, `1` for wakeword. use `4_create_wakeword_jsons.py` to create train and test json
+       ```
+       python 4_split_audio_into_chunks.py
+       ```
     5. create a train and test json in this format...
         ```
         // make each sample is on a seperate line
@@ -46,7 +61,17 @@ For more details make sure to visit these files to look at script arguments and 
 
 2. train model
     1. use `train.py` to train model
+        ```
+        cd \Voice-Assistant\AudioReaction\neuralnet
+
+        python train.py
+        ```
     2. after model training us `optimize_graph.py` to create an optimized pytorch model
+        ```
+        cd \Voice-Assistant\AudioReaction\neuralnet
+
+        python optimize_graph.py
+        ```
 
 3. test
     1. test using the `engine.py` script

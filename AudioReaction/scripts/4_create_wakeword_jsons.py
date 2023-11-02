@@ -57,11 +57,11 @@ if __name__ == "__main__":
     and one with all the 1 labels
     """
     )
-    parser.add_argument('--zero_label_dir', type=str, default="/home/vboxuser/A-Hackers-AI-Voice-Assistant/VoiceAssistant/wakeword/scripts/data/0", required=False,
+    parser.add_argument('--zero_label_dir', type=str, default="D:\\Voice-Assistant\\AudioReaction\\scripts\\data\\0", required=False,
                         help='directory of clips with zero labels')
-    parser.add_argument('--one_label_dir', type=str, default="/home/vboxuser/A-Hackers-AI-Voice-Assistant/VoiceAssistant/wakeword/scripts/data/1", required=False,
+    parser.add_argument('--one_label_dir', type=str, default="D:\\Voice-Assistant\\AudioReaction\\scripts\\data\\1", required=False,
                         help='directory of clips with one labels')
-    parser.add_argument('--save_json_path', type=str, default="/home/vboxuser/A-Hackers-AI-Voice-Assistant/VoiceAssistant/wakeword/scripts/data", required=False,
+    parser.add_argument('--save_json_path', type=str, default="D:\\Voice-Assistant\\AudioReaction\\scripts\\data", required=False,
                         help='path to save json file')
     parser.add_argument('--percent', type=int, default=10, required=False,
                         help='percent of clips put into test.json instead of train.json')

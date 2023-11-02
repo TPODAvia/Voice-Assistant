@@ -123,7 +123,7 @@ if __name__ == "__main__":
                         help='if set to None, then will record forever until keyboard interrupt')
     parser.add_argument('--save_path', type=str, default=None, required=False,
                         help='full path to save file. i.e. /to/path/sound.wav')
-    parser.add_argument('--interactive_save_path', type=str, default="/home/vboxuser/A-Hackers-AI-Voice-Assistant/VoiceAssistant/wakeword/scripts/data/wakewords", required=False,
+    parser.add_argument('--interactive_save_path', type=str, default="D:\Voice-Assistant\AudioReaction\scripts\data\wakewords", required=False,
                         help='directory to save all the interactive 2 second samples. i.e. /to/path/')
     parser.add_argument('--interactive', default=True, action='store_true', required=False,
                         help='sets to interactive mode')

@@ -34,3 +34,4 @@ addict
 sonopy
 sox
 pygame
+ffmpeg

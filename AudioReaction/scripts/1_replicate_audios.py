@@ -25,10 +25,10 @@ if __name__ == "__main__":
 
     """
     )
-    parser.add_argument('--wakewords_dir', type=str, default="/home/vboxuser/A-Hackers-AI-Voice-Assistant/VoiceAssistant/wakeword/scripts/data/wakewords", required=False,
+    parser.add_argument('--wakewords_dir', type=str, default="D:\Voice-Assistant\AudioReaction\scripts\data\wakewords", required=False,
                         help='directory of clips with wakewords')
 
-    parser.add_argument('--copy_destination', type=str, default="/home/vboxuser/A-Hackers-AI-Voice-Assistant/VoiceAssistant/wakeword/scripts/data/1", required=False,
+    parser.add_argument('--copy_destination', type=str, default="D:\Voice-Assistant\AudioReaction\scripts\data\1", required=False,
                         help='directory of the destinations of the wakewords copies')
 
     parser.add_argument('--copy_number', type=int, default=100, required=False,
