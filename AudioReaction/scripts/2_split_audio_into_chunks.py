@@ -15,10 +15,13 @@ def main(args):
         length = args.seconds * 1000 # this is in miliseconds
         chunks = make_chunks(audio, length)
         for i, chunk in enumerate(chunks):
+            if i == len(chunks) - 1:
+                break
             base_name = os.path.basename(audio_file).rsplit("_", 1)[0]
-            name = "{}_chunk_{}.wav".format(base_name, i)
+            name = "{}_{}_chunk_{}.wav".format(base_name, count, i)
             wav_path = os.path.join(args.save_path, name)
             chunk.export(wav_path, format="wav")
+
 
 
 

@@ -4,19 +4,19 @@
 ### scripts
 For more details make sure to visit these files to look at script arguments and description
 
-`wakeword/neuralnet/train.py` is used to train the model
+`AudioReaction/neuralnet/train.py` is used to train the model
 
-`wakeword/neuralnet/optimize_graph.py` is used to create a production ready graph that can be used in `engine.py`
+`AudioReaction/neuralnet/optimize_graph.py` is used to create a production ready graph that can be used in `engine.py`
 
-`wakeword/engine.py` is used to demo the wakeword model
+`AudioReaction/engine.py` is used to demo the wakeword model
 
-`wakeword/scripts/collect_wakeword_audio.py` - used to collect wakeword and environment data
+`AudioReaction/scripts/0_collect_wakeword_audio.py` - used to collect wakeword and environment data
 
-`wakeword/scripts/split_audio_into_chunks.py` - used to split audio into n second chunks
+`AudioReaction/scripts/split_audio_into_chunks.py` - used to split audio into n second chunks
 
-`wakeword/scripts/split_commonvoice.py` - if you download the common voice dataset, use this script to split it into n second chunks
+`AudioReaction/scripts/split_commonvoice.py` - if you download the common voice dataset, use this script to split it into n second chunks
 
-`wakeword/scripts/create_wakeword_jsons.py` - used to create the wakeword json for training
+`AudioReaction/scripts/create_wakeword_jsons.py` - used to create the wakeword json for training
 
 ### Steps to train and demo your wakeword model
 
@@ -74,4 +74,22 @@ For more details make sure to visit these files to look at script arguments and 
         ```
 
 3. test
-    1. test using the `engine.py` script
+    1. test using the `engine.py` script:
+
+        ```
+        cd \Voice-Assistant\AudioReaction
+
+        python engine.py
+        ```
+
+### data_s information
+
+0 - chicken
+1 - lion
+2 - monkey
+3 - cow
+4 - cat
+5 - dog
+6 - shep
+7 - frog
+8 - bird
