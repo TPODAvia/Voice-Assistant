@@ -140,7 +140,7 @@ class DemoAction:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="demoing the wakeword engine")
-    parser.add_argument('--model_file', type=str, default="D:\Coding_AI\Voice-Assistant\Wakeword\wakeword.pt", required=False,
+    parser.add_argument('--model_file', type=str, default="D:\\Voice-Assistant\\AudioReaction\\wakeword_m.pt", required=False,
                         help='optimized file to load. use optimize_graph.py')
     parser.add_argument('--sensitivty', type=int, default=10, required=False,
                         help='lower value is more sensitive to activations')

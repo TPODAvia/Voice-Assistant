@@ -13,11 +13,13 @@ https://drive.google.com/drive/folders/1KI7uF_-IYh3w4z0uLBNcCo3tRd-1nlm9?usp=sha
 
 ## TODO:
 
-- Implementing Wake Word reaction (DONE)
-- Sound "thinking" effect in plugin_tts_emotts.py (DONE)
-- Train StyleTTS for Russian language
-- Implementing Face UI. Replacing Emoji Picture with art. (DONE)
-- Create module that responce without spelling assistant name. (DONE)
+- Replace the absolute path to relative path
+- Update the ReadMe workflow
+- Modify the AudioReaction to the n class classification
+- Modyfy th UI and fix the UI bugs
+- Add the classification to the main runner
+- Add icon script to run the Voice Assistanse
+- Write the paper for this project
 
 
 ## Table of Contents

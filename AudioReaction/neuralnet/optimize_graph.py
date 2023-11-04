@@ -26,7 +26,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="testing the wakeword engine")
     parser.add_argument('--model_checkpoint', type=str, default="D:\\Voice-Assistant\\AudioReaction\\wakeword.pt", required=False,
                         help='Checkpoint of model to optimize')
-    parser.add_argument('--save_path', type=str, default="D:\\Voice-Assistant\\AudioReaction\\wakeword.pt", required=False,
+    parser.add_argument('--save_path', type=str, default="D:\\Voice-Assistant\\AudioReaction\\wakeword_m.pt", required=False,
                         help='path to save optmized model')
 
     args = parser.parse_args()

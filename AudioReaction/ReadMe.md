@@ -46,11 +46,11 @@ For more details make sure to visit these files to look at script arguments and 
        ```
     3. be sure to collect other speech data like common voice. split the data into n seconds chunk with `2_split_audio_into_chunks.py`.
        ```
-       <!-- python 2_split_audio_into_chunks.py -->
+       python 2_split_audio_into_chunks.py
        ```
     4. put data into two seperate directory named `0` and `1`. `0` for non wakeword, `1` for wakeword. use `4_create_wakeword_jsons.py` to create train and test json
        ```
-       python 4_split_audio_into_chunks.py
+       python .\4_create_wakeword_jsons.py
        ```
     5. create a train and test json in this format...
         ```
