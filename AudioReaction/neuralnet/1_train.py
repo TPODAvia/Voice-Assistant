@@ -28,6 +28,11 @@ def binary_accuracy(preds, y):
     acc = rounded_preds.eq(y.view_as(rounded_preds)).sum().item() / len(y)
     return acc
 
+def multi_class_accuracy(preds, y):
+    top_pred = preds.argmax(1, keepdim = True)
+    correct = top_pred.eq(y.view_as(top_pred)).sum()
+    acc = correct.float() / y.shape[0]
+    return acc
 
 def test(test_loader, model, device, epoch):
     print("\n starting test for epoch %s"%epoch)
@@ -38,7 +43,8 @@ def test(test_loader, model, device, epoch):
         for idx, (mfcc, label) in enumerate(test_loader):
             mfcc, label = mfcc.to(device), label.to(device)
             output = model(mfcc)
-            pred = torch.sigmoid(output)
+            # pred = torch.sigmoid(output)
+            pred = torch.softmax(output, dim=1)
             acc = binary_accuracy(pred, label)
             preds += torch.flatten(torch.round(pred)).cpu()
             labels += torch.flatten(label).cpu()
@@ -61,13 +67,15 @@ def train(train_loader, model, optimizer, loss_fn, device, epoch):
         optimizer.zero_grad()
         output = model(mfcc)
         # pred = F.sigmoid(output)
-        loss = loss_fn(torch.flatten(output), label)
+        label_indices = torch.argmax(label, dim=0)
+        loss = loss_fn(torch.flatten(output), label_indices)
         loss.backward()
         optimizer.step()
         losses.append(loss.item())
 
         # get predictions and labels for report
-        pred = torch.sigmoid(output)
+        # pred = torch.sigmoid(output)
+        pred = torch.softmax(output, dim=1)
         preds += torch.flatten(torch.round(pred)).cpu()
         labels += torch.flatten(label).cpu()
 
@@ -101,13 +109,14 @@ def main(args):
                                         **kwargs)
 
     model_params = {
-        "num_classes": 1, "feature_size": 40, "hidden_size": args.hidden_size,
+        "num_classes": 8, "feature_size": 40, "hidden_size": args.hidden_size,
         "num_layers": 1, "dropout" :0.1, "bidirectional": False
     }
     model = LSTMWakeWord(**model_params, device=device)
     model = model.to(device)
     optimizer = optim.AdamW(model.parameters(), lr=args.lr)
-    loss_fn = nn.BCEWithLogitsLoss()
+    # loss_fn = nn.BCEWithLogitsLoss()
+    loss_fn = nn.CrossEntropyLoss()
 
     scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='max', factor=0.5, patience=2)
 

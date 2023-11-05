@@ -84,12 +84,24 @@ For more details make sure to visit these files to look at script arguments and 
 
 ### data_s information
 
-0 - chicken
-1 - lion
-2 - monkey
-3 - cow
-4 - cat
-5 - dog
-6 - shep
-7 - frog
-8 - bird
+```
+    0 - chicken
+    1 - lion
+    2 - monkey
+    3 - cow
+    4 - cat
+    5 - dog
+    6 - shep
+    7 - frog
+    8 - bird
+```
+
+### architecture
+
+```
+LSTMWakeWord(
+  (layernorm): LayerNorm((40,), eps=1e-05, elementwise_affine=True)
+  (lstm): LSTM(40, 128, dropout=0.1)
+  (classifier): Linear(in_features=128, out_features=8, bias=True) 
+)
+```

@@ -71,9 +71,11 @@ class WakeWordEngine:
             # waveform = torch.Tensor([np.frombuffer(a, dtype=np.int16) for a in audio]).flatten()
             # mfcc = self.featurizer(waveform).transpose(0, 1).unsqueeze(1)
 
+            # print(torch.sigmoid(out))
+            # pred = torch.round(torch.sigmoid(out))
             out = self.model(mfcc)
-            print(torch.sigmoid(out))
-            pred = torch.round(torch.sigmoid(out))
+            print(torch.softmax(out, dim=1))
+            pred = torch.argmax(torch.softmax(out, dim=1))
             return pred.item()
 
     def inference_loop(self, action):
@@ -121,7 +123,7 @@ class DemoAction:
         ]
 
     def __call__(self, prediction):
-        if prediction == 1:
+        if prediction == 1:   # change this to the class label you're interested in
             self.detect_in_row += 1
             if self.detect_in_row == self.sensitivity:
                 self.play()
