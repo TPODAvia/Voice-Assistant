@@ -1,6 +1,8 @@
 """download and/or process data"""
 from torch.utils.data import Dataset
 import torchaudio
+import torch.nn.functional as F
+from torchaudio.functional import resample
 import torch
 import os
 
@@ -18,11 +20,14 @@ class CustomAudioDataset(Dataset):
         self.utterance_number = []
         # print(len(lines))
         for line in lines:
-            new_split_line, number = line.split("_nohash_")
-            label = new_split_line.split("/")
-            parts = number.split('.')
+            label, number = line.split("/")
 
-            self.utterance_number.append(int(parts[0]))
+            # for old dataset you can uncomment this code
+            # label = new_split_line.split("/")
+            # parts = number.split('.')
+            # self.utterance_number.append(int(parts[0]))
+
+            self.utterance_number.append(0)
             self.labels.append(label[0])
 
 
@@ -30,6 +35,7 @@ class CustomAudioDataset(Dataset):
         return len(self.filepaths)
 
     def __getitem__(self, idx):
+
         if torch.is_tensor(idx):
             idx = idx.tolist()
 
@@ -38,22 +44,21 @@ class CustomAudioDataset(Dataset):
         utterance_number = self.utterance_number[idx]
 
         # Load the audio file
-        waveform, sample_rate = torchaudio.load(audio_file)
+        waveform_raw, sample_rate = torchaudio.load(audio_file)
+
+        new_sample_rate = 8000
+        waveform = resample(waveform_raw, sample_rate, new_sample_rate)
+
+        # Interpolate waveform to the desired length
+        # waveform = F.interpolate(waveform.unsqueeze(0), size=8000).squeeze(0)
+        waveform = waveform[0, :].unsqueeze(0)
 
         # Extract speaker_id and utterance_number from filename
         speaker_id, _ = os.path.basename(audio_file).split("_")[0:2]
 
-        # sample = {
-        #     # 'audio': audio_file,
-        #     'waveform': waveform,
-        #     'sample_rate': sample_rate,
-        #     'label': label,
-        #     'speaker_id': speaker_id,
-        #     'utterance_number': len(utterance_number),
-        # }
-
         # return sample
-        return waveform, sample_rate, label, speaker_id, utterance_number
+        return waveform, new_sample_rate, label, speaker_id, utterance_number
+
 
 def pad_sequence(batch):
     # Make all tensor in a batch the same length by padding with zeros
@@ -65,10 +70,7 @@ def pad_sequence(batch):
 def collate_fn(batch, labels):
 
     # A data tuple has the form:
-    # waveform, sample_rate, label, speaker_id, utterance_number
-
     tensors, targets = [], []
-
     # Gather in lists, and encode labels as indices
     for waveform, _, label, *_ in batch:
         tensors += [waveform]
@@ -102,16 +104,16 @@ def get_likely_index(tensor):
 
 if __name__ == '__main__':
 
-    train_set = CustomAudioDataset("D:\\Coding_AI\\Voice-Assistant\AudioReaction\\speech_commands_v0.02\\testing_list.txt", "D:\\Coding_AI\\Voice-Assistant\AudioReaction\\speech_commands_v0.02")
-    test_set = CustomAudioDataset("D:\\Coding_AI\\Voice-Assistant\AudioReaction\\speech_commands_v0.02\\validation_list.txt", "D:\\Coding_AI\\Voice-Assistant\AudioReaction\\speech_commands_v0.02")
+    train_set = CustomAudioDataset("D:\\Coding_AI\\Voice-Assistant\\AudioReaction\\scripts\\data\\train.txt", "D:\\Coding_AI\\Voice-Assistant\\AudioReaction\\scripts\\data")
+    test_set = CustomAudioDataset("D:\\Coding_AI\\Voice-Assistant\\AudioReaction\\scripts\\data\\test.txt", "D:\\Coding_AI\\Voice-Assistant\\AudioReaction\\scripts\\data")
 
-    # this is working right now woth output: {'audio':"audio path ": '1.wav'}
-    waveform, sample_rate, label, speaker_id, utterance_number = train_set[0] 
-    print(train_set[0] )
+    waveform, sample_rate, label, speaker_id, utterance_number = train_set[1] 
+    print(waveform.shape)
+    print(train_set[0])
+
     labels = sorted(list(set(datapoint[2] for datapoint in train_set)))
-
-    word_start = "yes"
-    index = label_to_index(word_start)
+    word_start = "1"
+    index = label_to_index(word_start, labels)
     word_recovered = index_to_label(index, labels)
 
     print(word_start, "-->", index, "-->", word_recovered)

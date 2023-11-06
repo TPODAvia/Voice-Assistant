@@ -1,4 +1,15 @@
 """the interface to interact with wakeword model"""
+import os
+import sys
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+current_path = os.getcwd()
+if current_path != SCRIPT_DIR:
+    print("\n\n")
+    print("#"*100)
+    sys.exit('Program can only be run from path ' + SCRIPT_DIR)
+
+sys.path.append(os.path.dirname(SCRIPT_DIR) + "/Face_ui")
+
 import pyaudio
 import threading
 import time
@@ -6,10 +17,9 @@ import argparse
 import wave
 import torchaudio
 import torch
-import numpy as np
-from neuralnet.dataset import index_to_label, get_likely_index
-from threading import Event
-
+import signal
+import run_gif
+# from run_gif import run_tkinter
 
 class Listener:
 
@@ -36,14 +46,15 @@ class Listener:
         thread.start()
         print("\nWake Word Engine is now listening... \n")
 
-
-class WakeWordEngine:
+class ClassificationEngine:
 
     def __init__(self, model_file):
         self.listener = Listener(sample_rate=8000, record_seconds=2)
         self.model = torch.jit.load(model_file)
         self.model.eval().to('cpu')  #run on cpu
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.audio_q = list()
+        signal.signal(signal.SIGINT, self.signal_handler)
 
     def save(self, waveforms, fname="wakeword_temp"):
         wf = wave.open(fname, "wb")
@@ -59,7 +70,6 @@ class WakeWordEngine:
         wf.close()
         return fname
 
-
     def predict(self, audio):
         with torch.no_grad():
             fname = self.save(audio)
@@ -67,15 +77,22 @@ class WakeWordEngine:
 
             # waveform, sample_rate, utterance, *_ = train_set[2]
             # print(len(waveform))
+            # print(waveform.shape)
             # print(sample_rate)
-            device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
             # transform = transform.to(device)
-            tensor = waveform.to(device)
+            tensor = waveform.to(self.device)
+            # print(tensor)
+            # print(tensor.unsqueeze(0).shape)
             # tensor = transform(tensor)
-            print(tensor.shape)
-            tensor = self.model(tensor.unsqueeze(0))
-            tensor = get_likely_index(tensor)
-            output = index_to_label(tensor.squeeze())
+            # output = self.model(tensor.unsqueeze(0))
+            # output = tensor.argmax(dim=-1)
+
+            # this random shit should be removed
+            example_input = torch.randn(1, 4, 8000)
+            output = self.model(example_input)
+
+            # print(output)
             return output
 
     def inference_loop(self, action):
@@ -94,7 +111,41 @@ class WakeWordEngine:
         thread = threading.Thread(target=self.inference_loop,
                                     args=(action,), daemon=True)
         thread.start()
+        # Run the tkinter event loop in a separate thread
+        run_gif.text_input = [  1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0  ]
+        run_gif.run_prediction = False    
 
+        # Run the tkinter event loop in a separate thread
+        tkinter_thread = threading.Thread(target=run_gif.run_tkinter)
+        tkinter_thread.start()
+        self.my_event = True
+
+        time.sleep(5)
+        try:
+            while self.my_event:
+                # Your other code goes here
+                print("Executing other code...")
+                time.sleep(1)
+
+                run_gif.text_input = [  0,0,0,1, 0,0,0,0, 0,0,1,1, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0  ]
+                run_gif.run_prediction = True
+                time.sleep(10)
+
+                run_gif.text_input = [  0,1,0,0, 1,0,0,0, 0,0,0,0, 0,1,0,0, 0,0,0,0, 0,1,0,0, 0,1  ]
+                run_gif.run_prediction = True
+                time.sleep(10)
+
+                run_gif.text_input = [  0,0,0,0, 0,0,0,0, 1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0  ]
+                run_gif.run_prediction = True
+                time.sleep(10)
+        except KeyboardInterrupt:
+            print("Caught keyboard interrupt, terminating threads")
+            sys.exit(0)
+
+    def signal_handler(self, sig, frame):
+        print('You pressed Ctrl+C!')
+        self.my_event = False
+        sys.exit(0)
 
 class DemoAction:
     """This demo action will just randomly say Arnold Schwarzenegger quotes
@@ -123,13 +174,15 @@ class DemoAction:
         ]
 
     def __call__(self, prediction):
-        if prediction == 1:   # change this to the class label you're interested in
-            self.detect_in_row += 1
-            if self.detect_in_row == self.sensitivity:
-                self.play()
-                self.detect_in_row = 0
-        else:
-            self.detect_in_row = 0
+
+        print(prediction)
+        # if prediction == 1:   # change this to the class label you're interested in
+        #     self.detect_in_row += 1
+        #     if self.detect_in_row == self.sensitivity:
+        #         self.play()
+        #         self.detect_in_row = 0
+        # else:
+        #     self.detect_in_row = 0
 
     def play(self):
         filename = self.random.choice(self.arnold_mp3)
@@ -148,7 +201,7 @@ if __name__ == "__main__":
                         help='lower value is more sensitive to activations')
 
     args = parser.parse_args()
-    wakeword_engine = WakeWordEngine(args.model_file)
+    wakeword_engine = ClassificationEngine(args.model_file)
     action = DemoAction(sensitivity=60)
 
     print("""\n*** Make sure you have sox installed on your system for the demo to work!!!

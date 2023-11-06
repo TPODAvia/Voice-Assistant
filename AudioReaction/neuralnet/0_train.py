@@ -7,11 +7,9 @@ import torch.nn.functional as F
 import torch.optim as optim
 from dataset import CustomAudioDataset, collate_fn, number_of_correct, get_likely_index
 from model import LSTM_10
-# from sklearn.metrics import classification_report
-# from tabulate import tabulate
 import torchaudio
-# import sys
 from tqdm import tqdm
+import sys
 
 def test(device, model, epoch, test_loader, transform):
     model.eval()
@@ -35,7 +33,7 @@ def test(device, model, epoch, test_loader, transform):
 
 def train(device, model, epoch, log_interval, train_loader, transform, optimizer):
     model.train()
-    # count = 0
+    print("\n")
     for batch_idx, (data, target) in enumerate(train_loader):
 
         data = data.to(device)
@@ -43,8 +41,6 @@ def train(device, model, epoch, log_interval, train_loader, transform, optimizer
 
         # apply transform and model on whole batch directly on device
         data = transform(data)
-
-        # print(data.shape)
         output = model(data)
 
         # negative log-likelihood for a tensor of size (batch x 1 x n_output)
@@ -63,22 +59,19 @@ def train(device, model, epoch, log_interval, train_loader, transform, optimizer
 def main(args):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    train_set = CustomAudioDataset("D:\\Coding_AI\\Voice-Assistant\AudioReaction\\speech_commands_v0.02\\testing_list.txt", "D:\\Coding_AI\\Voice-Assistant\AudioReaction\\speech_commands_v0.02")
-    test_set = CustomAudioDataset("D:\\Coding_AI\\Voice-Assistant\AudioReaction\\speech_commands_v0.02\\validation_list.txt", "D:\\Coding_AI\\Voice-Assistant\AudioReaction\\speech_commands_v0.02")
+    train_set = CustomAudioDataset(args.train_data_txt, args.audio_path)
+    test_set = CustomAudioDataset(args.test_data_txt, args.audio_path)
 
-    # this is working right now woth output: {'audio':"audio path ": '1.wav'}
     waveform, sample_rate, label, speaker_id, utterance_number = train_set[0] 
-    print(train_set[0] )
 
-    new_sample_rate = 8000
-    transform = torchaudio.transforms.Resample(orig_freq=sample_rate, new_freq=new_sample_rate)
-    transformed = transform(waveform)
+    print("\n The train samle data set:")
+    print(train_set[0]) # (tensor([[0.0234, 0.0234, 0.0234,  ..., 0.0234, 0.0156, 0.0156]]), 11025, '2', 'maymun', 0)
+
     # Let’s find the list of labels available in the dataset.
     labels = sorted(list(set(datapoint[2] for datapoint in train_set)))
-    print(labels)
+    print("\n All labels are sorted:")
+    print(labels) # ['0', '1', '2', '3']
 
-
-    batch_size = 256
 
     if device == "cuda":
         num_workers = 1
@@ -86,6 +79,8 @@ def main(args):
     else:
         num_workers = 0
         pin_memory = False
+
+    batch_size = 256
 
     train_loader = torch.utils.data.DataLoader(
         train_set,
@@ -104,19 +99,26 @@ def main(args):
         num_workers=num_workers,
         pin_memory=pin_memory,
     )
+
     model = LSTM_10(input_size=8000, output_size=len(labels), hidden_size = 128, num_layers=1)
     model.to(device)
+
+    print("\n Model Architecture:")
+    print("#"*80)
     print(model)
+    print("#"*80)
+    print("\n")
 
 
     def count_parameters(model):
         return sum(p.numel() for p in model.parameters() if p.requires_grad)
-
-
+    
     n = count_parameters(model)
     print("Number of parameters: %s" % n)   
+
+    # reduce the learning after 20 epochs by a factor of 10
     optimizer = optim.Adam(model.parameters(), lr=0.01, weight_decay=0.0001)
-    scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=20, gamma=0.1)  # reduce the learning after 20 epochs by a factor of 10
+    scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=20, gamma=0.1)
 
 
     log_interval = 400
@@ -128,6 +130,8 @@ def main(args):
 
     # print(train_loader.shape)
     # The transform needs to live on the same device as the model and the data.
+    new_sample_rate = 8000
+    transform = torchaudio.transforms.Resample(orig_freq=sample_rate, new_freq=new_sample_rate)
     transform = transform.to(device)
     with tqdm(total=n_epoch) as pbar:
         for epoch in range(1, n_epoch + 1):
@@ -140,23 +144,15 @@ def main(args):
                     torch.save(model.state_dict(), os.path.join(args.save_checkpoint_path, 'wakeword.pt'))
 
     print("Done Training...")
-    # print("Best Model Saved to", checkpoint_path)
+    print("Best Model Saved to", args.save_checkpoint_path)
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Wake Word Training Script")
-    parser.add_argument('--sample_rate', type=int, default=8000, help='sample_rate for data')
-    parser.add_argument('--epochs', type=int, default=60, help='epoch size')
-    parser.add_argument('--batch_size', type=int, default=32, help='size of batch')
-    parser.add_argument('--eval_batch_size', type=int, default=32, help='size of batch')
-    parser.add_argument('--lr', type=float, default=1e-4, help='learning rate')
-    parser.add_argument('--model_name', type=str, default="wakeword", required=False, help='name of model to save')
-    parser.add_argument('--save_checkpoint_path', type=str, default="D:\\Coding_AI\\Voice-Assistant\\AudioReaction", help='Path to save the best checkpoint')
-    parser.add_argument('--train_data_json', type=str, default="D:\\Coding_AI\\Voice-Assistant\\AudioReaction\\scripts\\data\\train.json", required=False, help='path to train data json file')
-    parser.add_argument('--test_data_json', type=str, default="D:\\Coding_AI\\Voice-Assistant\\AudioReaction\\scripts\\data\\test.json", required=False, help='path to test data json file')
-    parser.add_argument('--no_cuda', action='store_true', default=False, help='disables CUDA training')
-    parser.add_argument('--num_workers', type=int, default=1, help='number of data loading workers')
-    parser.add_argument('--hidden_size', type=int, default=32, help='lstm hidden size')
+    parser = argparse.ArgumentParser(description="Classification Training Script")
+    parser.add_argument('--save_checkpoint_path',   type=str, default="D:\\Coding_AI\\Voice-Assistant\\AudioReaction", help='Path to save the best checkpoint')
+    parser.add_argument('--audio_path',             type=str, default="D:\\Coding_AI\\Voice-Assistant\\AudioReaction\\scripts\\data", required=False, help='path to all audio file')
+    parser.add_argument('--train_data_txt',         type=str, default="D:\\Coding_AI\\Voice-Assistant\\AudioReaction\\scripts\\data\\train.txt", required=False, help='path to train data txt file')
+    parser.add_argument('--test_data_txt',          type=str, default="D:\\Coding_AI\\Voice-Assistant\\AudioReaction\\scripts\\data\\test.txt", required=False, help='path to test data txt file')
 
     args = parser.parse_args()
 

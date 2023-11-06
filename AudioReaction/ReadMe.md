@@ -36,7 +36,7 @@ For more details make sure to visit these files to look at script arguments and 
        cd VoiceAssistant/AudioReaction/scripts
        mkdir data
        cd data
-       mkdir 0 1 wakewords
+       mkdir 0 1 2
        cd ..
        python 0_collect_wakeword_audio.py --sample_rate 8000 --seconds 2 --interactive --interactive_save_path ./data/wakewords
        ```
@@ -48,9 +48,9 @@ For more details make sure to visit these files to look at script arguments and 
        ```
        python 2_split_audio_into_chunks.py
        ```
-    4. put data into two seperate directory named `0` and `1`. `0` for non wakeword, `1` for wakeword. use `4_create_wakeword_jsons.py` to create train and test json
+    4. put data into two seperate directory named `0` and `1`. `0` for non wakeword, `1` for wakeword. use `5_create_wakeword_txt.py` to create train and test json
        ```
-       python .\4_create_wakeword_jsons.py
+       python .\5_create_wakeword_txt.py
        ```
     5. create a train and test json in this format...
         ```

@@ -70,18 +70,10 @@ class WorkerThread(threading.Thread):
 
 # Parse input arguments
 parser=argparse.ArgumentParser()
-parser.add_argument(
-    "--chunk_size", help="How much audio (in number of samples) to predict on at once",
-    type=int, default=1280, required=False
-)
+
 parser.add_argument(
     "--model_path", help="The path of a specific model to load",
     type=str, default="", required=False
-)
-parser.add_argument(
-    "--inference_framework",
-    help="The inference framework to use (either 'onnx' or 'tflite'",
-    type=str, default='tflite', required=False
 )
 args=parser.parse_args()
 
@@ -91,15 +83,16 @@ def my_function():
     FORMAT = pyaudio.paInt16
     CHANNELS = 1
     RATE = 16000
-    CHUNK = args.chunk_size
+    CHUNK = 1280
+    FRAMEWORK = "tflite" # onx or tflite
     audio = pyaudio.PyAudio()
     mic_stream = audio.open(format=FORMAT, channels=CHANNELS, rate=RATE, input=True, frames_per_buffer=CHUNK)
 
     # Load pre-trained openwakeword models
     if args.model_path != "":
-        owwModel = Model(wakeword_models=[args.model_path], inference_framework=args.inference_framework)
+        owwModel = Model(wakeword_models=[args.model_path], inference_framework=FRAMEWORK)
     else:
-        owwModel = Model(inference_framework=args.inference_framework)
+        owwModel = Model(inference_framework=FRAMEWORK)
 
     threads = []
     count = 0

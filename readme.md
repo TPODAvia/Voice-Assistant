@@ -15,10 +15,9 @@ https://drive.google.com/drive/folders/1KI7uF_-IYh3w4z0uLBNcCo3tRd-1nlm9?usp=sha
 
 - Replace the absolute path to relative path
 - Update the ReadMe workflow
-- Modify the AudioReaction to the n class classification
+- Modify the AudioReaction to the n class classification (DONE)
 - Modyfy th UI and fix the UI bugs
-- Add the classification to the main runner
-- Add icon script to run the Voice Assistanse
+- Add the classification to the main runner (DONE)
 - Write the paper for this project
 
 
@@ -96,3 +95,9 @@ We welcome contributions to the Emotional Offline Voice Assistant project. If yo
 This project is licensed under the [MIT License](./LICENSE.md).
 
 C:\Users\thepo\AppData\Local\Programs\Python\Python311\python.exe -m venv venv
+
+Install bash for window
+
+wsl --install
+
+bash script.sh
