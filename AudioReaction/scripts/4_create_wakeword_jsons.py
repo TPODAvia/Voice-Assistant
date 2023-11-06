@@ -52,9 +52,9 @@ if __name__ == "__main__":
     Utility script to create training json file for wakeword.
     """
     )
-    parser.add_argument('--data_dir', type=str, default="D:\\Voice-Assistant\\AudioReaction\\scripts\\data", required=False,
+    parser.add_argument('--data_dir', type=str, default="D:\\Coding_AI\\Voice-Assistant\\AudioReaction\\scripts\\data", required=False,
                         help='root directory of clips with labels')
-    parser.add_argument('--save_json_path', type=str, default="D:\\Voice-Assistant\\AudioReaction\\scripts\\data", required=False,
+    parser.add_argument('--save_json_path', type=str, default="D:\\Coding_AI\\Voice-Assistant\\AudioReaction\\scripts\\data", required=False,
                         help='path to save json file')
     parser.add_argument('--percent', type=int, default=10, required=False,
                         help='percent of clips put into test.json instead of train.json')

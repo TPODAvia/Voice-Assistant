@@ -1,147 +1,117 @@
 """download and/or process data"""
-import torch
-import torch.nn as nn
+from torch.utils.data import Dataset
 import torchaudio
-import pandas as pd
-from sonopy import power_spec, mel_spec, mfcc_spec, filterbanks
+import torch
+import os
 
+class CustomAudioDataset(Dataset):
+    def __init__(self, txt_file, root_dir):
+        self.txt_file = txt_file
+        self.root_dir = root_dir
 
-class MFCC(nn.Module):
+        with open(txt_file, 'r') as file:
+            lines = file.readlines()
 
-    def __init__(self, sample_rate, fft_size=400, window_stride=(400, 200), num_filt=40, num_coeffs=40):
-        super(MFCC, self).__init__()
-        self.sample_rate = sample_rate
-        self.window_stride = window_stride
-        self.fft_size = fft_size
-        self.num_filt = num_filt
-        self.num_coeffs = num_coeffs
-        self.mfcc = lambda x: mfcc_spec(
-            x, self.sample_rate, self.window_stride,
-            self.fft_size, self.num_filt, self.num_coeffs
-        )
-    
-    def forward(self, x):
-        return torch.Tensor(self.mfcc(x.squeeze(0).numpy())).transpose(0, 1).unsqueeze(0)
+        self.filepaths = [os.path.join(root_dir, line.split()[0]) for line in lines]
 
+        self.labels = []
+        self.utterance_number = []
+        # print(len(lines))
+        for line in lines:
+            new_split_line, number = line.split("_nohash_")
+            label = new_split_line.split("/")
+            parts = number.split('.')
 
-def get_featurizer(sample_rate):
-    return MFCC(sample_rate=sample_rate)
+            self.utterance_number.append(int(parts[0]))
+            self.labels.append(label[0])
 
-
-class RandomCut(nn.Module):
-    """Augmentation technique that randomly cuts start or end of audio"""
-
-    def __init__(self, max_cut=10):
-        super(RandomCut, self).__init__()
-        self.max_cut = max_cut
-
-    def forward(self, x):
-        """Randomly cuts from start or end of batch"""
-        side = torch.randint(0, 1, (1,))
-        cut = torch.randint(1, self.max_cut, (1,))
-        if side == 0:
-            return x[:-cut,:,:]
-        elif side == 1:
-            return x[cut:,:,:]
-
-
-class SpecAugment(nn.Module):
-    """Augmentation technique to add masking on the time or frequency domain"""
-
-    def __init__(self, rate, policy=3, freq_mask=2, time_mask=4):
-        super(SpecAugment, self).__init__()
-
-        self.rate = rate
-
-        self.specaug = nn.Sequential(
-            torchaudio.transforms.FrequencyMasking(freq_mask_param=freq_mask),
-            torchaudio.transforms.TimeMasking(time_mask_param=time_mask)
-        )
-
-        self.specaug2 = nn.Sequential(
-            torchaudio.transforms.FrequencyMasking(freq_mask_param=freq_mask),
-            torchaudio.transforms.TimeMasking(time_mask_param=time_mask),
-            torchaudio.transforms.FrequencyMasking(freq_mask_param=freq_mask),
-            torchaudio.transforms.TimeMasking(time_mask_param=time_mask)
-        )
-
-        policies = { 1: self.policy1, 2: self.policy2, 3: self.policy3 }
-        self._forward = policies[policy]
-
-    def forward(self, x):
-        return self._forward(x)
-
-    def policy1(self, x):
-        probability = torch.rand(1, 1).item()
-        if self.rate > probability:
-            return  self.specaug(x)
-        return x
-
-    def policy2(self, x):
-        probability = torch.rand(1, 1).item()
-        if self.rate > probability:
-            return  self.specaug2(x)
-        return x
-
-    def policy3(self, x):
-        probability = torch.rand(1, 1).item()
-        if probability > 0.5:
-            return self.policy1(x)
-        return self.policy2(x)
-
-
-class WakeWordData(torch.utils.data.Dataset):
-    """Load and process wakeword data"""
-
-    def __init__(self, data_json, sample_rate=8000, valid=False):
-        self.sr = sample_rate
-        self.data = pd.read_json(data_json, lines=True)
-        if valid:
-            self.audio_transform = get_featurizer(sample_rate)
-        else:
-            self.audio_transform = nn.Sequential(
-                get_featurizer(sample_rate),
-                SpecAugment(rate=0.5)
-            )
 
     def __len__(self):
-        return len(self.data)
+        return len(self.filepaths)
 
     def __getitem__(self, idx):
-
         if torch.is_tensor(idx):
-            idx = idx.item()
+            idx = idx.tolist()
 
-        try:    
-            file_path = self.data.key.iloc[idx]
-            waveform, sr = torchaudio.load(file_path)
-            if sr > self.sr:
-                waveform = torchaudio.transforms.Resample(sr, self.sr)(waveform)
-            mfcc = self.audio_transform(waveform)
-            label = self.data.label.iloc[idx]
+        audio_file = self.filepaths[idx]
+        label = self.labels[idx]
+        utterance_number = self.utterance_number[idx]
 
-        except Exception as e:
-            print(str(e), file_path)
-            return self.__getitem__(torch.randint(0, len(self), (1,)))
+        # Load the audio file
+        waveform, sample_rate = torchaudio.load(audio_file)
 
-        return mfcc, label
+        # Extract speaker_id and utterance_number from filename
+        speaker_id, _ = os.path.basename(audio_file).split("_")[0:2]
+
+        # sample = {
+        #     # 'audio': audio_file,
+        #     'waveform': waveform,
+        #     'sample_rate': sample_rate,
+        #     'label': label,
+        #     'speaker_id': speaker_id,
+        #     'utterance_number': len(utterance_number),
+        # }
+
+        # return sample
+        return waveform, sample_rate, label, speaker_id, utterance_number
+
+def pad_sequence(batch):
+    # Make all tensor in a batch the same length by padding with zeros
+    batch = [item.t() for item in batch]
+    batch = torch.nn.utils.rnn.pad_sequence(batch, batch_first=True, padding_value=0.)
+    return batch.permute(0, 2, 1)
 
 
-rand_cut = RandomCut(max_cut=10)
+def collate_fn(batch, labels):
 
-def collate_fn(data):
-    """Batch and pad wakeword data"""
-    mfccs = []
-    labels = []
-    for d in data:
-        mfcc, label = d
-        mfccs.append(mfcc.squeeze(0).transpose(0, 1))
-        labels.append(label)
+    # A data tuple has the form:
+    # waveform, sample_rate, label, speaker_id, utterance_number
 
-    # pad mfccs to ensure all tensors are same size in the time dim
-    mfccs = nn.utils.rnn.pad_sequence(mfccs, batch_first=True)  # batch, seq_len, feature
-    mfccs = mfccs.transpose(0, 1) # seq_len, batch, feature
-    mfccs = rand_cut(mfccs)
-    #print(mfccs.shape)
-    labels = torch.Tensor(labels)
-    return mfccs, labels
+    tensors, targets = [], []
+
+    # Gather in lists, and encode labels as indices
+    for waveform, _, label, *_ in batch:
+        tensors += [waveform]
+        targets += [label_to_index(label, labels)]
+
+    # Group the list of tensors into a batched tensor
+    tensors = pad_sequence(tensors)
+    targets = torch.stack(targets)
+
+    return tensors, targets
+
+def label_to_index(word, labels):
+    # Return the position of the word in labels
+    return torch.tensor(labels.index(word))
+
+
+def index_to_label(index, labels):
+    # Return the word corresponding to the index in labels
+    # This is the inverse of label_to_index
+    return labels[index]
+
+def number_of_correct(pred, target):
+    # count number of correct predictions
+    return pred.squeeze().eq(target).sum().item()
+
+
+def get_likely_index(tensor):
+    # find most likely label index for each element in the batch
+    return tensor.argmax(dim=-1)
+
+
+if __name__ == '__main__':
+
+    train_set = CustomAudioDataset("D:\\Coding_AI\\Voice-Assistant\AudioReaction\\speech_commands_v0.02\\testing_list.txt", "D:\\Coding_AI\\Voice-Assistant\AudioReaction\\speech_commands_v0.02")
+    test_set = CustomAudioDataset("D:\\Coding_AI\\Voice-Assistant\AudioReaction\\speech_commands_v0.02\\validation_list.txt", "D:\\Coding_AI\\Voice-Assistant\AudioReaction\\speech_commands_v0.02")
+
+    # this is working right now woth output: {'audio':"audio path ": '1.wav'}
+    waveform, sample_rate, label, speaker_id, utterance_number = train_set[0] 
+    print(train_set[0] )
+    labels = sorted(list(set(datapoint[2] for datapoint in train_set)))
+
+    word_start = "yes"
+    index = label_to_index(word_start)
+    word_recovered = index_to_label(index, labels)
+
+    print(word_start, "-->", index, "-->", word_recovered)

@@ -129,7 +129,7 @@ def my_function():
                         start_time = time.time()  # Store the current time as the start time
                         thread = WorkerThread()
                         thread.start()
-                        time.sleep(0.2)
+                        time.sleep(0.4)
                         threads.append(thread)
 
             elif mdl == "5_minute_timer":
@@ -139,20 +139,20 @@ def my_function():
                 else:
                     print("Okay, the timer have started")
 
-        # if I still have timer on still execute thread
+        # The feature is not working. Requres to add speaking excecution detection.
         # print(threads)
-        elapsed_time = time.time() - start_time
-        if elapsed_time <= 10:
-            if not threads and waiting_activate:
-                # print("thread_activate")
-                # print(threads)
-                thread = WorkerThread()
-                thread.start()
-                time.sleep(0.2)
-                threads.append(thread)
+        # elapsed_time = time.time() - start_time
+        # if elapsed_time <= 10:
+        #     if not threads and waiting_activate:
+        #         # print("thread_activate")
+        #         # print(threads)
+        #         thread = WorkerThread()
+        #         thread.start()
+        #         time.sleep(0.2)
+        #         threads.append(thread)
         
-        if elapsed_time > 4:
-            waiting_activate = True
+        # if elapsed_time > 4:
+        #     waiting_activate = True
 
         # deleting the 
         threads_alive = []
@@ -189,7 +189,11 @@ if __name__ == "__main__":
             no_punct_str = re.sub(r'[^\w\s]', '', voice_input_str)
             lowercase_str = no_punct_str.lower().strip()
 
-            if lowercase_str != ("" and "редактор субтитров асемкин корректор аегорова"):
+            # print(lowercase_str)
+
+            if (lowercase_str != "" 
+                and lowercase_str != "редактор субтитров асемкин корректор аегорова" 
+                and lowercase_str != "субтитры и редактор субтитров асемкин корректор всухиашвили"):
 
                 # Check if the timer has reached its duration
                 elapsed_time = time.time() - start_time

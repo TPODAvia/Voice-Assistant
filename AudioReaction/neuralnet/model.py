@@ -1,32 +1,45 @@
-"""wakeword model"""
+"""classification model"""
 import torch
 import torch.nn as nn
+from torchviz import make_dot
 
-
-class LSTMWakeWord(nn.Module):
-
-    def __init__(self, num_classes, feature_size, hidden_size,
-                num_layers, dropout, bidirectional, device='cpu'):
-        super(LSTMWakeWord, self).__init__()
-        self.num_layers = num_layers
+class LSTM_10(nn.Module):
+    def __init__(self, input_size, hidden_size, num_layers, output_size):
+        super(LSTM_10, self).__init__()
         self.hidden_size = hidden_size
-        self.directions = 2 if bidirectional else 1
-        self.device = device
-        self.layernorm = nn.LayerNorm(feature_size)
-        self.lstm = nn.LSTM(input_size=feature_size, hidden_size=hidden_size,
-                            num_layers=num_layers, dropout=dropout,
-                            bidirectional=bidirectional)
-        self.classifier = nn.Linear(hidden_size*self.directions, num_classes)
-
-    def _init_hidden(self, batch_size):
-        n, d, hs = self.num_layers, self.directions, self.hidden_size
-        return (torch.zeros(n*d, batch_size, hs).to(self.device),
-                torch.zeros(n*d, batch_size, hs).to(self.device))
+        self.num_layers = num_layers
+        self.lstm = nn.LSTM(input_size, hidden_size, num_layers, batch_first=True)
+        self.fc = nn.Linear(hidden_size, output_size)
 
     def forward(self, x):
-        # x.shape => seq_len, batch, feature
-        x = self.layernorm(x)
-        hidden = self._init_hidden(x.size()[1])
-        out, (hn, cn) = self.lstm(x, hidden)
-        out = self.classifier(hn)
+        h0 = torch.zeros(self.num_layers, x.size(0), self.hidden_size).to(x.device) 
+        c0 = torch.zeros(self.num_layers, x.size(0), self.hidden_size).to(x.device)
+        out, _ = self.lstm(x, (h0, c0)) 
+        out = self.fc(out[:, -1, :]) 
         return out
+    
+def count_parameters(model):
+    return sum(p.numel() for p in model.parameters() if p.requires_grad)
+
+if __name__ == '__main__':
+
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    print(device)
+
+    model = LSTM_10(input_size=8000, output_size=5, hidden_size = 128, num_layers=1)
+    model.to(device)
+
+    print("\n")
+    print("#"*60 + "\n")
+    print(model)
+    print("\n" + "#"*60)
+    print("\n")
+
+
+    # dummy_input = torch.randn(1, 5, 8000)
+    # out = model(dummy_input)
+    # dot = make_dot(out, params=dict(list(model.named_parameters())))
+    # dot.render("lstm_model_graph.png", format="png")
+
+    n = count_parameters(model)
+    print("Number of parameters: %s" % n)

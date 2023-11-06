@@ -36,3 +36,6 @@ sonopy
 sox
 pygame
 ffmpeg
+deep_utils
+pytorch_lightning
+torchmetrics

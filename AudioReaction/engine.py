@@ -7,7 +7,7 @@ import wave
 import torchaudio
 import torch
 import numpy as np
-from neuralnet.dataset import get_featurizer
+from neuralnet.dataset import index_to_label, get_likely_index
 from threading import Event
 
 
@@ -43,7 +43,6 @@ class WakeWordEngine:
         self.listener = Listener(sample_rate=8000, record_seconds=2)
         self.model = torch.jit.load(model_file)
         self.model.eval().to('cpu')  #run on cpu
-        self.featurizer = get_featurizer(sample_rate=8000)
         self.audio_q = list()
 
     def save(self, waveforms, fname="wakeword_temp"):
@@ -65,18 +64,19 @@ class WakeWordEngine:
         with torch.no_grad():
             fname = self.save(audio)
             waveform, _ = torchaudio.load(fname)  # don't normalize on train
-            mfcc = self.featurizer(waveform).transpose(1, 2).transpose(0, 1)
 
-            # TODO: read from buffer instead of saving and loading file
-            # waveform = torch.Tensor([np.frombuffer(a, dtype=np.int16) for a in audio]).flatten()
-            # mfcc = self.featurizer(waveform).transpose(0, 1).unsqueeze(1)
-
-            # print(torch.sigmoid(out))
-            # pred = torch.round(torch.sigmoid(out))
-            out = self.model(mfcc)
-            print(torch.softmax(out, dim=1))
-            pred = torch.argmax(torch.softmax(out, dim=1))
-            return pred.item()
+            # waveform, sample_rate, utterance, *_ = train_set[2]
+            # print(len(waveform))
+            # print(sample_rate)
+            device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+            # transform = transform.to(device)
+            tensor = waveform.to(device)
+            # tensor = transform(tensor)
+            print(tensor.shape)
+            tensor = self.model(tensor.unsqueeze(0))
+            tensor = get_likely_index(tensor)
+            output = index_to_label(tensor.squeeze())
+            return output
 
     def inference_loop(self, action):
         while True:
@@ -142,7 +142,7 @@ class DemoAction:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="demoing the wakeword engine")
-    parser.add_argument('--model_file', type=str, default="D:\\Voice-Assistant\\AudioReaction\\wakeword_m.pt", required=False,
+    parser.add_argument('--model_file', type=str, default="D:\Coding_AI\Voice-Assistant\AudioReaction\wakeword_m.pt", required=False,
                         help='optimized file to load. use optimize_graph.py')
     parser.add_argument('--sensitivty', type=int, default=10, required=False,
                         help='lower value is more sensitive to activations')
