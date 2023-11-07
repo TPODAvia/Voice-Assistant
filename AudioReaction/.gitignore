@@ -2,3 +2,4 @@
 /neuralnet/wakeword_temp
 /scripts/data
 wakeword_temp
+__pycache__

@@ -2,11 +2,12 @@
 import os
 import sys
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-current_path = os.getcwd()
-if current_path != SCRIPT_DIR:
-    print("\n\n")
-    print("#"*100)
-    sys.exit('Program can only be run from path ' + SCRIPT_DIR)
+# current_path = os.getcwd()
+# if current_path.upper() != SCRIPT_DIR.upper():
+#     print("\n\n")
+#     print("#"*100)
+#     print("Current path: " + str(current_path))
+#     sys.exit('Program can only be run from path ' + SCRIPT_DIR)
 
 sys.path.append(os.path.dirname(SCRIPT_DIR) + "/Face_ui")
 
@@ -19,12 +20,11 @@ import torchaudio
 import torch
 import signal
 import run_gif
-# from run_gif import run_tkinter
 
 class Listener:
 
-    def __init__(self, sample_rate=8000, record_seconds=2):
-        self.chunk = 1024
+    def __init__(self, sample_rate=8000, record_seconds=1):
+        self.chunk = 800
         self.sample_rate = sample_rate
         self.record_seconds = record_seconds
         self.p = pyaudio.PyAudio()
@@ -48,9 +48,9 @@ class Listener:
 
 class ClassificationEngine:
 
-    def __init__(self, model_file):
-        self.listener = Listener(sample_rate=8000, record_seconds=2)
-        self.model = torch.jit.load(model_file)
+    def __init__(self, model_lstm_file):
+        self.listener = Listener(sample_rate=8000, record_seconds=1)
+        self.model = torch.jit.load(model_lstm_file)
         self.model.eval().to('cpu')  #run on cpu
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.audio_q = list()
@@ -73,36 +73,31 @@ class ClassificationEngine:
     def predict(self, audio):
         with torch.no_grad():
             fname = self.save(audio)
-            waveform, _ = torchaudio.load(fname)  # don't normalize on train
-
-            # waveform, sample_rate, utterance, *_ = train_set[2]
-            # print(len(waveform))
-            # print(waveform.shape)
-            # print(sample_rate)
-
-            # transform = transform.to(device)
+            waveform, sample_rate = torchaudio.load(fname)  # don't normalize on train
             tensor = waveform.to(self.device)
-            # print(tensor)
-            # print(tensor.unsqueeze(0).shape)
-            # tensor = transform(tensor)
-            # output = self.model(tensor.unsqueeze(0))
-            # output = tensor.argmax(dim=-1)
+            model_output = self.model(tensor.unsqueeze(0))
 
-            # this random shit should be removed
-            example_input = torch.randn(1, 4, 8000)
-            output = self.model(example_input)
+            # for classification result use this
+            # tensor.argmax(dim=-1)
 
+            # this normalized all numbers to [0...1]
+            normalized_output = torch.nn.functional.normalize(model_output, p=2, dim=-1)
+
+            # this convert from tensor([[-0.05634324  0.47326437  0.8782495   0.03904041]])
+            # to [[-0.05634324  0.47326437  0.8782495   0.03904041]] using .numpy
+            # final [-0.05634324  0.47326437  0.8782495   0.03904041] using .flatten()
+            self.output = normalized_output.numpy().flatten()
             # print(output)
-            return output
+            return self.output
 
     def inference_loop(self, action):
         while True:
-            if len(self.audio_q) > 15:  # remove part of stream
-                diff = len(self.audio_q) - 15
+            if len(self.audio_q) > 10:  # remove part of stream
+                diff = len(self.audio_q) - 10
                 for _ in range(diff):
                     self.audio_q.pop(0)
                 action(self.predict(self.audio_q))
-            elif len(self.audio_q) == 15:
+            elif len(self.audio_q) == 10:
                 action(self.predict(self.audio_q))
             time.sleep(0.05)
 
@@ -111,6 +106,7 @@ class ClassificationEngine:
         thread = threading.Thread(target=self.inference_loop,
                                     args=(action,), daemon=True)
         thread.start()
+
         # Run the tkinter event loop in a separate thread
         run_gif.text_input = [  1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0  ]
         run_gif.run_prediction = False    
@@ -118,40 +114,30 @@ class ClassificationEngine:
         # Run the tkinter event loop in a separate thread
         tkinter_thread = threading.Thread(target=run_gif.run_tkinter)
         tkinter_thread.start()
-        self.my_event = True
+        run_gif.my_event = True
 
         time.sleep(5)
         try:
-            while self.my_event:
+            while run_gif.my_event:
                 # Your other code goes here
                 print("Executing other code...")
-                time.sleep(1)
 
-                run_gif.text_input = [  0,0,0,1, 0,0,0,0, 0,0,1,1, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0  ]
+                # run_gif.text_input = self.output
+                run_gif.text_input = [  0,0,0,1, 0,0,0,0, 0,0,1,1, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0  ] #26
                 run_gif.run_prediction = True
                 time.sleep(10)
 
-                run_gif.text_input = [  0,1,0,0, 1,0,0,0, 0,0,0,0, 0,1,0,0, 0,0,0,0, 0,1,0,0, 0,1  ]
-                run_gif.run_prediction = True
-                time.sleep(10)
-
-                run_gif.text_input = [  0,0,0,0, 0,0,0,0, 1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0  ]
-                run_gif.run_prediction = True
-                time.sleep(10)
         except KeyboardInterrupt:
             print("Caught keyboard interrupt, terminating threads")
             sys.exit(0)
 
     def signal_handler(self, sig, frame):
         print('You pressed Ctrl+C!')
-        self.my_event = False
+        run_gif.my_event = False
         sys.exit(0)
 
 class DemoAction:
     """This demo action will just randomly say Arnold Schwarzenegger quotes
-
-        args: sensitivty. the lower the number the more sensitive the
-        wakeword is to activation.
     """
     def __init__(self, sensitivity=10):
         # import stuff here to prevent engine.py from 
@@ -195,13 +181,11 @@ class DemoAction:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="demoing the wakeword engine")
-    parser.add_argument('--model_file', type=str, default="D:\Coding_AI\Voice-Assistant\AudioReaction\wakeword_m.pt", required=False,
+    parser.add_argument('--model_lstm_file', type=str, default="D:\Coding_AI\Voice-Assistant\AudioReaction\wakeword_m.pt", required=False,
                         help='optimized file to load. use optimize_graph.py')
-    parser.add_argument('--sensitivty', type=int, default=10, required=False,
-                        help='lower value is more sensitive to activations')
 
     args = parser.parse_args()
-    wakeword_engine = ClassificationEngine(args.model_file)
+    wakeword_engine = ClassificationEngine(args.model_lstm_file)
     action = DemoAction(sensitivity=60)
 
     print("""\n*** Make sure you have sox installed on your system for the demo to work!!!

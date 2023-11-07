@@ -58,6 +58,10 @@ class ImageLabel(tk.Label):
 
     def next_frame(self, loc):
         global run_prediction
+        global my_event
+
+        if not my_event:
+            sys.exit()
 
         if run_prediction:
             global text_input
@@ -119,7 +123,7 @@ def close_win(event):
 def run_tkinter():
     global root
     root = tk.Tk()
-    root.bind('<Escape>', close_win)
+    # root.bind('<Escape>', close_win)
     global lbl
     lbl = ImageLabel(root)
     lbl.pack()
@@ -139,20 +143,22 @@ if __name__ == '__main__':
     text_input = [  0,2,0,0, 0,0,0,0, 1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0  ]
     run_prediction = False
     time.sleep(5)
+    try:
+        while my_event:
+            # Your other code goes here
+            print("Executing other code...")
+            time.sleep(1)
 
-    while my_event:
-        # Your other code goes here
-        print("Executing other code...")
-        time.sleep(1)
+            text_input = [  0,0,0,1, 0,0,0,0, 0,0,1,1, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0  ]
+            run_prediction = True
+            time.sleep(10)
 
-        text_input = [  0,0,0,1, 0,0,0,0, 0,0,1,1, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0  ]
-        run_prediction = True
-        time.sleep(10)
+            text_input = [  0,1,0,0, 1,0,0,0, 0,0,0,0, 0,1,0,0, 0,0,0,0, 0,1,0,0, 0,1  ]
+            run_prediction = True
+            time.sleep(10)
 
-        text_input = [  0,1,0,0, 1,0,0,0, 0,0,0,0, 0,1,0,0, 0,0,0,0, 0,1,0,0, 0,1  ]
-        run_prediction = True
-        time.sleep(10)
-
-        text_input = [  0,0,0,0, 0,0,0,0, 1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0  ]
-        run_prediction = True
-        time.sleep(10)
+            text_input = [  0,0,0,0, 0,0,0,0, 1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0  ]
+            run_prediction = True
+            time.sleep(10)
+    except KeyboardInterrupt:
+        my_event = False

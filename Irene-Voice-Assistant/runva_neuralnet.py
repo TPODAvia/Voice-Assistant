@@ -8,10 +8,12 @@ import os
 import sys
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 current_path = os.getcwd()
-if current_path != SCRIPT_DIR:
+if current_path.upper() != SCRIPT_DIR.upper():
     print("\n\n")
     print("#"*100)
+    print("Current path: " + str(current_path))
     sys.exit('Program can only be run from path ' + SCRIPT_DIR)
+
 import whisper
 import re
 import threading
@@ -21,10 +23,8 @@ from openwakeword.model import Model
 import speech_recognition
 from vacore import VACore
 
-# sys.path.apspend(os.path.dirname(SCRIPT_DIR) + "/Audio_Classification")
-# import run_classification
-# sys.path.append(os.path.dirname(SCRIPT_DIR) + "/Face_ui")
-# import run_gif
+# sys.path.append(os.path.dirname(SCRIPT_DIR) + "/AudioReaction")
+# import engine
 
 # Load the Whisper model
 whisper.load_model("base")
@@ -71,10 +71,11 @@ class WorkerThread(threading.Thread):
 # Parse input arguments
 parser=argparse.ArgumentParser()
 
-parser.add_argument(
-    "--model_path", help="The path of a specific model to load",
-    type=str, default="", required=False
-)
+parser.add_argument("--model_path", type=str, default="", required=False, 
+                    help="The path of a specific model to load")
+
+parser.add_argument('--model_lstm_file', type=str, default="D:\Coding_AI\Voice-Assistant\AudioReaction\wakeword_m.pt", required=False,
+                    help='optimized file to load. use optimize_graph.py')
 args=parser.parse_args()
 
 
@@ -169,6 +170,12 @@ if __name__ == "__main__":
 
     my_thread = threading.Thread(target = my_function)
     my_thread.start()
+
+    # Run the UI and audio classification
+    # wakeword_engine = engine.ClassificationEngine(args.model_lstm_file)
+    # action = engine.DemoAction(sensitivity=60)
+    # wakeword_engine.run(action)
+    # threading.Event().wait()
 
     try:
         while _interrupted:
