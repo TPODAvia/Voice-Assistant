@@ -54,7 +54,10 @@ class ClassificationEngine:
         self.model.eval().to('cpu')  #run on cpu
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.audio_q = list()
-        signal.signal(signal.SIGINT, self.signal_handler)
+
+        # Check if the current thread is the main thread
+        if threading.current_thread() is threading.main_thread():
+            signal.signal(signal.SIGINT, self.signal_handler)
 
     def save(self, waveforms, fname="wakeword_temp"):
         wf = wave.open(fname, "wb")
@@ -91,7 +94,7 @@ class ClassificationEngine:
             return self.output
 
     def inference_loop(self, action):
-        while True:
+        while run_gif.my_event:
             if len(self.audio_q) > 10:  # remove part of stream
                 diff = len(self.audio_q) - 10
                 for _ in range(diff):
