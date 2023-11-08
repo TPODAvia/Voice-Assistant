@@ -33,9 +33,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="script to split audio files into chunks")
     parser.add_argument('--seconds', type=int, default=1,
                         help='if set to None, then will record forever until keyboard interrupt')
-    parser.add_argument('--audio_file_name', type=str, default="D:\\Coding_AI\\Voice-Assistant\\AudioReaction\\scripts\\data_s\\8", required=False,
+    parser.add_argument('--audio_file_name', type=str, default="D:\\Coding_AI\\Voice-Assistant\\AudioReaction\\scripts\\data_s\\1", required=False,
                         help='name of audio file')
-    parser.add_argument('--save_path', type=str, default="D:\\Coding_AI\\Voice-Assistant\\AudioReaction\\scripts\\data\\8", required=False,
+    parser.add_argument('--save_path', type=str, default="D:\\Coding_AI\\Voice-Assistant\\AudioReaction\\scripts\\data\\25", required=False,
                         help='full path to to save data. i.e. /to/path/saved_clips/')
 
     args = parser.parse_args()

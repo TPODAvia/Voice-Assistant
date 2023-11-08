@@ -23,7 +23,7 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="optimising the engine")
 
-    parser.add_argument('--numbers_of_class', type=int, default= 4, required=False,
+    parser.add_argument('--numbers_of_class', type=int, default= 26, required=False,
                         help='numbers of class in the /data folder')
     parser.add_argument('--model_checkpoint', type=str, default="D:\\Coding_AI\\Voice-Assistant\\AudioReaction\\wakeword.pt", required=False,
                         help='Checkpoint of model to optimize')

@@ -72,7 +72,6 @@ def main(args):
     print("\n All labels are sorted:")
     print(labels) # ['0', '1', '2', '3']
 
-
     if device == "cuda":
         num_workers = 1
         pin_memory = True

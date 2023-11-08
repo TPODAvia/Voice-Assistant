@@ -28,7 +28,7 @@ class CustomAudioDataset(Dataset):
             # self.utterance_number.append(int(parts[0]))
 
             self.utterance_number.append(0)
-            self.labels.append(label[0])
+            self.labels.append(label)
 
 
     def __len__(self):
