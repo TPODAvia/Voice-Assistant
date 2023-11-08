@@ -1,16 +1,6 @@
-"""the interface to interact with wakeword model"""
+"""the interface to interact with LSTM_10 model"""
 import os
 import sys
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-# current_path = os.getcwd()
-# if current_path.upper() != SCRIPT_DIR.upper():
-#     print("\n\n")
-#     print("#"*100)
-#     print("Current path: " + str(current_path))
-#     sys.exit('Program can only be run from path ' + SCRIPT_DIR)
-
-sys.path.append(os.path.dirname(SCRIPT_DIR) + "/Face_ui")
-
 import pyaudio
 import threading
 import time
@@ -19,7 +9,25 @@ import wave
 import torchaudio
 import torch
 import signal
-import run_gif
+import numpy as np
+
+_classification_loop = True
+
+# Check if the current thread is the main thread
+# if threading.current_thread() is threading.main_thread():
+if __name__ == "__main__":
+    # import stuff here to prevent engine.py from importing unecessary modules during production usage
+    import subprocess
+    import random
+    from os.path import join, realpath
+
+    SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+    sys.path.append(os.path.dirname(SCRIPT_DIR))
+    import Face_ui.run_gif
+
+    Face_ui.run_gif._gif_looping = True
+    Face_ui.run_gif._text_input = [  0,2,0,0, 0,0,0,0, 1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0  ] #26
+    Face_ui.run_gif._run_prediction = False
 
 class Listener:
 
@@ -36,7 +44,8 @@ class Listener:
                         frames_per_buffer=self.chunk)
 
     def listen(self, queue):
-        while True:
+        global _classification_loop
+        while _classification_loop:
             data = self.stream.read(self.chunk , exception_on_overflow=False)
             queue.append(data)
             time.sleep(0.01)
@@ -48,130 +57,43 @@ class Listener:
 
 class ClassificationEngine:
 
-    def __init__(self, model_lstm_file):
-        self.listener = Listener(sample_rate=8000, record_seconds=1)
-        self.model = torch.jit.load(model_lstm_file)
+    def __init__(self, model_class_file):
+        self.model = torch.jit.load(model_class_file)
         self.model.eval().to('cpu')  #run on cpu
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        self.audio_q = list()
-
-        # Check if the current thread is the main thread
-        if threading.current_thread() is threading.main_thread():
-            signal.signal(signal.SIGINT, self.signal_handler)
-
-    def save(self, waveforms, fname="wakeword_temp"):
-        wf = wave.open(fname, "wb")
-        # set the channels
-        wf.setnchannels(1)
-        # set the sample format
-        wf.setsampwidth(self.listener.p.get_sample_size(pyaudio.paInt16))
-        # set the sample rate
-        wf.setframerate(8000)
-        # write the frames as bytes
-        wf.writeframes(b"".join(waveforms))
-        # close the file
-        wf.close()
-        return fname
 
     def predict(self, audio):
         with torch.no_grad():
-            fname = self.save(audio)
-            waveform, sample_rate = torchaudio.load(fname)  # don't normalize on train
+            if str(type(audio)) == "<class 'str'>":
+                waveform, sample_rate = torchaudio.load(audio)  # don't normalize on train
+            else:
+                audio = np.array(audio)
+                buffer = audio.astype(np.float32) / 32767.0
+                waveform_tensor = torch.from_numpy(buffer)
+                waveform = waveform_tensor.unsqueeze(0)
+
             tensor = waveform.to(self.device)
             model_output = self.model(tensor.unsqueeze(0))
 
-            # for classification result use this
-            # tensor.argmax(dim=-1)
-
             # this normalized all numbers to [0...1]
-            normalized_output = torch.nn.functional.normalize(model_output, p=2, dim=-1)
+            tensor_normalized_output = torch.nn.functional.normalize(model_output, p=2, dim=-1)
 
-            # this convert from tensor([[-0.05634324  0.47326437  0.8782495   0.03904041]])
-            # to [[-0.05634324  0.47326437  0.8782495   0.03904041]] using .numpy
-            # final [-0.05634324  0.47326437  0.8782495   0.03904041] using .flatten()
-            self.output = normalized_output.numpy().flatten()
-            # print(output)
-            return self.output
-
-    def inference_loop(self, action):
-        while run_gif.my_event:
-            if len(self.audio_q) > 10:  # remove part of stream
-                diff = len(self.audio_q) - 10
-                for _ in range(diff):
-                    self.audio_q.pop(0)
-                action(self.predict(self.audio_q))
-            elif len(self.audio_q) == 10:
-                action(self.predict(self.audio_q))
-            time.sleep(0.05)
-
-    def run(self, action):
-        self.listener.run(self.audio_q)
-        thread = threading.Thread(target=self.inference_loop,
-                                    args=(action,), daemon=True)
-        thread.start()
-
-        # Run the tkinter event loop in a separate thread
-        run_gif.text_input = [  1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0  ]
-        run_gif.run_prediction = False    
-
-        # Run the tkinter event loop in a separate thread
-        tkinter_thread = threading.Thread(target=run_gif.run_tkinter)
-        tkinter_thread.start()
-        run_gif.my_event = True
-
-        time.sleep(5)
-        try:
-            while run_gif.my_event:
-                # Your other code goes here
-                print("Executing other code...")
-
-                # run_gif.text_input = self.output
-                run_gif.text_input = [  0,0,0,1, 0,0,0,0, 0,0,1,1, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0  ] #26
-                run_gif.run_prediction = True
-                time.sleep(10)
-
-        except KeyboardInterrupt:
-            print("Caught keyboard interrupt, terminating threads")
-            sys.exit(0)
-
-    def signal_handler(self, sig, frame):
-        print('You pressed Ctrl+C!')
-        run_gif.my_event = False
-        sys.exit(0)
+            return tensor_normalized_output
 
 class DemoAction:
     """This demo action will just randomly say Arnold Schwarzenegger quotes
     """
-    def __init__(self, sensitivity=10):
-        # import stuff here to prevent engine.py from 
-        # importing unecessary modules during production usage
-        import os
-        import subprocess
-        import random
-        from os.path import join, realpath
-
+    def __init__(self):
         self.random = random
         self.subprocess = subprocess
         self.detect_in_row = 0
 
-        self.sensitivity = sensitivity
         folder = realpath(join(os.path.dirname(os.path.abspath(__file__)), 'fun', 'arnold_audio'))
         self.arnold_mp3 = [
             os.path.join(folder, x)
             for x in os.listdir(folder)
             if ".wav" in x
         ]
-
-    def __call__(self, prediction):
-
-        print(prediction)
-        # if prediction == 1:   # change this to the class label you're interested in
-        #     self.detect_in_row += 1
-        #     if self.detect_in_row == self.sensitivity:
-        #         self.play()
-        #         self.detect_in_row = 0
-        # else:
-        #     self.detect_in_row = 0
 
     def play(self):
         filename = self.random.choice(self.arnold_mp3)
@@ -181,21 +103,92 @@ class DemoAction:
         except Exception as e:
             print(str(e))
 
+    def save(self, waveforms, get_sample_size, fname="wakeword_temp"):
+        wf = wave.open(fname, "wb")
+        wf.setnchannels(1)
+        wf.setsampwidth(get_sample_size)
+        wf.setframerate(8000)
+        # write the frames as bytes
+        wf.writeframes(b"".join(waveforms))
+        wf.close()
+        return fname
+
+def classification_function():
+
+    audio_q = list()
+    listener = Listener(sample_rate=8000, record_seconds=1)
+    get_sample_size = listener.p.get_sample_size(pyaudio.paInt16)
+    classificator  = ClassificationEngine(args.model_class_file)
+    action = DemoAction()
+    listener.run(audio_q)
+
+    tkinter_thread = threading.Thread(target=Face_ui.run_gif.run_tkinter)
+    tkinter_thread.start()
+
+    detect_in_row = 0
+    sensitivity = 60
+    tensor_normalized_output = []
+    class_trigger = False
+    global _classification_loop
+
+    while _classification_loop:
+
+        if len(audio_q) > 10:  # remove part of stream
+            diff = len(audio_q) - 10
+
+            for _ in range(diff):
+                audio_q.pop(0)
+
+            fname = action.save(audio_q, get_sample_size)
+            tensor_normalized_output = classificator.predict(fname)
+
+        elif len(audio_q) == 10:
+            fname = action.save(audio_q, get_sample_size)
+            tensor_normalized_output = classificator.predict(fname)
+
+        if class_trigger:
+            class_prediction = torch.argmax(dim=-1)
+            if class_prediction == 1:
+                detect_in_row += 1
+                if detect_in_row == sensitivity:
+                    action.play()
+                    detect_in_row = 0
+            else:
+                detect_in_row = 0
+
+        if not tensor_normalized_output == []:
+            # this convert from tensor([[-0.05634324  0.47326437  0.8782495   0.03904041]])
+            # to [[-0.05634324  0.47326437  0.8782495   0.03904041]] using .numpy
+            # finaly [-0.05634324  0.47326437  0.8782495   0.03904041] using .flatten()
+            output = tensor_normalized_output.numpy().flatten()
+            print(output)
+            if len(output) == 26:
+                # _text_input requres arrays of 26: [1, 2, 3 ... 26]
+                Face_ui.run_gif._text_input = output
+                Face_ui.run_gif._run_prediction = True
+
+        time.sleep(0.05)
 
 if __name__ == "__main__":
+
+    def signal_handler(signal, frame):
+        print("Ctrl+C pressed. Stopping threads...")
+        global _classification_loop
+        _classification_loop = False
+        Face_ui.run_gif._gif_looping = False
+
     parser = argparse.ArgumentParser(description="demoing the wakeword engine")
-    parser.add_argument('--model_lstm_file', type=str, default="D:\Coding_AI\Voice-Assistant\AudioReaction\wakeword_m.pt", required=False,
+    parser.add_argument('--model_class_file', type=str, default="D:\Coding_AI\Voice-Assistant\AudioReaction\wakeword_m.pt", required=False,
                         help='optimized file to load. use optimize_graph.py')
-
     args = parser.parse_args()
-    wakeword_engine = ClassificationEngine(args.model_lstm_file)
-    action = DemoAction(sensitivity=60)
 
-    print("""\n*** Make sure you have sox installed on your system for the demo to work!!!
-    If you don't want to use sox, change the play function in the DemoAction class
-    in engine.py module to something that works with your system.\n
-    """)
-    # action = lambda x: print(x)
-    wakeword_engine.run(action)
 
-    threading.Event().wait()
+    signal.signal(signal.SIGINT, signal_handler)
+    neural_thread = threading.Thread(target = classification_function)
+    neural_thread.start()
+
+
+    while _classification_loop:
+        print("Hello")
+        time.sleep(1)
+

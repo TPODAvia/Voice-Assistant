@@ -12,6 +12,10 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.dirname(SCRIPT_DIR))
 from Face_ui.img_library import library, img_library
 
+_gif_looping = True
+_text_input = [  0,2,0,0, 0,0,0,0, 1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0  ]
+_run_prediction = False
+
 class ImageLabel(tk.Label):
     def __init__(self, master=None, **kwargs):
         super().__init__(master, **kwargs)
@@ -19,14 +23,13 @@ class ImageLabel(tk.Label):
         self.frame_rates = []
         self.loc = 0
 
-    def load(self, text_input):
+    def load(self, _text_input):
         self.config(image="")
         self.frames.clear()
         self.frame_rates.clear()
 
-        folder_path = self.pred(text_input)
+        folder_path = self.pred(_text_input)
         gif_file = self.select_random_gif(folder_path)
-
         self.load_frames_and_rates(gif_file)
 
         if self.frames:
@@ -57,16 +60,16 @@ class ImageLabel(tk.Label):
         self.frames.clear()
 
     def next_frame(self, loc):
-        global run_prediction
-        global my_event
+        global _run_prediction
+        global _gif_looping
 
-        if not my_event:
+        if not _gif_looping:
             sys.exit()
 
-        if run_prediction:
-            global text_input
-            run_prediction = False
-            self.load(text_input)
+        if _run_prediction:
+            global _text_input
+            _run_prediction = False
+            self.load(_text_input)
 
         if self.frames:
             loc += 1
@@ -74,12 +77,12 @@ class ImageLabel(tk.Label):
             self.config(image=self.frames[loc])
             self.after(self.frame_rates[loc], self.next_frame, loc)
 
-    def pred(self, text_input):
+    def pred(self, _text_input):
         
         list = []
         for i in range(len(library)):
             # counting cosine similarity
-            cos_sim = dot(text_input, library[i][:])/(norm(text_input)*norm(library[i][:]))
+            cos_sim = dot(_text_input, library[i][:])/(norm(_text_input)*norm(library[i][:]))
             list.append(cos_sim)
         
         pred = argmax(list, axis = None, out = None)
@@ -117,8 +120,8 @@ class ImageLabel(tk.Label):
 def close_win(event):
     lbl.unload()
     root.destroy()
-    global my_event
-    my_event = False
+    global _gif_looping
+    _gif_looping = False
 
 def run_tkinter():
     global root
@@ -127,8 +130,8 @@ def run_tkinter():
     global lbl
     lbl = ImageLabel(root)
     lbl.pack()
-    global text_input
-    lbl.load(text_input)
+    global _text_input
+    lbl.load(_text_input)
     root.mainloop()
 
 
@@ -137,28 +140,27 @@ if __name__ == '__main__':
     # Run the tkinter event loop in a separate thread
     tkinter_thread = threading.Thread(target=run_tkinter)
     tkinter_thread.start()
-    my_event = True
-
-    # Global variable input
-    text_input = [  0,2,0,0, 0,0,0,0, 1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0  ]
-    run_prediction = False
-    time.sleep(5)
+    
     try:
-        while my_event:
+        time.sleep(5)
+
+        while _gif_looping:
             # Your other code goes here
             print("Executing other code...")
             time.sleep(1)
 
-            text_input = [  0,0,0,1, 0,0,0,0, 0,0,1,1, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0  ]
-            run_prediction = True
+            _text_input = [  0,0,0,1, 0,0,0,0, 0,0,1,1, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0  ]
+            _run_prediction = True
             time.sleep(10)
 
-            text_input = [  0,1,0,0, 1,0,0,0, 0,0,0,0, 0,1,0,0, 0,0,0,0, 0,1,0,0, 0,1  ]
-            run_prediction = True
+            _text_input = [  0,1,0,0, 1,0,0,0, 0,0,0,0, 0,1,0,0, 0,0,0,0, 0,1,0,0, 0,1  ]
+            _run_prediction = True
             time.sleep(10)
 
-            text_input = [  0,0,0,0, 0,0,0,0, 1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0  ]
-            run_prediction = True
+            _text_input = [  0,0,0,0, 0,0,0,0, 1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0  ]
+            _run_prediction = True
             time.sleep(10)
     except KeyboardInterrupt:
-        my_event = False
+
+        print("Interupted")
+        _gif_looping = False

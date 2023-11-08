@@ -36,10 +36,9 @@ if __name__ == '__main__':
     print("\n")
 
 
-    # dummy_input = torch.randn(1, 5, 8000)
-    # out = model(dummy_input)
-    # dot = make_dot(out, params=dict(list(model.named_parameters())))
-    # dot.render("lstm_model_graph.png", format="png")
+    dummy_input = torch.randn(1, 5, 8000)
+    out = model(dummy_input)
+    make_dot(out, params=dict(model.named_parameters())).render("model_graph", format="png")
 
     n = count_parameters(model)
     print("Number of parameters: %s" % n)
