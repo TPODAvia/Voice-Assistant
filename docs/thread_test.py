@@ -19,6 +19,7 @@ class MyThreadedClass2(threading.Thread):
     def __init__(self, thread1):
         threading.Thread.__init__(self)
         self.value = None
+        self.thread1 = thread1
 
     def run(self):
         global _looping
@@ -35,7 +36,7 @@ def main():
         thread1.start()
 
         # init MyThreadedClass2 here
-        thread2 = MyThreadedClass2()
+        thread2 = MyThreadedClass2(thread1)
         thread2.start()
 
     # Main loop that prints "Hello"

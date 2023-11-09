@@ -14,9 +14,9 @@ https://drive.google.com/drive/folders/1KI7uF_-IYh3w4z0uLBNcCo3tRd-1nlm9?usp=sha
 ## TODO:
 
 - Replace the absolute path to relative path
-- Update the ReadMe workflow
+- Update the ReadMe workflow (DONE)
 - Modify the AudioReaction to the n class classification (DONE)
-- Modyfy th UI and fix the UI bugs
+- Modyfy the UI and fix the UI bugs (DONE)
 - Add the classification to the main runner (DONE)
 - Write the paper for this project
 
@@ -48,38 +48,62 @@ To install the Emotional Offline Voice Assistant, follow these steps:
 
 1. Clone the repository:
 
-   ```
-   Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser
-   python -m venv venv
-
+```bash
    get the Microsoft Visual Studio
 
+   python -m venv venv
+```
+   if strugles of creating venv theen execute this code:
+
+```bash
+   Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
+
+   python -m venv venv
+
+   # or
+
+   C:\Users\vboxuser\AppData\Local\Programs\Python\Python311\python.exe -m venv venv
+
+```
+
+   Now clone this repository
+```
    git clone https://github.com/TPODAvia/Voice-Assistant
-   ```
+```
 
 2. Install the required dependencies:
 
-   ```
+```bash
    cd Voice-Assistant
    pip install -r requirements.txt
    sudo apt-get install libasound-dev portaudio19-dev libportaudio2 libportaudiocpp0 python3-tk python3-dev sox python3-pil python3-pil.imagetk espeak -y
-   ```
-   ```
+```
+```bash
    pip install PyAudio
-   ```
+```
 
 3. Configure the voice assistant settings as needed:
 
-   ```
+```bash
    cd /home/vboxuser/Voice-Assistant/Irene-Voice-Assistant/options/core.json
    sudo nano core.json
-   ```
+```
+
+4. Run icon execution:
+
+   Still in the developmant...
+
+   Install bash for window:
+```bash
+   wsl --install
+   bash script.sh
+```
 
 ## Usage
 
 To start the Emotional Offline Voice Assistant, run the following command:
 
-```
+```bash
 cd Voice-Assistant/Irene-Voice-Assistant
 python3 runva_neuralnet.py
 ```
@@ -93,11 +117,3 @@ We welcome contributions to the Emotional Offline Voice Assistant project. If yo
 ## License
 
 This project is licensed under the [MIT License](./LICENSE.md).
-
-C:\Users\thepo\AppData\Local\Programs\Python\Python311\python.exe -m venv venv
-
-Install bash for window
-
-wsl --install
-
-bash script.sh
