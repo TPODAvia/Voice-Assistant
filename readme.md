@@ -16,7 +16,7 @@ https://drive.google.com/drive/folders/1KI7uF_-IYh3w4z0uLBNcCo3tRd-1nlm9?usp=sha
 - Replace the absolute path to relative path
 - Update the ReadMe workflow (DONE)
 - Modify the AudioReaction to the n class classification (DONE)
-- Modyfy the UI and fix the UI bugs (DONE)
+- Modify the UI and fix the UI bugs (DONE)
 - Add the classification to the main runner (DONE)
 - Write the paper for this project
 
