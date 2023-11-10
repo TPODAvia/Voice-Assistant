@@ -30,9 +30,11 @@ whisper.load_model("base")
 
 # Duration in seconds for the timer
 _timer_duration = 30
+# the NN service is opened as a default. Turn this off to fully run offline.
+VACore.using_internet_service = True
+# other variables to properly run the program
 _recognized_data = ""
 _runva_looping = True
-VACore.using_internet_service = False
 Face_ui.run_gif._gif_looping = True
 Face_ui.run_gif._text_input = [  0,2,0,0, 0,0,0,0, 1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0  ] #26
 Face_ui.run_gif._run_prediction = False

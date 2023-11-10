@@ -50,24 +50,30 @@ To install the Emotional Offline Voice Assistant, follow these steps:
 
 ```bash
    get the Microsoft Visual Studio
-
    python -m venv venv
 ```
    if strugles of creating venv theen execute this code:
 
 ```bash
    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
-
    python -m venv venv
-
    # or
-
    C:\Users\vboxuser\AppData\Local\Programs\Python\Python311\python.exe -m venv venv
 
 ```
 
-   Now clone this repository
+Activate the venv
+
+```bash
+   ./venv/Script/activate
+   # or
+   .\venv\Scripts\activate
+   # or
+   ./venv/Scripts/Activate.ps1
 ```
+
+   Now clone this repository
+```bash
    git clone https://github.com/TPODAvia/Voice-Assistant
 ```
 
