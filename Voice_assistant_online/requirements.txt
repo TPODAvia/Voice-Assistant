@@ -1,0 +1,5 @@
+gtts
+g4f
+sounddevice
+SpeechRecognition
+SoundFile

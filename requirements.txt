@@ -39,3 +39,5 @@ ffmpeg
 deep_utils
 pytorch_lightning
 torchmetrics
+gtts
+g4f

@@ -11,6 +11,7 @@ import torch
 import phonemizer
 from numpy import load
 from playsound import playsound
+from gtts import gTTS 
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -54,19 +55,25 @@ def say(core:VACore, text_to_speech:str):
 
 def towavfile(core:VACore, text_to_speech:str,wavfile:str):
 
-    # run if text input is long
-    if len(text_to_speech) > 30:
-        random_wav = random.choice(wav_files)
-        playsound(random_wav, False)
+    if VACore.available_internet == True:
+        mytext = text_to_speech
+        language = "ru"
+        myobj = gTTS(text=mytext, lang=language, slow=False) 
+        myobj.save(wavfile) 
+    else:
+        # run if text input is long
+        if len(text_to_speech) > 30:
+            random_wav = random.choice(wav_files)
+            playsound(random_wav, False)
 
 
-    n = load(os.path.dirname(SCRIPT_DIR) + "/tts_cache/emotts/emotion.npy")
+        n = load(os.path.dirname(SCRIPT_DIR) + "/tts_cache/emotts/emotion.npy")
 
-    emotion = ['Angry', 'Happy', 'Neutral', 'Sad', 'Surprise']
+        emotion = ['Angry', 'Happy', 'Neutral', 'Sad', 'Surprise']
 
-    ref_dicts = {}
-    ref_dicts[emotion[n]] = "Some comments" # the output is:{"Emotion":"Some comments" }
+        ref_dicts = {}
+        ref_dicts[emotion[n]] = "Some comments" # the output is:{"Emotion":"Some comments" }
 
-    save_wave_scipy(wavfile, main(text_to_speech, ref_dicts, model, generator, textclenaer, device, global_phonemizer), 24000)
+        save_wave_scipy(wavfile, main(text_to_speech, ref_dicts, model, generator, textclenaer, device, global_phonemizer), 24000)
 
     pass

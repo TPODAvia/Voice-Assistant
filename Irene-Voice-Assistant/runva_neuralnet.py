@@ -9,7 +9,7 @@ if current_path.upper() != SCRIPT_DIR.upper():
     print("\n\n")
     print("#"*100)
     print("Current path: " + str(current_path))
-    sys.exit('Program can only be run from path ' + SCRIPT_DIR)
+    sys.exit('Program can only be run from path ' + SCRIPT_DIR + "\n")
 
 import whisper
 import re
@@ -32,6 +32,7 @@ whisper.load_model("base")
 _timer_duration = 30
 _recognized_data = ""
 _runva_looping = True
+VACore.using_internet_service = False
 Face_ui.run_gif._gif_looping = True
 Face_ui.run_gif._text_input = [  0,2,0,0, 0,0,0,0, 1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0  ] #26
 Face_ui.run_gif._run_prediction = False
@@ -53,7 +54,7 @@ class WorkerThread(threading.Thread):
         self.microphone = speech_recognition.Microphone()
 
         with self.microphone:
-            self.recognizer.adjust_for_ambient_noise(self.microphone, duration=1)
+            self.recognizer.adjust_for_ambient_noise(self.microphone, duration=0.3)
 
     def run(self):
 
@@ -68,8 +69,12 @@ class WorkerThread(threading.Thread):
                     # data_s16 = np.frombuffer(audio_data, dtype=np.int16, count=len(audio_data)//2, offset=0)
                     # float_data = data_s16.astype(np.float32, order='C') / 32768.0
                 try:
-                    print("Started recognition...")
-                    _recognized_data = self.recognizer.recognize_whisper(audio, model="base", language="russian")
+
+                    if VACore.available_internet == True:
+                        _recognized_data = self.recognizer.recognize_google(audio, language="ru").lower()
+                    else:
+                        print("Started recognition...")
+                        _recognized_data = self.recognizer.recognize_whisper(audio, model="base", language="russian")
 
                 except speech_recognition.UnknownValueError:
                     pass
@@ -147,9 +152,9 @@ def neural_function():
                         _start_time = time.time()  # Store the current time as the start time
                         thread = WorkerThread()
                         thread.start()
-                        time.sleep(0.4)
                         threads.append(thread)
-
+                        time.sleep(0.4)
+                        
             elif mdl == "5_minute_timer":
                 scores = list(owwModel.prediction_buffer[mdl])
                 if scores[-1] <= 0.5:
@@ -207,7 +212,11 @@ if __name__ == "__main__":
             # print("_recognized_data: " + str(_recognized_data))
             # print(_recognized_data)
             voice_input_str = _recognized_data
-            time.sleep(1)
+
+            if VACore.is_internet_available() and VACore.using_internet_service:
+                VACore.available_internet = True
+            else:
+                VACore.available_internet = False
 
             # remove punctuations and caps: Ирина, привет! --> ирина привет
             no_punct_str = re.sub(r'[^\w\s]', '', voice_input_str)

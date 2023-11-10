@@ -98,6 +98,12 @@ To install the Emotional Offline Voice Assistant, follow these steps:
    wsl --install
    bash script.sh
 ```
+5. Optionaly, the online voice assistance can be executed in the `Voice_assistant_online` folder:
+
+```bash
+   cd Voice_assistant_online
+   python voice_assistant_online.py
+```
 
 ## Usage
 

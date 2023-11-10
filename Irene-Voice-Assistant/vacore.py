@@ -15,6 +15,9 @@ from collections.abc import Callable
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import re
 
+import requests
+import g4f
+
 tokenizer = AutoTokenizer.from_pretrained('tinkoff-ai/ruDialoGPT-medium')
 model = AutoModelForCausalLM.from_pretrained('tinkoff-ai/ruDialoGPT-medium')
 
@@ -55,6 +58,9 @@ class VACore(JaaCore):
         self.version = version
 
         self.voiceAssNames = []
+        self.messages = []
+        self.using_internet_service = False
+        self.available_internet = False
 
         self.useTTSCache = False
         self.tts_cache_dir = "tts_cache"
@@ -402,38 +408,59 @@ class VACore(JaaCore):
                 self.say(self.plugin_options("core")["replyNoCommandFound"])
 
             else:
-                # in context
-                # self.say(self.plugin_options("core")["replyNoCommandFoundInContext"])
-                inputs = tokenizer(f'@@ПЕРВЫЙ@@ {command} @@ВТОРОЙ@@', return_tensors='pt')
-                generated_token_ids = model.generate(
-                    **inputs,
-                    top_k=10,
-                    top_p=0.95,
-                    num_beams=3,
-                    num_return_sequences=1,
-                    do_sample=True,
-                    no_repeat_ngram_size=2,
-                    temperature=1.2,
-                    repetition_penalty=1.2,
-                    length_penalty=1.0,
-                    eos_token_id=50257,
-                    max_new_tokens=40
-                )
-                context_with_response = [tokenizer.decode(sample_token_ids) for sample_token_ids in generated_token_ids]
+                if self.available_internet and self.using_internet_service:
 
-                pattern = r'@@ВТОРОЙ@@(.*?)@@ПЕРВЫЙ@@'
+                    self.messages.append({'role': "user", "content": command})
+                    extracted_text = self.ask_gpt(messages=self.messages)
+                    self.messages.append({'role': "assistant", "content": extracted_text})
+                else:
+                    # in context
+                    # self.say(self.plugin_options("core")["replyNoCommandFoundInContext"])
+                    inputs = tokenizer(f'@@ПЕРВЫЙ@@ {command} @@ВТОРОЙ@@', return_tensors='pt')
+                    generated_token_ids = model.generate(
+                        **inputs,
+                        top_k=10,
+                        top_p=0.95,
+                        num_beams=3,
+                        num_return_sequences=1,
+                        do_sample=True,
+                        no_repeat_ngram_size=2,
+                        temperature=1.2,
+                        repetition_penalty=1.2,
+                        length_penalty=1.0,
+                        eos_token_id=50257,
+                        max_new_tokens=40
+                    )
+                    context_with_response = [tokenizer.decode(sample_token_ids) for sample_token_ids in generated_token_ids]
 
-                match = re.search(pattern, context_with_response[0])
-                if match:
-                    extracted_text = match.group(1)
-                    print("Responce Text: ", extracted_text)
-                    self.play_voice_assistant_speech(extracted_text)
+                    pattern = r'@@ВТОРОЙ@@(.*?)@@ПЕРВЫЙ@@'
+
+                    match = re.search(pattern, context_with_response[0])
+                    if match:
+                        extracted_text = match.group(1)
+                        print("Responce Text: ", extracted_text)
+                        self.play_voice_assistant_speech(extracted_text)
                     
                 # restart timer for context
                 if self.contextTimer != None:
                     self.context_set(self.context,self.contextTimerLastDuration)
         except Exception as err:
             print(traceback.format_exc())
+
+    def ask_gpt(messages: list) -> str:
+        response = g4f.ChatCompletion.create(
+            model=g4f.models.gpt_35_turbo,
+            messages=messages
+        )
+        print(response)
+        return response
+    
+    def is_internet_available():
+        try:
+            requests.get('http://www.google.com', timeout=3)
+            return True
+        except (requests.ConnectionError, requests.Timeout):
+            return False
 
     # fuzzy util
     def fuzzy_get_command_key_from_context(self, predicted_command:str, context:dict):
