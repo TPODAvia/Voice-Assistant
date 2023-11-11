@@ -159,12 +159,16 @@ def neural_function():
                         sounddevice.wait()
                         time.sleep(0.4)
                         
-            elif mdl == "5_minute_timer":
+            elif mdl in ["1_minute_timer", "5_minute_timer", "10_minute_timer", "20_minute_timer", "30_minute_timer", "1_hour_timer"]:
                 scores = list(owwModel.prediction_buffer[mdl])
                 if scores[-1] <= 0.5:
                     pass
                 else:
                     print("Okay, the timer have started")
+                    data, samplerate = soundfile.read('media/timer.wav')
+                    sounddevice.play(data, samplerate)
+                    sounddevice.wait()
+                    time.sleep(0.4)
 
         # The feature is not working. Requres to add speaking excecution detection.
         # print(threads)
