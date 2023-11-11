@@ -17,14 +17,17 @@ import re
 
 import requests
 import g4f
+import unicodedata
 
 tokenizer = AutoTokenizer.from_pretrained('tinkoff-ai/ruDialoGPT-medium')
 model = AutoModelForCausalLM.from_pretrained('tinkoff-ai/ruDialoGPT-medium')
 
 version = "8.1"
 
-# main VACore class
+class UseInternet():
+    using_internet_service = True
 
+# main VACore class
 class VACore(JaaCore):
     def __init__(self):
         JaaCore.__init__(self)
@@ -58,9 +61,10 @@ class VACore(JaaCore):
         self.version = version
 
         self.voiceAssNames = []
+        # this is parameters for server gpt3.5
         self.messages = []
-        self.using_internet_service = False
-        self.available_internet = False
+        content = "Ты голосовой ассистент. Все ответы должны быть на русском языке"
+        self.messages.append({"role": "system", "content": content})
 
         self.useTTSCache = False
         self.tts_cache_dir = "tts_cache"
@@ -408,11 +412,13 @@ class VACore(JaaCore):
                 self.say(self.plugin_options("core")["replyNoCommandFound"])
 
             else:
-                if self.available_internet and self.using_internet_service:
+                if self.is_internet_available() and UseInternet.using_internet_service:
 
                     self.messages.append({'role': "user", "content": command})
                     extracted_text = self.ask_gpt(messages=self.messages)
                     self.messages.append({'role': "assistant", "content": extracted_text})
+                    print("Responce Text: ", extracted_text)
+                    self.play_voice_assistant_speech(extracted_text)
                 else:
                     # in context
                     # self.say(self.plugin_options("core")["replyNoCommandFoundInContext"])
@@ -433,34 +439,45 @@ class VACore(JaaCore):
                     )
                     context_with_response = [tokenizer.decode(sample_token_ids) for sample_token_ids in generated_token_ids]
 
-                    pattern = r'@@ВТОРОЙ@@(.*?)@@ПЕРВЫЙ@@'
+                    pattern = r'@@ВТОРОЙ@@(.*?)(?=@@ПЕРВЫЙ@@|$)'
 
                     match = re.search(pattern, context_with_response[0])
                     if match:
                         extracted_text = match.group(1)
                         print("Responce Text: ", extracted_text)
-                        self.play_voice_assistant_speech(extracted_text)
-                    
+                        text_without_emojis = self.remove_emojis(extracted_text)
+                        self.play_voice_assistant_speech(text_without_emojis)
+
                 # restart timer for context
                 if self.contextTimer != None:
                     self.context_set(self.context,self.contextTimerLastDuration)
         except Exception as err:
             print(traceback.format_exc())
 
-    def ask_gpt(messages: list) -> str:
+    def ask_gpt(self, messages: list) -> str:
         response = g4f.ChatCompletion.create(
             model=g4f.models.gpt_35_turbo,
             messages=messages
         )
-        print(response)
         return response
     
+    @staticmethod
     def is_internet_available():
         try:
-            requests.get('http://www.google.com', timeout=3)
+            requests.get('http://www.google.com', timeout=10)
             return True
         except (requests.ConnectionError, requests.Timeout):
             return False
+
+    def remove_emojis(self, input_string):
+        emoji_pattern = re.compile("["
+                                    u"\U0001F600-\U0001F64F"  # emoticons
+                                    u"\U0001F300-\U0001F5FF"  # symbols & pictographs
+                                    u"\U0001F680-\U0001F6FF"  # transport & map symbols
+                                    u"\U0001F1E0-\U0001F1FF"  # flags (iOS)
+                                    "]+", flags=re.UNICODE)
+        filter_layer = emoji_pattern.sub(r'', input_string)
+        return ''.join(c for c in filter_layer if unicodedata.category(c) != 'So')
 
     # fuzzy util
     def fuzzy_get_command_key_from_context(self, predicted_command:str, context:dict):

@@ -132,7 +132,7 @@ def from_pretrained(device):
     generator.remove_weight_norm()
 
     # load StyleTTS
-    model_path = os.path.dirname(SCRIPT_DIR) + "/Models/LJSpeech/epoch_2nd_5_00096_196.pth"
+    model_path = os.path.dirname(SCRIPT_DIR) + "/Models/LJSpeech/epoch_2nd_2_00096_196.pth"
     model_config_path = os.path.dirname(SCRIPT_DIR) + "/Models/LJSpeech/config.yml"
 
     config = yaml.safe_load(open(model_config_path))
@@ -227,7 +227,7 @@ if __name__=="__main__":
 
 
     # load phonemizer
-    global_phonemizer = phonemizer.backend.EspeakBackend(language='ru', preserve_punctuation=True,  with_stress=True)
+    global_phonemizer = phonemizer.backend.EspeakBackend(language='ru', preserve_punctuation=True,  with_stress=True, words_mismatch='ignore')
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
     # Happy Sad Angry Surprise Neutral

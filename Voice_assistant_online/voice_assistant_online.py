@@ -4,8 +4,8 @@ import requests
 import g4f
 import os
 import sys
-import sounddevice as sd
-import soundfile as sf
+import sounddevice
+import soundfile
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 current_path = os.getcwd()
@@ -41,8 +41,13 @@ def text_to_wav(text: str, voice_lang: str, filename: str):
 if __name__ == "__main__":
 
     messages = []
+    content = "Ты голосовой ассистент. Все ответы должны быть на русском языке"
+    messages.append({"role": "system", "content": content})
     recognizer = sr.Recognizer()
     microphone = sr.Microphone()
+    with microphone as source:
+        print("Starting... Please wait")
+        recognizer.adjust_for_ambient_noise(source)
     try:
         while True:
             with microphone as source:
@@ -58,9 +63,9 @@ if __name__ == "__main__":
                     answer = ask_gpt(messages=messages)
                     messages.append({'role': "assistant", "content": answer})
                     text_to_wav(text = answer, voice_lang = "ru", filename = "")
-                    data, samplerate = sf.read('response_audio.wav')
-                    stream = sd.play(data, samplerate)
-                    sd.wait()
+                    data, samplerate = soundfile.read('response_audio.wav')
+                    stream = sounddevice.play(data, samplerate)
+                    sounddevice.wait()
                 else:
                     print("Internet is not available")
             except sr.UnknownValueError:

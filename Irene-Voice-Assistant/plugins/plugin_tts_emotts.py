@@ -7,6 +7,7 @@ import glob
 import random
 
 from vacore import VACore
+from vacore import UseInternet
 import torch
 import phonemizer
 from numpy import load
@@ -54,8 +55,7 @@ def say(core:VACore, text_to_speech:str):
     pass
 
 def towavfile(core:VACore, text_to_speech:str,wavfile:str):
-
-    if VACore.available_internet == True:
+    if VACore.is_internet_available() and UseInternet.using_internet_service:
         mytext = text_to_speech
         language = "ru"
         myobj = gTTS(text=mytext, lang=language, slow=False) 

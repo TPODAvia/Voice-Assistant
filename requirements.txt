@@ -41,3 +41,4 @@ pytorch_lightning
 torchmetrics
 gtts
 g4f
+onnxruntime

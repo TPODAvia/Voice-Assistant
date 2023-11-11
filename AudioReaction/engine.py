@@ -163,7 +163,7 @@ def classification_function():
             # to [[-0.05634324  0.47326437  0.8782495   0.03904041]] using .numpy
             # finaly [-0.05634324  0.47326437  0.8782495   0.03904041] using .flatten()
             output = tensor_normalized_output.numpy().flatten()
-            print(len(output))
+            # print(len(output))
             if len(output) == 26:
                 # _text_input requres arrays of 26: [1, 2, 3 ... 26]
                 Face_ui.run_gif._text_input = output

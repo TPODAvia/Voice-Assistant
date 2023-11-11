@@ -19,8 +19,10 @@ import pyaudio
 from openwakeword.model import Model
 import speech_recognition
 import signal
+import sounddevice
+import soundfile
 from vacore import VACore
-
+from vacore import UseInternet
 sys.path.append(os.path.dirname(SCRIPT_DIR))
 import AudioReaction.engine
 import Face_ui.run_gif
@@ -30,11 +32,10 @@ whisper.load_model("base")
 
 # Duration in seconds for the timer
 _timer_duration = 30
-# the NN service is opened as a default. Turn this off to fully run offline.
-VACore.using_internet_service = True
 # other variables to properly run the program
 _recognized_data = ""
 _runva_looping = True
+_ambient_mic = 300
 Face_ui.run_gif._gif_looping = True
 Face_ui.run_gif._text_input = [  0,2,0,0, 0,0,0,0, 1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0  ] #26
 Face_ui.run_gif._run_prediction = False
@@ -55,8 +56,8 @@ class WorkerThread(threading.Thread):
         self.recognizer = speech_recognition.Recognizer()
         self.microphone = speech_recognition.Microphone()
 
-        with self.microphone:
-            self.recognizer.adjust_for_ambient_noise(self.microphone, duration=0.3)
+        global _ambient_mic
+        self.recognizer.energy_threshold = _ambient_mic
 
     def run(self):
 
@@ -71,8 +72,7 @@ class WorkerThread(threading.Thread):
                     # data_s16 = np.frombuffer(audio_data, dtype=np.int16, count=len(audio_data)//2, offset=0)
                     # float_data = data_s16.astype(np.float32, order='C') / 32768.0
                 try:
-
-                    if VACore.available_internet == True:
+                    if VACore.is_internet_available() and UseInternet.using_internet_service:
                         _recognized_data = self.recognizer.recognize_google(audio, language="ru").lower()
                     else:
                         print("Started recognition...")
@@ -92,7 +92,7 @@ def neural_function():
     CHANNELS = 1
     RATE = 16000
     CHUNK = 8000
-    FRAMEWORK = "tflite" # onx or tflite
+    FRAMEWORK = "onnx" # onx or tflite
     audio = pyaudio.PyAudio()
     mic_stream = audio.open(format=FORMAT, channels=CHANNELS, rate=RATE, input=True, frames_per_buffer=CHUNK)
 
@@ -133,7 +133,6 @@ def neural_function():
                 # to [[-0.05634324  0.47326437  0.8782495   0.03904041]] using .numpy
                 # finaly [-0.05634324  0.47326437  0.8782495   0.03904041] using .flatten()
                 output = tensor_normalized_output.numpy().flatten()
-                print(len(output))
                 if len(output) == 26:
                     # _text_input requres arrays of 26: [1, 2, 3 ... 26]
                     Face_ui.run_gif._text_input = output
@@ -155,6 +154,9 @@ def neural_function():
                         thread = WorkerThread()
                         thread.start()
                         threads.append(thread)
+                        data, samplerate = soundfile.read('media/bit.wav')
+                        sounddevice.play(data, samplerate)
+                        sounddevice.wait()
                         time.sleep(0.4)
                         
             elif mdl == "5_minute_timer":
@@ -209,16 +211,19 @@ if __name__ == "__main__":
     neural_thread.start()
 
     try:
+            
+        recognizer = speech_recognition.Recognizer()
+        microphone = speech_recognition.Microphone()
         while _runva_looping:
 
             # print("_recognized_data: " + str(_recognized_data))
             # print(_recognized_data)
             voice_input_str = _recognized_data
 
-            if VACore.is_internet_available() and VACore.using_internet_service:
-                VACore.available_internet = True
-            else:
-                VACore.available_internet = False
+            # this line of code will slow down the loop in 2 second
+            with microphone as source:
+                recognizer.adjust_for_ambient_noise(source, duration=2)
+                _ambient_mic = recognizer.energy_threshold
 
             # remove punctuations and caps: Ирина, привет! --> ирина привет
             no_punct_str = re.sub(r'[^\w\s]', '', voice_input_str)
