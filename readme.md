@@ -69,6 +69,14 @@ Activate the venv
 
 2. Install the required dependencies:
 
+Install torch with cuda
+https://pytorch.org/get-started/locally/
+To test that the cuda is working:
+```bash
+# activate your venv first
+cd Voice-Assistant
+python docs/cuda_test.py
+```
 ```bash
    cd Voice-Assistant
    pip install -r requirements.txt
