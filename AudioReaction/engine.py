@@ -29,9 +29,11 @@ if __name__ == "__main__":
     Face_ui.run_gif._text_input = [  0,2,0,0, 0,0,0,0, 1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0  ] #26
     Face_ui.run_gif._run_prediction = False
 
+
+my_list = ['airplane', 'breathing', 'brushing_teeth', 'car_horn', 'cat', 'chirping_birds', 'clock_alarm', 'cow', 'crow', 'crying_baby', 'dog', 'door_wood_knock', 'engine', 'fireworks', 'insects', 'laughing', 'rain', 'rooster', 'sea_waves', 'sheep', 'siren', 'snoring', 'thunderstorm', 'toilet_flush', 'train', 'wind']
 class Listener:
 
-    def __init__(self, sample_rate=8000, record_seconds=1):
+    def __init__(self, sample_rate=16000, record_seconds=1):
         self.chunk = 800
         self.sample_rate = sample_rate
         self.record_seconds = record_seconds
@@ -59,23 +61,24 @@ class ClassificationEngine:
 
     def __init__(self, model_class_file):
         self.model = torch.jit.load(model_class_file)
-        self.model.eval().to('cpu')  #run on cpu
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        self.model.to("cpu")  # Ensure model is on the correct device
+        self.model.eval()
 
     def predict(self, audio):
         with torch.no_grad():
-            if str(type(audio)) == "<class 'str'>":
-                waveform, sample_rate = torchaudio.load(audio)  # don't normalize on train
+            if isinstance(audio, str):
+                waveform, sample_rate = torchaudio.load(audio)  # Load audio file
             else:
                 audio = np.array(audio)
-                buffer = audio.astype(np.float32) / 32767.0
+                buffer = audio.astype(np.float32) / 32767.0  # Normalize audio
                 waveform_tensor = torch.from_numpy(buffer)
                 waveform = waveform_tensor.unsqueeze(0)
 
-            tensor = waveform.to(self.device)
+            tensor = waveform.to("cpu")  # Move input tensor to the correct device
             model_output = self.model(tensor.unsqueeze(0))
 
-            # this normalized all numbers to [0...1]
+            # Normalize the output tensor
             tensor_normalized_output = torch.nn.functional.normalize(model_output, p=2, dim=-1)
 
             return tensor_normalized_output
@@ -107,16 +110,16 @@ class DemoAction:
         wf = wave.open(fname, "wb")
         wf.setnchannels(1)
         wf.setsampwidth(get_sample_size)
-        wf.setframerate(8000)
+        wf.setframerate(16000)
         # write the frames as bytes
         wf.writeframes(b"".join(waveforms))
         wf.close()
         return fname
 
 def classification_function():
-
+    global my_list
     audio_q = list()
-    listener = Listener(sample_rate=8000, record_seconds=1)
+    listener = Listener(sample_rate=16000, record_seconds=1)
     get_sample_size = listener.p.get_sample_size(pyaudio.paInt16)
     classificator  = ClassificationEngine(args.model_class_file)
     action = DemoAction()
@@ -132,7 +135,7 @@ def classification_function():
     global _classification_loop
 
     while _classification_loop:
-
+        last_time = time.time()
         if len(audio_q) > 10:  # remove part of stream
             diff = len(audio_q) - 10
 
@@ -156,8 +159,6 @@ def classification_function():
             else:
                 detect_in_row = 0
 
-        time.sleep(5)
-
         if not tensor_normalized_output == []:
             # this convert from tensor([[-0.05634324  0.47326437  0.8782495   0.03904041]])
             # to [[-0.05634324  0.47326437  0.8782495   0.03904041]] using .numpy
@@ -165,9 +166,12 @@ def classification_function():
             output = tensor_normalized_output.numpy().flatten()
             # print(len(output))
             if len(output) == 26:
+                # print(output)
+                print(f"{round(time.time() - last_time, 3)} :: {np.argmax(output)} :: {my_list[np.argmax(output)]}")
                 # _text_input requres arrays of 26: [1, 2, 3 ... 26]
                 Face_ui.run_gif._text_input = output
                 Face_ui.run_gif._run_prediction = True
+
 
         time.sleep(0.05)
 
@@ -191,6 +195,6 @@ if __name__ == "__main__":
 
 
     while _classification_loop:
-        print("Hello")
+        # print("Hello")
         time.sleep(1)
 

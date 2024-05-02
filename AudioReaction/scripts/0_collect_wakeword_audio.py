@@ -117,7 +117,7 @@ if __name__ == "__main__":
     To record interactively (usually for recording your own wake words N times)
     use --interactive mode.
     ''')
-    parser.add_argument('--sample_rate', type=int, default=8000,
+    parser.add_argument('--sample_rate', type=int, default=16000,
                         help='the sample_rate to record at')
     parser.add_argument('--seconds', type=int, default=3,
                         help='if set to None, then will record forever until keyboard interrupt')

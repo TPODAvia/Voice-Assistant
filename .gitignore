@@ -2,4 +2,5 @@ cache_dir/
 output_scipy.wav
 wakeword_temp
 Drive_storage.zip
+Models
 /venv

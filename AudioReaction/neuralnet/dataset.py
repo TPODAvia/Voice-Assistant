@@ -46,11 +46,11 @@ class CustomAudioDataset(Dataset):
         # Load the audio file
         waveform_raw, sample_rate = torchaudio.load(audio_file)
 
-        new_sample_rate = 8000
+        new_sample_rate = 16000
         waveform = resample(waveform_raw, sample_rate, new_sample_rate)
 
         # Interpolate waveform to the desired length
-        # waveform = F.interpolate(waveform.unsqueeze(0), size=8000).squeeze(0)
+        # waveform = F.interpolate(waveform.unsqueeze(0), size=16000).squeeze(0)
         waveform = waveform[0, :].unsqueeze(0)
 
         # Extract speaker_id and utterance_number from filename
@@ -112,7 +112,8 @@ if __name__ == '__main__':
     print(train_set[0])
 
     labels = sorted(list(set(datapoint[2] for datapoint in train_set)))
-    word_start = "1"
+    print(labels)
+    word_start = "airplane"
     index = label_to_index(word_start, labels)
     word_recovered = index_to_label(index, labels)
 

@@ -11,12 +11,15 @@ if current_path.upper() != SCRIPT_DIR.upper():
     print("Current path: " + str(current_path))
     sys.exit('Program can only be run from path ' + SCRIPT_DIR + "\n")
 
+
 import whisper
 import re
 import threading
 import argparse
 import pyaudio
+import openwakeword
 from openwakeword.model import Model
+openwakeword.utils.download_models()
 import speech_recognition
 import signal
 import sounddevice
@@ -25,7 +28,6 @@ from vacore import VACore
 from vacore import UseInternet
 sys.path.append(os.path.dirname(SCRIPT_DIR))
 import AudioReaction.engine
-import Face_ui.run_gif
 
 # Load the Whisper model
 whisper.load_model("base")
@@ -36,9 +38,6 @@ _timer_duration = 30
 _recognized_data = ""
 _runva_looping = True
 _ambient_mic = 300
-Face_ui.run_gif._gif_looping = True
-Face_ui.run_gif._text_input = [  0,2,0,0, 0,0,0,0, 1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0  ] #26
-Face_ui.run_gif._run_prediction = False
 
 # Parse input arguments
 parser=argparse.ArgumentParser()
@@ -87,7 +86,7 @@ class WorkerThread(threading.Thread):
                 return _recognized_data #, emo_classf
 
 def neural_function():
-
+    time.sleep(1)
     FORMAT = pyaudio.paInt16
     CHANNELS = 1
     RATE = 16000
@@ -113,8 +112,8 @@ def neural_function():
     global _timer_duration
     tensor_normalized_output = []
 
-    tkinter_thread = threading.Thread(target=Face_ui.run_gif.run_tkinter)
-    tkinter_thread.start()
+    # tkinter_thread = threading.Thread(target=Face_ui.run_gif.run_tkinter)
+    # tkinter_thread.start()
 
     while _runva_looping:
 
@@ -135,8 +134,9 @@ def neural_function():
                 output = tensor_normalized_output.numpy().flatten()
                 if len(output) == 26:
                     # _text_input requres arrays of 26: [1, 2, 3 ... 26]
-                    Face_ui.run_gif._text_input = output
-                    Face_ui.run_gif._run_prediction = True
+                    print(output)
+                    # Face_ui.run_gif._text_input = output
+                    # Face_ui.run_gif._run_prediction = True
 
         for mdl in owwModel.prediction_buffer.keys():
 
@@ -205,7 +205,6 @@ if __name__ == "__main__":
         print("Ctrl+C pressed. Stopping threads...")
         global _runva_looping
         _runva_looping = False
-        Face_ui.run_gif._gif_looping = False
 
     core = VACore()
     core.init_with_plugins()

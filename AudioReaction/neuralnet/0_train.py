@@ -11,7 +11,10 @@ import torchaudio
 from tqdm import tqdm
 import sys
 
+sorted_labels = None
+
 def test(device, model, epoch, test_loader, transform):
+    global sorted_labels
     model.eval()
     correct = 0
     for data, target in test_loader:
@@ -19,44 +22,36 @@ def test(device, model, epoch, test_loader, transform):
         data = data.to(device)
         target = target.to(device)
 
-        # apply transform and model on whole batch directly on device
         data = transform(data)
         output = model(data)
 
         pred = get_likely_index(output)
         correct += number_of_correct(pred, target)
 
-        # update progress bar
-        # pbar.update(pbar_update)
-
     print(f"\nTest Epoch: {epoch}\tAccuracy: {correct}/{len(test_loader.dataset)} ({100. * correct / len(test_loader.dataset):.0f}%)\n")
 
 def train(device, model, epoch, log_interval, train_loader, transform, optimizer):
     model.train()
+    criterion = torch.nn.CrossEntropyLoss()  # Use CrossEntropyLoss
     print("\n")
     for batch_idx, (data, target) in enumerate(train_loader):
 
         data = data.to(device)
         target = target.to(device)
 
-        # apply transform and model on whole batch directly on device
         data = transform(data)
         output = model(data)
-
-        # negative log-likelihood for a tensor of size (batch x 1 x n_output)
-        loss = F.nll_loss(output.squeeze(), target)
-
+        loss = criterion(output, target)  # Apply CrossEntropyLoss
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
 
-        # print training stats
         if batch_idx % log_interval == 0:
             print(f"Train Epoch: {epoch} [{batch_idx * len(data)}/{len(train_loader.dataset)} ({100. * batch_idx / len(train_loader):.0f}%)]\tLoss: {loss.item():.6f}")
-            # update progress bar
-        # pbar.update(pbar_update)
+
 
 def main(args):
+    global sorted_labels
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     train_set = CustomAudioDataset(args.train_data_txt, args.audio_path)
@@ -71,6 +66,8 @@ def main(args):
     labels = sorted(list(set(datapoint[2] for datapoint in train_set)))
     print("\n All labels are sorted:")
     print(labels) # ['0', '1', '2', '3']
+    sorted_labels = labels
+
 
     if device == "cuda":
         num_workers = 1
@@ -99,7 +96,7 @@ def main(args):
         pin_memory=pin_memory,
     )
 
-    model = LSTM_10(input_size=8000, output_size=len(labels), hidden_size = 128, num_layers=1)
+    model = LSTM_10(input_size=16000, output_size=len(labels), hidden_size = 128, num_layers=1)
     model.to(device)
 
     print("\n Model Architecture:")
@@ -121,7 +118,7 @@ def main(args):
 
 
     log_interval = 400
-    n_epoch = 6
+    n_epoch = 100
 
     # pbar_update = 1 / (len(train_loader) + len(test_loader))
     # losses = []
@@ -129,7 +126,7 @@ def main(args):
 
     # print(train_loader.shape)
     # The transform needs to live on the same device as the model and the data.
-    new_sample_rate = 8000
+    new_sample_rate = 16000
     transform = torchaudio.transforms.Resample(orig_freq=sample_rate, new_freq=new_sample_rate)
     transform = transform.to(device)
     with tqdm(total=n_epoch) as pbar:

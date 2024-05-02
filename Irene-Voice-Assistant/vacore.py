@@ -19,9 +19,9 @@ import requests
 import g4f
 import unicodedata
 
-tokenizer = AutoTokenizer.from_pretrained('tinkoff-ai/ruDialoGPT-medium')
-model = AutoModelForCausalLM.from_pretrained('tinkoff-ai/ruDialoGPT-medium')
-
+cache_dir = r"D:\Coding_AI\Voice-Assistant\Models"
+tokenizer = AutoTokenizer.from_pretrained('tinkoff-ai/ruDialoGPT-medium', cache_dir=cache_dir)
+model = AutoModelForCausalLM.from_pretrained('tinkoff-ai/ruDialoGPT-medium', cache_dir=cache_dir)
 version = "8.1"
 
 class UseInternet():
@@ -30,8 +30,9 @@ class UseInternet():
 # main VACore class
 class VACore(JaaCore):
     def __init__(self):
+        print("fvefvefr766")
         JaaCore.__init__(self)
-
+        print("fvefvefr766")
         self.timers = [-1,-1,-1,-1,-1,-1,-1,-1]
         self.timersFuncUpd = [None,None,None,None,None,None,None,None]
         self.timersFuncEnd = [None,None,None,None,None,None,None,None]
