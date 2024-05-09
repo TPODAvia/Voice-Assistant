@@ -7,9 +7,10 @@ import random
 import time
 from numpy import save, argmax, dot
 from numpy.linalg import norm
+from pathlib import Path
 
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.dirname(SCRIPT_DIR))
+SCRIPT_DIR = str(Path(__file__).resolve().parent.parent)
+sys.path.append(SCRIPT_DIR)
 from Face_ui.img_library import library, img_library
 
 _gif_looping = True
@@ -91,29 +92,29 @@ class ImageLabel(tk.Label):
         if emot_convert in [22,35]:
             # Angry
             print("Angry")
-            save(os.path.dirname(SCRIPT_DIR) + "/Irene-Voice-Assistant/tts_cache/emotts/emotion", 0)
+            save(SCRIPT_DIR + "/Irene-Voice-Assistant/tts_cache/emotts/emotion", 0)
 
         elif emot_convert in [2,3,4,5,10,11,12,13,14,15,17,21,25,32,34,38,39,40,42,43]:
             # Happy
             print("Happy")
-            save(os.path.dirname(SCRIPT_DIR) + "/Irene-Voice-Assistant/tts_cache/emotts/emotion", 1)
+            save(SCRIPT_DIR + "/Irene-Voice-Assistant/tts_cache/emotts/emotion", 1)
 
         elif emot_convert in [1,26,28,30,36,37]:
             # Neutral
             print("Neutral")
-            save(os.path.dirname(SCRIPT_DIR) + "/Irene-Voice-Assistant/tts_cache/emotts/emotion", 2)
+            save(SCRIPT_DIR + "/Irene-Voice-Assistant/tts_cache/emotts/emotion", 2)
 
         elif emot_convert in [6,7,16,19,24,31,33,41]:
             # Sad
             print("Sad")
-            save(os.path.dirname(SCRIPT_DIR) + "/Irene-Voice-Assistant/tts_cache/emotts/emotion", 3)
+            save(SCRIPT_DIR + "/Irene-Voice-Assistant/tts_cache/emotts/emotion", 3)
 
         elif emot_convert in [8,18,20,23,27,29]:
             # Surprise
             print("Surprise")
-            save(os.path.dirname(SCRIPT_DIR) + "/Irene-Voice-Assistant/tts_cache/emotts/emotion", 4)
+            save(SCRIPT_DIR + "/Irene-Voice-Assistant/tts_cache/emotts/emotion", 4)
 
-        image_path = SCRIPT_DIR + '/face expression/' + img_library[pred]
+        image_path = SCRIPT_DIR + '/Face_ui/face expression/' + img_library[pred]
 
         return image_path
 

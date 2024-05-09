@@ -237,7 +237,7 @@ class VACore(JaaCore):
                 tts_file = self.get_tts_cache_file(text_to_speech)
             else:
                 tts_file = self.get_tempfilename()+".wav"
-
+            print(f"{tts_file}")
             if not self.useTTSCache or self.useTTSCache and not os.path.exists(tts_file):
                 self.tts_to_filewav(text_to_speech, tts_file)
             #self.play_wav(tts_file)
@@ -417,9 +417,12 @@ class VACore(JaaCore):
 
                     self.messages.append({'role': "user", "content": command})
                     extracted_text = self.ask_gpt(messages=self.messages)
-                    self.messages.append({'role': "assistant", "content": extracted_text})
-                    print("Responce Text: ", extracted_text)
-                    self.play_voice_assistant_speech(extracted_text)
+                    if len(extracted_text)>2:
+                        self.messages.append({'role': "assistant", "content": extracted_text})
+                        print("Responce Text: ", extracted_text)
+                        self.play_voice_assistant_speech(extracted_text)
+                    else:
+                        print("gpt4free with no respomd")
                 else:
                     # in context
                     # self.say(self.plugin_options("core")["replyNoCommandFoundInContext"])

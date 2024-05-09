@@ -11,7 +11,6 @@ if current_path.upper() != SCRIPT_DIR.upper():
     print("Current path: " + str(current_path))
     sys.exit('Program can only be run from path ' + SCRIPT_DIR + "\n")
 
-
 import whisper
 import re
 import threading
@@ -26,8 +25,14 @@ import sounddevice
 import soundfile
 from vacore import VACore
 from vacore import UseInternet
-sys.path.append(os.path.dirname(SCRIPT_DIR))
+from pathlib import Path
+
+SCRIPT_DIR = str(Path(__file__).resolve().parent.parent)
+sys.path.append(SCRIPT_DIR)
 import AudioReaction.engine
+import Face_ui.run_gif
+
+emotion_generator = Face_ui.run_gif.ImageLabel()
 
 # Load the Whisper model
 whisper.load_model("base")
@@ -134,7 +139,8 @@ def neural_function():
                 output = tensor_normalized_output.numpy().flatten()
                 if len(output) == 26:
                     # _text_input requres arrays of 26: [1, 2, 3 ... 26]
-                    print(output)
+                    print(f"emotion_generator: {output}")
+                    emotion_generator.pred(output)
                     # Face_ui.run_gif._text_input = output
                     # Face_ui.run_gif._run_prediction = True
 

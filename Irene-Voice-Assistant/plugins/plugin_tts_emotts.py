@@ -58,8 +58,12 @@ def towavfile(core:VACore, text_to_speech:str,wavfile:str):
     if VACore.is_internet_available() and UseInternet.using_internet_service:
         mytext = text_to_speech
         language = "ru"
-        myobj = gTTS(text=mytext, lang=language, slow=False) 
-        myobj.save(wavfile) 
+        try:
+            myobj = gTTS(text=mytext, lang=language, slow=False) 
+            myobj.save(wavfile) 
+        except:
+            print("plugin_tss_emotts.py gtts is not working")
+            return
     else:
         # run if text input is long
         # if len(text_to_speech) > 30:
