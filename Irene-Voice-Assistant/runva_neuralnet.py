@@ -49,7 +49,7 @@ parser=argparse.ArgumentParser()
 
 parser.add_argument("--model_path", type=str, default="", required=False, 
                     help="The path of a specific model to load")
-parser.add_argument('--model_class_file', type=str, default="D:\Coding_AI\Voice-Assistant\AudioReaction\wakeword_m.pt", required=False,
+parser.add_argument('--model_class_file', type=str, default=f"{SCRIPT_DIR}\AudioReaction\wakeword_m.pt", required=False,
                     help='optimized file to load. use optimize_graph.py')
 args=parser.parse_args()
 

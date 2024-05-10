@@ -1,6 +1,7 @@
 """the interface to interact with LSTM_10 model"""
 import os
 import sys
+from pathlib import Path
 import pyaudio
 import threading
 import time
@@ -10,27 +11,28 @@ import torchaudio
 import torch
 import signal
 import numpy as np
+import subprocess
+import random
+from os.path import join, realpath
 
+SCRIPT_DIR = str(Path(__file__).resolve().parent.parent)
 _classification_loop = True
 
 # Check if the current thread is the main thread
 # if threading.current_thread() is threading.main_thread():
-if __name__ == "__main__":
-    # import stuff here to prevent engine.py from importing unecessary modules during production usage
-    import subprocess
-    import random
-    from os.path import join, realpath
+# if __name__ == "__main__":
+#     import Face_ui.run_gif
 
-    SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-    sys.path.append(os.path.dirname(SCRIPT_DIR))
-    import Face_ui.run_gif
+#     Face_ui.run_gif._gif_looping = True
+#     Face_ui.run_gif._text_input = [  0,2,0,0, 0,0,0,0, 1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0  ] #26
+#     Face_ui.run_gif._run_prediction = False
 
-    Face_ui.run_gif._gif_looping = True
-    Face_ui.run_gif._text_input = [  0,2,0,0, 0,0,0,0, 1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0  ] #26
-    Face_ui.run_gif._run_prediction = False
+my_list = ['airplane',       'breathing',       'brushing_teeth', 'car_horn',  'cat', \
+           'chirping_birds', 'clock_alarm',     'cow',            'crow',      'crying_baby', \
+           'dog',            'door_wood_knock', 'engine',         'fireworks', 'insects', \
+           'laughing',       'rain', 'rooster', 'sea_waves',      'sheep',     'siren', \
+           'snoring',        'thunderstorm',    'toilet_flush',   'train',     'wind']
 
-
-my_list = ['airplane', 'breathing', 'brushing_teeth', 'car_horn', 'cat', 'chirping_birds', 'clock_alarm', 'cow', 'crow', 'crying_baby', 'dog', 'door_wood_knock', 'engine', 'fireworks', 'insects', 'laughing', 'rain', 'rooster', 'sea_waves', 'sheep', 'siren', 'snoring', 'thunderstorm', 'toilet_flush', 'train', 'wind']
 class Listener:
 
     def __init__(self, sample_rate=16000, record_seconds=1):
@@ -91,7 +93,7 @@ class DemoAction:
         self.subprocess = subprocess
         self.detect_in_row = 0
 
-        folder = realpath(join(os.path.dirname(os.path.abspath(__file__)), 'fun', 'arnold_audio'))
+        folder = f"{SCRIPT_DIR}/AudioReaction/fun/arnold_audio/"
         self.arnold_mp3 = [
             os.path.join(folder, x)
             for x in os.listdir(folder)
@@ -125,8 +127,8 @@ def classification_function():
     action = DemoAction()
     listener.run(audio_q)
 
-    tkinter_thread = threading.Thread(target=Face_ui.run_gif.run_tkinter)
-    tkinter_thread.start()
+    # tkinter_thread = threading.Thread(target=Face_ui.run_gif.run_tkinter)
+    # tkinter_thread.start()
 
     detect_in_row = 0
     sensitivity = 60
@@ -169,30 +171,27 @@ def classification_function():
                 # print(output)
                 print(f"{round(time.time() - last_time, 3)} :: {np.argmax(output)} :: {my_list[np.argmax(output)]}")
                 # _text_input requres arrays of 26: [1, 2, 3 ... 26]
-                Face_ui.run_gif._text_input = output
-                Face_ui.run_gif._run_prediction = True
+                # Face_ui.run_gif._text_input = output
+                # Face_ui.run_gif._run_prediction = True
 
 
         time.sleep(0.05)
 
 if __name__ == "__main__":
-
     def signal_handler(signal, frame):
         print("Ctrl+C pressed. Stopping threads...")
         global _classification_loop
         _classification_loop = False
-        Face_ui.run_gif._gif_looping = False
+        # Face_ui.run_gif._gif_looping = False
 
     parser = argparse.ArgumentParser(description="demoing the wakeword engine")
-    parser.add_argument('--model_class_file', type=str, default="D:\Coding_AI\Voice-Assistant\AudioReaction\wakeword_m.pt", required=False,
+    parser.add_argument('--model_class_file', type=str, default=f"{SCRIPT_DIR}\AudioReaction\wakeword_m.pt", required=False,
                         help='optimized file to load. use optimize_graph.py')
     args = parser.parse_args()
-
 
     signal.signal(signal.SIGINT, signal_handler)
     neural_thread = threading.Thread(target = classification_function)
     neural_thread.start()
-
 
     while _classification_loop:
         # print("Hello")
