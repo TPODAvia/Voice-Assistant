@@ -1,8 +1,11 @@
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import os
+from pathlib import Path
+
 os.environ['PYTHONHTTPSVERIFY'] = '0'
-cache_dir = r"D:\Coding_AI\Voice-Assistant\docs"
+SCRIPT_DIR = str(Path(__file__).resolve().parent.parent)
+cache_dir = SCRIPT_DIR+ "/Models/"
 
 # Load the tokenizer and model from the Hugging Face Hub
 tokenizer = AutoTokenizer.from_pretrained('tinkoff-ai/ruDialoGPT-medium', cache_dir=cache_dir)

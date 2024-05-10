@@ -84,7 +84,16 @@ python docs/cuda_test.py
 ```
 ```bash
    pip install PyAudio
+   pip install transformers==4.39.0 # new realeases get errors when switching to offline mode
+   pip install openwakeword
+   pip install SoundFile torchaudio munch torch pydub pyyaml librosa git+https://github.com/resemble-ai/monotonic_align.git
+
 ```
+
+1.PHONEMIZER_ESPEAK_LIBRARY = C:\Program Files\eSpeak NG\libespeak-ng.dll
+2.PHONEMIZER_ESPEAK_PATH = C:\Program Files\eSpeak NG
+
+click new and add these variables to your system variables in environment variables
 
 3. Configure the voice assistant settings as needed:
 

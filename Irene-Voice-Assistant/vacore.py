@@ -18,8 +18,12 @@ import re
 import requests
 import g4f
 import unicodedata
+from pathlib import Path
+import sys
 
-cache_dir = r"D:\Coding_AI\Voice-Assistant\Models"
+SCRIPT_DIR = str(Path(__file__).resolve().parent.parent)
+sys.path.append(SCRIPT_DIR)
+cache_dir = SCRIPT_DIR + "/Models"
 tokenizer = AutoTokenizer.from_pretrained('tinkoff-ai/ruDialoGPT-medium', cache_dir=cache_dir)
 model = AutoModelForCausalLM.from_pretrained('tinkoff-ai/ruDialoGPT-medium', cache_dir=cache_dir)
 version = "8.1"

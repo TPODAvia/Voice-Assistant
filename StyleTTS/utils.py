@@ -9,6 +9,7 @@ import torch.nn.functional as F
 import torchaudio
 import librosa
 import matplotlib.pyplot as plt
+import sys
 
 def maximum_path(neg_cent, mask):
   """ Cython optimized version.
@@ -27,9 +28,11 @@ def maximum_path(neg_cent, mask):
 
 def get_data_path_list(train_path=None, val_path=None):
     if train_path is None:
-        train_path = "Data/train_list.txt"
+        print("StyleTTS/utils.py: train_path is None!")
+        sys.exit()
     if val_path is None:
-        val_path = "Data/val_list.txt"
+        print("StyleTTS/utils.py: val_path is None!")
+        sys.exit()
 
     with open(train_path, 'r', encoding='utf-8', errors='ignore') as f:
         train_list = f.readlines()

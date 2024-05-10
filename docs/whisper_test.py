@@ -1,9 +1,12 @@
 import whisper
-
+import os
 model = whisper.load_model("base")
+from pathlib import Path
+
+SCRIPT_DIR = str(Path(__file__).resolve().parent.parent)
 
 # load audio and pad/trim it to fit 30 seconds
-audio = whisper.load_audio("D:\\Coding_AI\\Voice-Assistant\StyleTTS\\Demo\\output_scipy.wav")
+audio = whisper.load_audio(f"{SCRIPT_DIR}/StyleTT/Demo/output_scipy.wav")
 audio = whisper.pad_or_trim(audio)
 
 # make log-Mel spectrogram and move to the same device as the model

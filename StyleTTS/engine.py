@@ -10,24 +10,22 @@ import librosa
 from scipy.io import wavfile
 import phonemizer
 from random import SystemRandom
+from pathlib import Path
 
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+SCRIPT_DIR = str(Path(__file__).resolve().parent.parent)
+sys.path.append(f"{SCRIPT_DIR}/StyleTTS")
+
 from models import build_model, load_ASR_models, load_F0_models
 from utils import *
-
-sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/hifi-gan")
-
+from HifiGAN.vocoder import Generator
 import glob
 import os
 import json
 import torch
 from addict import Addict
-from vocoder import Generator
 import librosa
 import numpy as np
 import torchaudio
-
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 class TextCleaner:
     def __init__(self, dummy=None):
@@ -77,7 +75,7 @@ def compute_style(ref_dicts, model, device):
     keys_list = list(ref_dicts.keys())
     emotion = keys_list[0] # Angry Happy Sad Surprise etc
 
-    path = os.path.dirname(SCRIPT_DIR) + '/Sample/' + emotion
+    path = SCRIPT_DIR + '/StyleTTS/Sample/' + emotion
     wav_filenames = [filename for filename in glob.glob(os.path.join(path, '*.wav'))]
 
     cryptogen = SystemRandom()
@@ -113,10 +111,9 @@ def scan_checkpoint(cp_dir, prefix):
 def from_pretrained(device):
 
     textclenaer = TextCleaner()
+    cp_g = scan_checkpoint(SCRIPT_DIR + "/StyleTTS/Vocoder/LibriTTS/", 'g_')
 
-    cp_g = scan_checkpoint(os.path.dirname(SCRIPT_DIR) + "/Vocoder/LibriTTS/", 'g_')
-
-    config_file = os.path.join(os.path.split(cp_g)[0], os.path.dirname(SCRIPT_DIR) + '/Vocoder/LibriTTS/config.json')
+    config_file = SCRIPT_DIR + '/StyleTTS/Vocoder/LibriTTS/config.json'
     with open(config_file) as f:
         data = f.read()
     json_config = json.loads(data)
@@ -132,18 +129,18 @@ def from_pretrained(device):
     generator.remove_weight_norm()
 
     # load StyleTTS
-    model_path = os.path.dirname(SCRIPT_DIR) + "/Models/LJSpeech/epoch_2nd_2_00096_196.pth"
-    model_config_path = os.path.dirname(SCRIPT_DIR) + "/Models/LJSpeech/config.yml"
+    model_path = SCRIPT_DIR + "/StyleTTS/Models/LJSpeech/epoch_2nd_2_00096_196.pth"
+    model_config_path = SCRIPT_DIR + "/StyleTTS/Configs/config.yml"
 
     config = yaml.safe_load(open(model_config_path))
 
     # load pretrained ASR model
-    ASR_config = config.get('ASR_config', False)
-    ASR_path = config.get('ASR_path', False)
+    ASR_config = SCRIPT_DIR + config.get('ASR_config', False)
+    ASR_path = SCRIPT_DIR + config.get('ASR_path', False)
     text_aligner = load_ASR_models(ASR_path, ASR_config)
 
     # load pretrained F0 model
-    F0_path = config.get('F0_path', False)
+    F0_path = SCRIPT_DIR + config.get('F0_path', False)
     pitch_extractor = load_F0_models(F0_path)
 
     model = build_model(Munch(config['model_params']), text_aligner, pitch_extractor)
@@ -160,7 +157,6 @@ def from_pretrained(device):
     
 
     return model, generator, textclenaer
-
 
 def main(text, ref_dicts, model, generator, textclenaer, device, global_phonemizer):
 
@@ -216,7 +212,6 @@ def main(text, ref_dicts, model, generator, textclenaer, device, global_phonemiz
     waves = []
     for key, wave in converted_samples.items():
         waves = wave
-    
     return waves
 
 def save_wave_scipy(filename, audio_data, sample_rate):
@@ -225,10 +220,10 @@ def save_wave_scipy(filename, audio_data, sample_rate):
 
 if __name__=="__main__":
 
-
     # load phonemizer
     global_phonemizer = phonemizer.backend.EspeakBackend(language='ru', preserve_punctuation=True,  with_stress=True, words_mismatch='ignore')
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    print(f"Device used: {device}")
 
     # Happy Sad Angry Surprise Neutral
     ref_dicts = {}
@@ -238,5 +233,5 @@ if __name__=="__main__":
     text = ''' Приближаются долгожданные майские праздники. '''
 
     model, generator, textclenaer = from_pretrained(device)
-
-    save_wave_scipy('output_scipy.wav', main(text, ref_dicts, model, generator, textclenaer, device, global_phonemizer), 24000)
+    wave = main(text, ref_dicts, model, generator, textclenaer, device, global_phonemizer)
+    save_wave_scipy(SCRIPT_DIR + 'output_scipy.wav', wave, 24000)

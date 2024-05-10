@@ -3,6 +3,7 @@
 
 import os
 import sys
+from pathlib import Path 
 import glob
 import random
 
@@ -14,13 +15,12 @@ from numpy import load
 # from playsound import playsound
 from gtts import gTTS 
 
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+SCRIPT_DIR = str(Path(__file__).resolve().parent.parent.parent)
 
 # Get all WAV files in the folder
-wav_files = glob.glob(os.path.dirname(os.path.dirname(SCRIPT_DIR)) + "/Voices/humble/*.wav")
-
-sys.path.append(os.path.dirname(os.path.dirname(SCRIPT_DIR)) + "/StyleTTS/Demo")
-from run_tts import from_pretrained, main, save_wave_scipy
+wav_files = SCRIPT_DIR + "/Voices/humble/*.wav"
+sys.path.append(SCRIPT_DIR)
+from StyleTTS.engine import from_pretrained, main, save_wave_scipy
 
 # load phonemizer
 global_phonemizer = phonemizer.backend.EspeakBackend(language='ru', preserve_punctuation=True,  with_stress=True)
@@ -73,7 +73,7 @@ def towavfile(core:VACore, text_to_speech:str,wavfile:str):
         #     stream = sd.play(data, samplerate)
 
 
-        n = load(os.path.dirname(SCRIPT_DIR) + "/tts_cache/emotts/emotion.npy")
+        n = load(SCRIPT_DIR + "/Irene-Voice-Assistant/tts_cache/emotts/emotion.npy")
 
         emotion = ['Angry', 'Happy', 'Neutral', 'Sad', 'Surprise']
 

@@ -1,4 +1,5 @@
 __pycache__
 neuron/
 Models/
+ruls_data/
 output_scipy.wav

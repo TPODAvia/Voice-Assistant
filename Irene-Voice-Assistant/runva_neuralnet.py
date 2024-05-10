@@ -3,14 +3,6 @@ _start_time = time.time()
 import numpy as np
 import os
 import sys
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-current_path = os.getcwd()
-if current_path.upper() != SCRIPT_DIR.upper():
-    print("\n\n")
-    print("#"*100)
-    print("Current path: " + str(current_path))
-    sys.exit('Program can only be run from path ' + SCRIPT_DIR + "\n")
-
 import whisper
 import re
 import threading
