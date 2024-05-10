@@ -87,6 +87,7 @@ python docs/cuda_test.py
    pip install transformers==4.39.0 # new realeases get errors when switching to offline mode
    pip install openwakeword
    pip install SoundFile torchaudio munch torch pydub pyyaml librosa git+https://github.com/resemble-ai/monotonic_align.git
+   
 
 ```
 

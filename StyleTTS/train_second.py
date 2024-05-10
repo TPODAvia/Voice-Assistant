@@ -1,8 +1,5 @@
 import os
 import os.path as osp
-from pathlib import Path
-from pathlib import Path
-SCRIPT_DIR = str(Path(__file__).resolve().parent.parent)
 import re
 import sys
 import yaml
@@ -63,12 +60,12 @@ handler.setLevel(logging.DEBUG)
 logger.addHandler(handler)
 
 @click.command()
-@click.option('-p', '--config_path', default=f'{SCRIPT_DIR}/StyleTTS/Configs/config.yml', type=str)
+@click.option('-p', '--config_path', default='Configs/config.yml', type=str)
 def main(config_path):
 
     config = yaml.safe_load(open(config_path))
 
-    log_dir = SCRIPT_DIR + config['log_dir']
+    log_dir = config['log_dir']
     if not osp.exists(log_dir): os.makedirs(log_dir, exist_ok=True)
     shutil.copy(config_path, osp.join(log_dir, osp.basename(config_path)))
     writer = SummaryWriter(log_dir + "/tensorboard")
@@ -83,8 +80,8 @@ def main(config_path):
     device = config.get('device', 'cpu')
     epochs = config.get('epochs_2nd', 100)
     save_freq = config.get('save_freq', 2)
-    train_path = SCRIPT_DIR + config.get('train_data', None)
-    val_path = SCRIPT_DIR + config.get('val_data', None)
+    train_path = config.get('train_data', None)
+    val_path = config.get('val_data', None)
     multigpu = config.get('multigpu', False)
     log_interval = config.get('log_interval', 10)
     saving_epoch = config.get('save_freq', 2)
@@ -105,12 +102,12 @@ def main(config_path):
                                       device=device,
                                       dataset_config={})
     # load pretrained ASR model
-    ASR_config = SCRIPT_DIR + config.get('ASR_config', False)
-    ASR_path = SCRIPT_DIR + config.get('ASR_path', False)
+    ASR_config = config.get('ASR_config', False)
+    ASR_path = config.get('ASR_path', False)
     text_aligner = load_ASR_models(ASR_path, ASR_config)
 
     # load pretrained F0 model
-    F0_path = SCRIPT_DIR + config.get('F0_path', False)
+    F0_path = config.get('F0_path', False)
     pitch_extractor = load_F0_models(F0_path)
 
     scheduler_params = {
@@ -133,7 +130,7 @@ def main(config_path):
             model[key] = MyDataParallel(model[key])
         
     if config.get('pretrained_model', '') != '' and config.get('second_stage_load_pretrained', False):
-        model, optimizer, start_epoch, iters = load_checkpoint(model,  optimizer, SCRIPT_DIR + config['pretrained_model'],
+        model, optimizer, start_epoch, iters = load_checkpoint(model,  optimizer, config['pretrained_model'],
                                     load_only_params=config.get('load_only_params', True))
     else:
         start_epoch = 0

@@ -1,4 +1,4 @@
-log_dir: "/Models/LJSpeech"
+log_dir: "/StyleTTS/Models/LJSpeech"
 first_stage_path: "first_stage.pth"
 save_freq: 8
 log_interval: 10
@@ -6,17 +6,17 @@ device: "cuda"
 multigpu: false
 epochs_1st: 200 # number of epochs for first stage training
 epochs_2nd: 100 # number of peochs for second stage training
-batch_size: 16
+batch_size: 8
 pretrained_model: ""
 second_stage_load_pretrained: false # set to true if the pre-trained model is for 2nd stage
 load_only_params: false # set to true if do not want to load epoch numbers and optimizer parameters
 
-train_data: "D:\\Voice-Assistant\\StyleTTS\\Data\\dev_train.txt"
-val_data: "D:\\Voice-Assistant\\StyleTTS\\Data\\dev_val.txt"
+train_data: "/StyleTTS/Data/large_train.txt"
+val_data: "/StyleTTS/Data/large_val.txt"
 
-F0_path: "D:\\Voice-Assistant\\StyleTTS\\Utils\\JDC\\bst.t7"
-ASR_config: "D:\\Voice-Assistant\\StyleTTS\\Utils\\ASR\\config.yml"
-ASR_path: "D:\\Voice-Assistant\\StyleTTS\\Utils\\ASR\\epoch_00080.pth"
+F0_path: "/StyleTTS/Utils/JDC/bst.t7"
+ASR_config: "/StyleTTS/Utils/ASR/config.yml"
+ASR_path: "/StyleTTS/Utils/ASR/epoch_00080.pth"
 
 preprocess_params:
   sr: 24000

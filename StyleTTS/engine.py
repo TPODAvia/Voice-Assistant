@@ -130,7 +130,7 @@ def from_pretrained(device):
 
     # load StyleTTS
     model_path = SCRIPT_DIR + "/StyleTTS/Models/LJSpeech/epoch_2nd_2_00096_196.pth"
-    model_config_path = SCRIPT_DIR + "/StyleTTS/Configs/config.yml"
+    model_config_path = SCRIPT_DIR + "/StyleTTS/Configs/config_relative.yml"
 
     config = yaml.safe_load(open(model_config_path))
 
@@ -234,4 +234,4 @@ if __name__=="__main__":
 
     model, generator, textclenaer = from_pretrained(device)
     wave = main(text, ref_dicts, model, generator, textclenaer, device, global_phonemizer)
-    save_wave_scipy(SCRIPT_DIR + 'output_scipy.wav', wave, 24000)
+    save_wave_scipy(SCRIPT_DIR + '/output_scipy.wav', wave, 24000)
