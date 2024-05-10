@@ -1,16 +1,5 @@
 # Emotional Offline Voice Assistant
 
-https://machine-listening.eecs.qmul.ac.uk/bird-audio-detection-challenge/
-https://drive.google.com/drive/folders/1KI7uF_-IYh3w4z0uLBNcCo3tRd-1nlm9?usp=sharing
-
-![GitHub Repo stars](https://img.shields.io/github/stars/your-github-username/emotional-offline-voice-assistant?style=social)
-![GitHub forks](https://img.shields.io/github/forks/your-github-username/emotional-offline-voice-assistant?style=social)
-![GitHub Profile Views](https://komarev.com/ghpvc/?username=your-github-username&style=flat-square&color=blue)
-
-<div align="center">
-  <img src="https://media.giphy.com/media/dWesBcTLavkZuG35MI/giphy.gif" width="447" height="358"/>
-</div>
-
 ## Table of Contents
 
 - [Introduction](#introduction)
@@ -77,24 +66,35 @@ To test that the cuda is working:
 cd Voice-Assistant
 python docs/cuda_test.py
 ```
+
 ```bash
    cd Voice-Assistant
    pip install -r requirements.txt
+```
+
+For Windows:
+
+Download and install espeak-ng
+https://github.com/espeak-ng/espeak-ng
+
+Add to the system variables:
+```bash
+PHONEMIZER_ESPEAK_LIBRARY = C:\Program Files\eSpeak NG\libespeak-ng.dll
+PHONEMIZER_ESPEAK_PATH = C:\Program Files\eSpeak NG
+```
+
+For Linux:
+
+```bash
    sudo apt-get install libasound-dev portaudio19-dev libportaudio2 libportaudiocpp0 python3-tk python3-dev sox python3-pil python3-pil.imagetk espeak -y
 ```
+
 ```bash
    pip install PyAudio
-   pip install transformers==4.39.0 # new realeases get errors when switching to offline mode
-   pip install openwakeword
-   pip install SoundFile torchaudio munch torch pydub pyyaml librosa git+https://github.com/resemble-ai/monotonic_align.git
-   
-
+#    pip install transformers==4.39.0 # new realeases get errors when switching to offline mode
+#    pip install openwakeword
+#    pip install SoundFile torchaudio munch torch pydub pyyaml librosa git+https://github.com/resemble-ai/monotonic_align.git
 ```
-
-1.PHONEMIZER_ESPEAK_LIBRARY = C:\Program Files\eSpeak NG\libespeak-ng.dll
-2.PHONEMIZER_ESPEAK_PATH = C:\Program Files\eSpeak NG
-
-click new and add these variables to your system variables in environment variables
 
 3. Configure the voice assistant settings as needed:
 

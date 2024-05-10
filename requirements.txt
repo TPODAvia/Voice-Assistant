@@ -1,8 +1,7 @@
 torch
 torchviz
-# simpletransformers
 openai-whisper
-# transformers
+transformers==4.39.0
 numba
 numpy
 pandas
@@ -21,7 +20,7 @@ librosa
 phonemizer
 sounddevice
 SpeechRecognition
-# git+https://github.com/resemble-ai/monotonic_align.git
+git+https://github.com/resemble-ai/monotonic_align.git
 wikipedia-api~=0.5.4
 pyttsx3~=2.90
 vosk-tts~=0.3.45
@@ -42,3 +41,4 @@ torchmetrics
 gtts
 g4f
 onnxruntime
+openwakeword
