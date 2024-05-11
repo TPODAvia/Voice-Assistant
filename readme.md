@@ -30,7 +30,7 @@ To install the Emotional Offline Voice Assistant, follow these steps:
    Now clone this repository and dowload the pretrained speech model.
 ```bash
    git clone https://github.com/TPODAvia/Voice-Assistant
-   cd Voice-Assistant/StyleTTS
+   cd Voice-Assistant
    curl -LJO "https://github.com/TPODAvia/Voice-Assistant/releases/download/v0.0.1-alpha/StyleTTS.zip"
    unzip StyleTTS.zip
    cd ../..
