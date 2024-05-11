@@ -27,8 +27,18 @@ To install the Emotional Offline Voice Assistant, follow these steps:
 
 1. Clone the repository:
 
+   Now clone this repository and dowload the pretrained speech model.
 ```bash
-   get the Microsoft Visual Studio
+   git clone https://github.com/TPODAvia/Voice-Assistant
+   cd Voice-Assistant/StyleTTS
+   curl -LJO "https://github.com/TPODAvia/Voice-Assistant/releases/download/v0.0.1-alpha/StyleTTS.zip"
+   unzip StyleTTS.zip
+   cd ../..
+```
+
+   Get the Microsoft Visual Studio:
+```bash
+   cd Voice-Assistant
    python -m venv venv
 ```
    if strugles of creating venv theen execute this code:
@@ -51,10 +61,6 @@ Activate the venv
    ./venv/Scripts/Activate.ps1
 ```
 
-   Now clone this repository
-```bash
-   git clone https://github.com/TPODAvia/Voice-Assistant
-```
 
 2. Install the required dependencies:
 
@@ -67,11 +73,7 @@ cd Voice-Assistant
 python docs/cuda_test.py
 ```
 
-```bash
-   cd Voice-Assistant
-   pip install -r requirements.txt
-```
-
+Install espeak-NG
 For Windows:
 
 Download and install espeak-ng
@@ -89,6 +91,11 @@ For Linux:
    sudo apt-get install libasound-dev portaudio19-dev libportaudio2 libportaudiocpp0 python3-tk python3-dev sox python3-pil python3-pil.imagetk espeak -y
 ```
 
+Install pip dependencies
+```bash
+   cd Voice-Assistant
+   pip install -r requirements.txt
+```
 ```bash
    pip install PyAudio
 #    pip install transformers==4.39.0 # new realeases get errors when switching to offline mode
@@ -103,7 +110,7 @@ For Linux:
    sudo nano core.json
 ```
 
-4. Run icon execution:
+<!-- 4. Run icon execution:
 
    Still in the developmant...
 
@@ -111,7 +118,7 @@ For Linux:
 ```bash
    wsl --install
    bash script.sh
-```
+``` -->
 5. Optionaly, the online voice assistance can be executed in the `Voice_assistant_online` folder:
 
 ```bash
