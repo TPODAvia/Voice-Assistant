@@ -34,9 +34,7 @@ class UseInternet():
 # main VACore class
 class VACore(JaaCore):
     def __init__(self):
-        print("fvefvefr766")
         JaaCore.__init__(self)
-        print("fvefvefr766")
         self.timers = [-1,-1,-1,-1,-1,-1,-1,-1]
         self.timersFuncUpd = [None,None,None,None,None,None,None,None]
         self.timersFuncEnd = [None,None,None,None,None,None,None,None]

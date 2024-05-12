@@ -1,3 +1,7 @@
+from pathlib import Path
+from numpy import save, argmax, dot
+from numpy.linalg import norm
+
 img_library =  ['Happy',
                 'Happy',
                 'Funny',
@@ -85,4 +89,43 @@ library =  [[  0,0,0,0, 1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,1, 1,0,0,0, 0,0  ], # 1
             [  0,0,0,0, 0,0,0,0, 0,1,1,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0  ], # 41 Yawning Face                            -- Sad
             [  1,0,0,0, 1,0,0,0, 0,0,0,0, 0,1,0,0, 1,0,0,1, 1,0,1,0, 0,1  ], # 42 Slightly Smiling Face                   -- Happy
             [  1,0,0,0, 1,1,0,0, 0,0,0,0, 0,1,0,0, 0,0,0,1, 0,0,0,0, 0,0  ]] # 43 Winking Face                            -- Wrinking
-     
+
+def pred(_path, _text_input):
+    
+    list = []
+    for i in range(len(library)):
+        # counting cosine similarity
+        cos_sim = dot(_text_input, library[i][:])/(norm(_text_input)*norm(library[i][:]))
+        list.append(cos_sim)
+    
+    pred = argmax(list, axis = None, out = None)
+
+    emot_convert = pred + 1
+    if emot_convert in [22,35]:
+        # Angry
+        print("Angry")
+        save(_path + "/Irene-Voice-Assistant/tts_cache/emotts/emotion", 0)
+
+    elif emot_convert in [2,3,4,5,10,11,12,13,14,15,17,21,25,32,34,38,39,40,42,43]:
+        # Happy
+        print("Happy")
+        save(_path + "/Irene-Voice-Assistant/tts_cache/emotts/emotion", 1)
+
+    elif emot_convert in [1,26,28,30,36,37]:
+        # Neutral
+        print("Neutral")
+        save(_path + "/Irene-Voice-Assistant/tts_cache/emotts/emotion", 2)
+
+    elif emot_convert in [6,7,16,19,24,31,33,41]:
+        # Sad
+        print("Sad")
+        save(_path + "/Irene-Voice-Assistant/tts_cache/emotts/emotion", 3)
+
+    elif emot_convert in [8,18,20,23,27,29]:
+        # Surprise
+        print("Surprise")
+        save(_path + "/Irene-Voice-Assistant/tts_cache/emotts/emotion", 4)
+
+    image_path = _path + '/Face_ui/face expression/' + img_library[pred]
+
+    return image_path

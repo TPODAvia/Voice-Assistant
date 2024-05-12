@@ -22,9 +22,7 @@ from pathlib import Path
 SCRIPT_DIR = str(Path(__file__).resolve().parent.parent)
 sys.path.append(SCRIPT_DIR)
 import AudioReaction.engine
-import Face_ui.run_gif
-
-emotion_generator = Face_ui.run_gif.ImageLabel()
+import Face_ui.img_library
 
 # Load the Whisper model
 whisper.load_model("base")
@@ -41,7 +39,7 @@ parser=argparse.ArgumentParser()
 
 parser.add_argument("--model_path", type=str, default="", required=False, 
                     help="The path of a specific model to load")
-parser.add_argument('--model_class_file', type=str, default=f"{SCRIPT_DIR}\AudioReaction\wakeword_m.pt", required=False,
+parser.add_argument('--model_class_file', type=str, default=f"{SCRIPT_DIR}/AudioReaction/wakeword_m.pt", required=False,
                     help='optimized file to load. use optimize_graph.py')
 args=parser.parse_args()
 
@@ -73,7 +71,7 @@ class WorkerThread(threading.Thread):
                     else:
                         print("Started recognition...")
                         _recognized_data = self.recognizer.recognize_whisper(audio, model="base", language="russian")
-
+                    # print(_recognized_data)
                 except speech_recognition.UnknownValueError:
                     pass
 
@@ -132,7 +130,7 @@ def neural_function():
                 if len(output) == 26:
                     # _text_input requres arrays of 26: [1, 2, 3 ... 26]
                     print(f"emotion_generator: {output}")
-                    emotion_generator.pred(output)
+                    Face_ui.img_library.pred(SCRIPT_DIR, output)
                     # Face_ui.run_gif._text_input = output
                     # Face_ui.run_gif._run_prediction = True
 
@@ -227,10 +225,9 @@ if __name__ == "__main__":
                 _ambient_mic = recognizer.energy_threshold
 
             # remove punctuations and caps: Ирина, привет! --> ирина привет
-            no_punct_str = re.sub(r'[^\w\s]', '', voice_input_str)
+            # no_punct_str = re.sub(r'[^\w\s]', '', voice_input_str)
+            no_punct_str = voice_input_str # No removing anything
             lowercase_str = no_punct_str.lower().strip()
-
-            # print(lowercase_str)
 
             if (lowercase_str != "" 
                 and lowercase_str != "редактор субтитров асемкин корректор аегорова" 

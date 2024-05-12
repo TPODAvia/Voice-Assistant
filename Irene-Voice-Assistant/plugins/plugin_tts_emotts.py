@@ -20,6 +20,10 @@ SCRIPT_DIR = str(Path(__file__).resolve().parent.parent.parent)
 # Get all WAV files in the folder
 wav_files = SCRIPT_DIR + "/Voices/humble/*.wav"
 sys.path.append(SCRIPT_DIR)
+
+model_path = SCRIPT_DIR + "/StyleTTS/Models/LJSpeech/"
+if not os.path.isdir(model_path):
+    print(f"ERROR plugin_tts_emotts.py! Model path does not exist: {model_path}")
 from StyleTTS.engine import from_pretrained, main, save_wave_scipy
 
 # load phonemizer

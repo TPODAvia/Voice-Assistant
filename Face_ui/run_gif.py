@@ -5,13 +5,12 @@ import sys
 import os
 import random
 import time
-from numpy import save, argmax, dot
-from numpy.linalg import norm
 from pathlib import Path
 
 SCRIPT_DIR = str(Path(__file__).resolve().parent.parent)
 sys.path.append(SCRIPT_DIR)
-from Face_ui.img_library import library, img_library
+from Face_ui.img_library import pred
+
 
 _gif_looping = True
 _text_input = [  0,2,0,0, 0,0,0,0, 1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0  ]
@@ -29,7 +28,7 @@ class ImageLabel(tk.Label):
         self.frames.clear()
         self.frame_rates.clear()
 
-        folder_path = self.pred(_text_input)
+        folder_path = pred(SCRIPT_DIR, _text_input)
         gif_file = self.select_random_gif(folder_path)
         self.load_frames_and_rates(gif_file)
 
@@ -77,46 +76,6 @@ class ImageLabel(tk.Label):
             loc %= len(self.frames)
             self.config(image=self.frames[loc])
             self.after(self.frame_rates[loc], self.next_frame, loc)
-
-    def pred(self, _text_input):
-        
-        list = []
-        for i in range(len(library)):
-            # counting cosine similarity
-            cos_sim = dot(_text_input, library[i][:])/(norm(_text_input)*norm(library[i][:]))
-            list.append(cos_sim)
-        
-        pred = argmax(list, axis = None, out = None)
-
-        emot_convert = pred + 1
-        if emot_convert in [22,35]:
-            # Angry
-            print("Angry")
-            save(SCRIPT_DIR + "/Irene-Voice-Assistant/tts_cache/emotts/emotion", 0)
-
-        elif emot_convert in [2,3,4,5,10,11,12,13,14,15,17,21,25,32,34,38,39,40,42,43]:
-            # Happy
-            print("Happy")
-            save(SCRIPT_DIR + "/Irene-Voice-Assistant/tts_cache/emotts/emotion", 1)
-
-        elif emot_convert in [1,26,28,30,36,37]:
-            # Neutral
-            print("Neutral")
-            save(SCRIPT_DIR + "/Irene-Voice-Assistant/tts_cache/emotts/emotion", 2)
-
-        elif emot_convert in [6,7,16,19,24,31,33,41]:
-            # Sad
-            print("Sad")
-            save(SCRIPT_DIR + "/Irene-Voice-Assistant/tts_cache/emotts/emotion", 3)
-
-        elif emot_convert in [8,18,20,23,27,29]:
-            # Surprise
-            print("Surprise")
-            save(SCRIPT_DIR + "/Irene-Voice-Assistant/tts_cache/emotts/emotion", 4)
-
-        image_path = SCRIPT_DIR + '/Face_ui/face expression/' + img_library[pred]
-
-        return image_path
 
 def close_win(event):
     lbl.unload()

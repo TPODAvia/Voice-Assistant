@@ -18,15 +18,6 @@ from os.path import join, realpath
 SCRIPT_DIR = str(Path(__file__).resolve().parent.parent)
 _classification_loop = True
 
-# Check if the current thread is the main thread
-# if threading.current_thread() is threading.main_thread():
-# if __name__ == "__main__":
-#     import Face_ui.run_gif
-
-#     Face_ui.run_gif._gif_looping = True
-#     Face_ui.run_gif._text_input = [  0,2,0,0, 0,0,0,0, 1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0  ] #26
-#     Face_ui.run_gif._run_prediction = False
-
 my_list = ['airplane',       'breathing',       'brushing_teeth', 'car_horn',  'cat', \
            'chirping_birds', 'clock_alarm',     'cow',            'crow',      'crying_baby', \
            'dog',            'door_wood_knock', 'engine',         'fireworks', 'insects', \
@@ -127,9 +118,6 @@ def classification_function():
     action = DemoAction()
     listener.run(audio_q)
 
-    # tkinter_thread = threading.Thread(target=Face_ui.run_gif.run_tkinter)
-    # tkinter_thread.start()
-
     detect_in_row = 0
     sensitivity = 60
     tensor_normalized_output = []
@@ -182,10 +170,9 @@ if __name__ == "__main__":
         print("Ctrl+C pressed. Stopping threads...")
         global _classification_loop
         _classification_loop = False
-        # Face_ui.run_gif._gif_looping = False
 
     parser = argparse.ArgumentParser(description="demoing the wakeword engine")
-    parser.add_argument('--model_class_file', type=str, default=f"{SCRIPT_DIR}\AudioReaction\wakeword_m.pt", required=False,
+    parser.add_argument('--model_class_file', type=str, default=f"{SCRIPT_DIR}/AudioReaction/wakeword_m.pt", required=False,
                         help='optimized file to load. use optimize_graph.py')
     args = parser.parse_args()
 
