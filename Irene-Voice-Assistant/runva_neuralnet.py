@@ -111,7 +111,6 @@ def neural_function():
     # tkinter_thread.start()
 
     while _runva_looping:
-
         # print("Second thread doing some work...")
         audio = np.frombuffer(mic_stream.read(CHUNK), dtype=np.int16)
         owwModel.predict(audio)
@@ -150,7 +149,7 @@ def neural_function():
                         thread = WorkerThread()
                         thread.start()
                         threads.append(thread)
-                        data, samplerate = soundfile.read('media/bit.wav')
+                        data, samplerate = soundfile.read(SCRIPT_DIR + '/Irene-Voice-Assistant/media/bit.wav')
                         sounddevice.play(data, samplerate)
                         sounddevice.wait()
                         time.sleep(0.4)
@@ -214,7 +213,6 @@ if __name__ == "__main__":
         recognizer = speech_recognition.Recognizer()
         microphone = speech_recognition.Microphone()
         while _runva_looping:
-
             # print("_recognized_data: " + str(_recognized_data))
             # print(_recognized_data)
             voice_input_str = _recognized_data
