@@ -1,9 +1,3 @@
-import os
-import subprocess
-import numpy as np
-import sounddevice as sd
-import soundfile as sf
-from audioplayer import AudioPlayer
 from pathlib import Path
 from colorama import Fore, Back, Style
 
@@ -14,6 +8,7 @@ wavfile = SCRIPT_DIR + "/Irene-Voice-Assistant/media/bit.wav"
 # Test 1: Play using AudioPlayer
 def test_audio_player():
     print(Fore.GREEN + "Testing AudioPlayer..." + Style.RESET_ALL)
+    from audioplayer import AudioPlayer
     player = AudioPlayer(wavfile)
     player.play(block=True)
     print("AudioPlayer test completed.")
@@ -21,13 +16,15 @@ def test_audio_player():
 # Test 2: Play using subprocess and aplay
 def test_aplay():
     print(Fore.GREEN + "Testing aplay..."  + Style.RESET_ALL)
-    print(Style.RESET_ALL)
+    import subprocess
     subprocess.call(f"aplay {wavfile}", shell=True)
     print("aplay test completed.")
 
 # Test 3: Play using sounddevice and soundfile
 def test_sounddevice():
     print(Fore.GREEN + "Testing sounddevice..." + Style.RESET_ALL)
+    import sounddevice as sd
+    import soundfile as sf
     data, fs = sf.read(wavfile, dtype='float32')
     print(f"{len(data)} : {fs}")
     # Fix to prevent cut-offs at the end of playback
