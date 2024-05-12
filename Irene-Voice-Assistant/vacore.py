@@ -415,6 +415,7 @@ class VACore(JaaCore):
                 self.say(self.plugin_options("core")["replyNoCommandFound"])
 
             else:
+                gpt3_available = False
                 if self.is_internet_available() and UseInternet.using_internet_service:
 
                     self.messages.append({'role': "user", "content": command})
@@ -423,9 +424,11 @@ class VACore(JaaCore):
                         self.messages.append({'role': "assistant", "content": extracted_text})
                         print("Responce Text: ", extracted_text)
                         self.play_voice_assistant_speech(extracted_text)
+                        gpt3_available = True
                     else:
-                        print("gpt4free with no respomd")
-                else:
+                        print("gpt4free with no respomd. Switch to gpt2.")
+
+                if not gpt3_available:
                     # in context
                     # self.say(self.plugin_options("core")["replyNoCommandFoundInContext"])
                     inputs = tokenizer(f'@@ПЕРВЫЙ@@ {command} @@ВТОРОЙ@@', return_tensors='pt')
