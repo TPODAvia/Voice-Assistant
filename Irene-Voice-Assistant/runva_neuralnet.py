@@ -25,7 +25,7 @@ import AudioReaction.engine
 import Face_ui.img_library
 
 # Load the Whisper model
-whisper.load_model("base")
+model = whisper.load_model("base")
 
 # Duration in seconds for the timer
 _timer_duration = 30
@@ -54,7 +54,6 @@ class WorkerThread(threading.Thread):
         self.recognizer.energy_threshold = _ambient_mic
 
     def run(self):
-
         global _runva_looping
         while _runva_looping and not self.stop:
             with self.microphone:
@@ -66,11 +65,19 @@ class WorkerThread(threading.Thread):
                     # data_s16 = np.frombuffer(audio_data, dtype=np.int16, count=len(audio_data)//2, offset=0)
                     # float_data = data_s16.astype(np.float32, order='C') / 32768.0
                 try:
+
+                    print("Started recognition...")
                     if VACore.is_internet_available() and UseInternet.using_internet_service:
                         _recognized_data = self.recognizer.recognize_google(audio, language="ru").lower()
                     else:
-                        print("Started recognition...")
-                        _recognized_data = self.recognizer.recognize_whisper(audio, model="base", language="russian")
+                        # language = None mean it's will automatically detect the language
+                        _recognized_data = self.recognizer.recognize_whisper(audio, model="base", language=None)
+                        # global model
+                        # audio_data = audio.get_wav_data()
+                        # data_s16 = np.frombuffer(audio_data, dtype=np.int16)
+                        # float_data = data_s16.astype(np.float32) / 32768.0  # Normalize the buffer to [-1, 1]
+                        # result = model.transcribe(float_data, language=None)
+                        # _recognized_data = result['text']
                     # print(_recognized_data)
                 except speech_recognition.UnknownValueError:
                     pass
