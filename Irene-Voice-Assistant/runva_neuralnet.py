@@ -18,6 +18,7 @@ import soundfile
 from vacore import VACore
 from vacore import UseInternet
 from pathlib import Path
+# import cProfile
 
 SCRIPT_DIR = str(Path(__file__).resolve().parent.parent)
 sys.path.append(SCRIPT_DIR)
@@ -203,11 +204,16 @@ def neural_function():
 
 if __name__ == "__main__":
 
+    # profiler = cProfile.Profile()
+    # profiler.enable()
+
     def signal_handler(signal, frame):
         print("Ctrl+C pressed. Stopping threads...")
         global _runva_looping
         _runva_looping = False
-
+        # profiler.disable()
+        # profiler.dump_stats('profile_data.prof')
+        
     core = VACore()
     core.init_with_plugins()
 

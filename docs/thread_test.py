@@ -1,8 +1,10 @@
 import threading
 import time
 import sys
+import cProfile
 
 _looping = True
+
 class MyThreadedClass1(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
@@ -29,7 +31,6 @@ class MyThreadedClass2(threading.Thread):
             time.sleep(1)
 
 def main():
-    
     try:
         # init MyThreadedClass1 here
         thread1 = MyThreadedClass1()
@@ -39,7 +40,7 @@ def main():
         thread2 = MyThreadedClass2(thread1)
         thread2.start()
 
-    # Main loop that prints "Hello"
+        # Main loop that prints "Hello"
         while True:
             print("Hello")
             print(thread1.value)
@@ -54,4 +55,8 @@ def main():
         # sys.exit(0)
 
 if __name__ == "__main__":
+    profiler = cProfile.Profile()
+    profiler.enable()
     main()
+    profiler.disable()
+    profiler.dump_stats('profile_data.prof')

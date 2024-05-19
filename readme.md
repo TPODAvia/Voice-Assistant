@@ -137,6 +137,69 @@ python3 runva_neuralnet.py
 
 Once the voice assistant is running, you can interact with it using your microphone or by providing text input.
 
+## Perfomance check
+
+To create a profiling image using `gprof2dot` from the provided script, follow these steps:
+
+1. **Profile the Script with `cProfile`:**
+   Modify the script to use the `cProfile` module to collect profiling data.
+
+2. **Run the Script to Generate Profiling Data:**
+   Execute the modified script to generate a `.prof` file containing the profiling data.
+
+3. **Convert Profiling Data to a Dot File:**
+   Use `gprof2dot` to convert the `.prof` file to a `.dot` file.
+
+4. **Generate an Image from the Dot File:**
+   Use Graphviz to convert the `.dot` file to an image format like PNG.
+
+Here is the step-by-step process:
+
+### Step 1: Modify the Script to Use `cProfile`
+
+Add the `cProfile` module to your script to collect profiling data:
+
+```python
+import sys
+import cProfile
+
+if __name__ == "__main__":
+    profiler = cProfile.Profile()
+    profiler.enable()
+    main()
+    profiler.disable()
+    profiler.dump_stats('profile_data.prof')
+```
+
+### Step 2: Run the Script
+
+Run the modified script to generate the `profile_data.prof` file:
+
+```sh
+python your_script.py
+```
+
+Terminate the script with `Ctrl+C` after a few seconds to ensure profiling data is collected.
+
+### Step 3: Convert Profiling Data to a Dot File
+
+Use `gprof2dot` to convert the `.prof` file to a `.dot` file:
+
+```sh
+gprof2dot -f pstats profile_data.prof -o profile_data.dot
+```
+
+### Step 4: Generate an Image from the Dot File
+
+Use Graphviz to convert the `.dot` file to an image format like PNG:
+
+```sh
+dot -Tpng profile_data.dot -o profile_data.png
+```
+
+After these steps, you will have a `profile_data.png` file that visually represents the profiling data of your script.
+
+
 ## Contributing
 
 We welcome contributions to the Emotional Offline Voice Assistant project. If you're interested in contributing, please read our [contribution guidelines](./CONTRIBUTING.md) and [code of conduct](./CODE_OF_CONDUCT.md) before getting started.
