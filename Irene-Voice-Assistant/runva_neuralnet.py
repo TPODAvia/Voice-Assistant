@@ -18,8 +18,8 @@ import soundfile
 from vacore import VACore
 from vacore import UseInternet
 from pathlib import Path
-# import cProfile
 
+RELEASE = True
 SCRIPT_DIR = str(Path(__file__).resolve().parent.parent)
 sys.path.append(SCRIPT_DIR)
 import AudioReaction.engine
@@ -204,15 +204,25 @@ def neural_function():
 
 if __name__ == "__main__":
 
-    # profiler = cProfile.Profile()
-    # profiler.enable()
+    if not RELEASE:
+        import cProfile
+        import pstats
+        import io
+        profiler = cProfile.Profile()
+        profiler.enable()
 
     def signal_handler(signal, frame):
         print("Ctrl+C pressed. Stopping threads...")
         global _runva_looping
         _runva_looping = False
-        # profiler.disable()
-        # profiler.dump_stats('profile_data.prof')
+        if not RELEASE:
+            profiler.disable()
+            profiler.dump_stats('profile_data.prof')
+            s = io.StringIO()
+            ps = pstats.Stats(profiler, stream=s).sort_stats(pstats.SortKey.TIME)
+            ps.print_stats()
+            with open('profile_data_time.prof', 'w') as f:
+                f.write(s.getvalue())
         
     core = VACore()
     core.init_with_plugins()
