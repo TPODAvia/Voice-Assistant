@@ -29,7 +29,7 @@ model = AutoModelForCausalLM.from_pretrained('tinkoff-ai/ruDialoGPT-medium', cac
 version = "8.1"
 
 class UseInternet():
-    using_internet_service = True
+    using_internet_service = False
 
 # main VACore class
 class VACore(JaaCore):

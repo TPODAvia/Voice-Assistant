@@ -1,24 +1,54 @@
+import openwakeword
+from openwakeword.model import Model
+openwakeword.utils.download_models()
 import asyncio
 import websockets
 import sounddevice as sd
 import time
+import soundfile
+
+time_past = time.time()
+# Initialize the OpenWakeWord model
+owwModel = Model(inference_framework="onnx")  # onnx or tflite
+thread_activate = True
+send_data = True
 
 async def send_audio(ws):
-    """Send audio data to WebSocket server."""
+    """Send audio data to WebSocket server only if wake word is detected."""
     loop = asyncio.get_event_loop()
     input_queue = asyncio.Queue()
+    wakeword_detected = False
 
-    def audio_callback(indata, frames, time, status):
-        loop.call_soon_threadsafe(input_queue.put_nowait, indata.tobytes())
+    def audio_callback(indata, frames, time_data, status):
+        global thread_activate
+        global time_past
+        global send_data
+        try:
+            audio_data = indata[:, 0]
+            owwModel.predict(audio_data)
+
+            for mdl in owwModel.prediction_buffer.keys():
+                if mdl == "alexa": # Say "Alexa" to activate
+                    scores = list(owwModel.prediction_buffer[mdl])
+                    if scores[-1] <= 0.5:
+                        thread_activate = True
+                    else:
+                        if thread_activate:
+                            print("Wake word detected!")
+                            thread_activate = False
+                            send_data = True
+                            time_past = time.time()
+
+            if send_data:
+                loop.call_soon_threadsafe(input_queue.put_nowait, indata.tobytes())
+            if (time.time() - time_past) > 10:
+                send_data = False
+
+        except Exception as e:
+            print(f"Error in audio_callback: {e}")
 
     # Record audio stream
-    stream = sd.InputStream(
-        channels=1,
-        samplerate=16000,
-        dtype='int16',
-        callback=audio_callback,
-        blocksize=1600  # Adjust blocksize as needed
-    )
+    stream = sd.InputStream(channels=1, samplerate=16000, dtype='int16', callback=audio_callback, blocksize=1600)  # Adjust blocksize as needed
 
     # Send audio stream to the server
     with stream:
@@ -34,6 +64,7 @@ async def send_audio(ws):
         finally:
             # Signal end of audio stream
             await ws.send("submit_response")
+            await ws.close()  # Explicitly close the WebSocket connection
 
 async def receive_transcriptions(ws, assistant_ws):
     """Receive transcriptions from WebSocket server and send them to the assistant."""
@@ -83,6 +114,9 @@ async def connect_and_run():
                 await asyncio.gather(send_audio_task, receive_transcription_task, send_text_task, receive_response_task)
         except (websockets.exceptions.InvalidURI, websockets.exceptions.ConnectionClosedError, ConnectionRefusedError):
             print("Unable to connect to the WebSocket servers. Retrying in 5 seconds...")
+            await asyncio.sleep(5)
+        except Exception as e:
+            print(f"Error: {e}. Retrying in 5 seconds...")
             await asyncio.sleep(5)
 
 if __name__ == "__main__":

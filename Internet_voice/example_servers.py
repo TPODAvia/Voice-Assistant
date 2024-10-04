@@ -32,6 +32,8 @@ async def websocket_endpoint(websocket: WebSocket):
     await websocket.accept()
     recognizer = KaldiRecognizer(model, 16000)
     try:
+        is_closed = False  # Flag to track if the WebSocket is closed
+
         while True:
             data = await websocket.receive_bytes()
             if data == b"submit_response":
@@ -44,23 +46,28 @@ async def websocket_endpoint(websocket: WebSocket):
                     # Send the transcription to the assistant
                     await send_to_assistant(text)
                     # Also send back to the robot if needed
-                    await websocket.send_text(text)
+                    if not is_closed:
+                        await websocket.send_text(text)
             else:
                 # Partial result if needed
                 pass
+        
         # Send final result
         final_result = recognizer.FinalResult()
         result_json = json.loads(final_result)
         text = result_json.get('text', '')
-        if text:
+        if text and not is_closed:
             await send_to_assistant(text)
             await websocket.send_text(text)
+
     except WebSocketDisconnect:
         logging.info("WebSocket disconnected")
     except Exception as e:
         logging.error(f"Unexpected error: {e}")
     finally:
-        await websocket.close()
+        if not is_closed:
+            await websocket.close()
+            is_closed = True  # Mark the WebSocket as closed to prevent multiple close attempts
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
